@@ -24,7 +24,7 @@
                 exit();
             }
             else{
-                $error = "Login Failed";
+                $error = "User not found";
             } 
         }
     }
@@ -34,7 +34,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login & Sign Up</title>
+    <title>Login</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         .container{
@@ -88,13 +88,13 @@
             height: 22%;
         }
         h1{     
-            margin-top: 10px;
+            margin-top: 25px;
             align-items: center;
         }
     </style>
 </head>
 <body>
-    <?php if(!empty($error)): ?>
+    <?php if (!empty($error)): ?>
     <div style="background-color: red; color: white; padding: 10px; margin-bottom: 10px;">
             <?php echo $error; ?>
     </div>
@@ -108,9 +108,9 @@
         <a href="#signup-form">SIGN UP</a>-->
         <h1>CSS SIT-IN MONITORING SYSTEM</h1>
         <form action="login.php" method="post">
-            <label for="username" style="margin-bottom: -30px;">Username</label><br>
+            <label for="username" style="margin-bottom: -20px;">Username</label><br>
             <input type="text" id="username" name="username" placeholder="Username" required><br>
-            <label for="password" style="margin-bottom: -30px;">Password</label><br>
+            <label for="password" style="margin-bottom: -20px;">Password</label><br>
             <input type="password" id="password"name="password" placeholder="Password" required><br>
             <input type="submit" name="submit" value="Login">
         </form>

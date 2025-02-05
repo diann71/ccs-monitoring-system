@@ -34,7 +34,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login & Sign Up</title>
+    <title>Sign up</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         .cont{
@@ -155,33 +155,33 @@ environment.
             <p>Sign up to continue</p>
             <form action="register.php" method="post">
                 <div class="col">
-                        <label style="margin-bottom: -30px;">Idno</label><br>
+                        <label style="margin-bottom: -20px;">Idno</label><br>
                         <input type="text" name="idno" placeholder="Id number" required><br>
-                        <label style="margin-bottom: -30px;">Lastname</label><br>
+                        <label style="margin-bottom: -20px;">Lastname</label><br>
                         <input type="text" name="lastname" placeholder="Lastname" required><br>
-                        <label style="margin-bottom: -30px;">Firstname</label><br>
+                        <label style="margin-bottom: -20px;">Firstname</label><br>
                         <input type="text" name="firstname" placeholder="Firstname" required><br>
-                        <label style="margin-bottom: -30px;">Midname</label><br>
+                        <label style="margin-bottom: -20px;">Midname</label><br>
                         <input type="text" name="midname" placeholder="Midname" required><br>
                 </div>
                 <div class="col1">
-                        <label style="margin-bottom: -20px;">Course</label><br>
+                        <label style="margin-bottom: -10px;">Course</label><br>
                         <select style="margin-bottom: 10px;" name="course" required>
                             <option value="" disabled selected>Select a course</option>
-                            <option value="1">Bachelor Science in Information Technology</option>
-                            <option value="1">Bachelor Science in Computer Science</option>
+                            <option value="1">BSIT</option>
+                            <option value="2">BSCS</option>
                         </select>
-                        <label style="margin-bottom: -20px;">Year Level</label><br>
+                        <label style="margin-bottom: -10px;">Year Level</label><br>
                         <select name="year" required>
-                            <option value="" disabled selected>Select a course</option>
+                            <option value="" disabled selected>Select a level</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                         </select>
-                        <label style="margin-bottom: -30px; margin-top: 48px;">Username</label><br>
+                        <label style="margin-bottom: -20px; margin-top: 48px;">Username</label><br>
                         <input type="text" name="username" placeholder="Username" required><br>
-                        <label style="margin-bottom: -30px;">Password</label><br>
+                        <label style="margin-bottom: -20px;">Password</label><br>
                         <input type="password" name="password" placeholder="Password" required><br>
                 </div>
                 <input type="submit" name="submit" value="Sign up">

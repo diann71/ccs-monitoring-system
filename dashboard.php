@@ -9,10 +9,10 @@ include "connector.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
     <style>
         .container{
-            width: 50%;
+            width: 100%;
             height: 10px;
             background: white;
             border-radius: 0px;
