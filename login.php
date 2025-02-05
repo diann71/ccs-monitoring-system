@@ -1,15 +1,15 @@
 <?php session_start();
 
-    include "connector.php";
-
-    $error= "";
+include "connector.php";
 
     if(isset($_POST['submit'])){
         $username = mysqli_real_escape_string($mysql, $_POST["username"]);
         $password = mysqli_real_escape_string($mysql, $_POST["password"]);
 
         if(empty($username) || empty($password)) {
-            $error = "All fields should be filled.";
+            $_SESSION["error"] = "All fields should be filled.";
+            header('location: login.php');
+            exit();
         }
         else{
             $result = mysqli_query($mysql, "SELECT * FROM students WHERE username = '$username' AND `password` ='$password' ") or die("Could not execute the select query.");
@@ -18,13 +18,15 @@
             if($row){
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['idno'] = $row['idno'];
-                
-                header('Location: dashboard.php');
 
+                $_SESSION['success'] = "Login Successfully!";
+                header('Location: dashboard.php');
                 exit();
             }
             else{
-                $error = "User not found";
+                $_SESSION["error"] = "User not Found";
+                header('Location: login.php'); // Redirect to login page
+                exit();
             } 
         }
     }
@@ -94,12 +96,23 @@
     </style>
 </head>
 <body>
-    <?php if (!empty($error)): ?>
-    <div style="background-color: red; color: white; padding: 10px; margin-bottom: 10px;">
-            <?php echo $error; ?>
+    <div class="container">
+    <?php if (isset($_SESSION['error'])): ?>
+        <div style="background-color: red; color: white; padding: 10px;">
+            <?php 
+                echo $_SESSION['error']; 
+                unset($_SESSION['error']); // Clear the error message after displaying
+            ?>
+        </div>
+    <?php endif; ?>     
+    <?php if(isset($_SESSION['success'])): ?>
+    <div style="background-color: green; color: white; padding: 10px;">
+        <?php 
+            echo $_SESSION['success']; 
+            unset($_SESSION['success']); // Clear message after displaying
+        ?>
     </div>
     <?php endif; ?>
-    <div class="container">
 
         <img id="logo" src="images/logo.png">
         <img id="css" src="images/css.png">

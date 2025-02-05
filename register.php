@@ -1,33 +1,38 @@
-<?php session_start();
-    include 'connector.php';
+<?php 
+session_start();
+include 'connector.php';
 
-    $success = "";
-    
-    if(isset($_POST["submit"])){
-        $idno = $_POST["idno"];
-        $lastname = $_POST["lastname"];
-        $firstname = $_POST["firstname"];
-        $midname = $_POST["midname"];
-        $course = $_POST["course"];
-        $yearlevel = $_POST["year"];
-        $username = $_POST["username"];
-        $password = $_POST["password"];
-    
+if(isset($_POST["submit"])){
+    $idno = mysqli_real_escape_string($mysql, $_POST["idno"]);
+    $lastname = mysqli_real_escape_string($mysql, $_POST["lastname"]);
+    $firstname = mysqli_real_escape_string($mysql, $_POST["firstname"]);
+    $midname = mysqli_real_escape_string($mysql, $_POST["midname"]);
+    $course = mysqli_real_escape_string($mysql, $_POST["course"]);
+    $yearlevel = mysqli_real_escape_string($mysql, $_POST["year"]);
+    $username = mysqli_real_escape_string($mysql, $_POST["username"]);
+    $password = mysqli_real_escape_string($mysql, $_POST["password"]);
 
-        if($idno == "" || $lastname == "" || $firstname == "" || $midname == "" || $course == "" ||
-        $yearlevel == "" || $username == "" || $password == ""){
-            echo "All fields should be filled.";
-        }
-        else{
-            mysqli_query($mysql, "INSERT INTO students (idno, lastname, firstname, midname, course, year, username, password) VALUES ('$idno','$lastname','$firstname','$midname','$course','$yearlevel','$username','$password') ") or die("Could not execute the select query.");
-            echo $success;
-        }
+    if(empty($idno) || empty($lastname) || empty($firstname) || empty($midname) || empty($course) ||
+       empty($yearlevel) || empty($username) || empty($password)){
+        $_SESSION['error'] = "All fields should be filled.";
+        header("Location: register.php"); // Reload the page with error
+        exit();
     }
-
-    if(isset($_POST["submit"])){
+    else {
+        $result = "INSERT INTO students (idno, lastname, firstname, midname, course, year, username, password) 
+                  VALUES ('$idno','$lastname','$firstname','$midname','$course','$yearlevel','$username','$password')";
         
-        header("Location: login.php");
+        if(mysqli_query($mysql, $result)){
+            $_SESSION['success'] = "Registered Successfully";
+            header("Location: login.php"); // Redirect to login page with success message
+            exit();
+        } else {
+            $_SESSION['error'] = "Registration Failed!";
+            header("Location: register.php");
+            exit();
+        }
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -129,11 +134,6 @@
     </style>
 </head>
 <body>  
-    <?php if($success): ?>
-       <div style="background-color: green;">
-            <?php echo $success; ?>
-       </div>
-    <?php endif ?>
         <div class="cont">
             <img id="logo" src="images/logo.png">
             <img id="css" src="images/css.png">
