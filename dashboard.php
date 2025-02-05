@@ -56,7 +56,15 @@ include "connector.php";
     </style>
 </head>
 <body>
-    <div class="container"ss>
+    <div class="container">
+        <?php if(isset($_SESSION["success"])): ?>
+            <div style="background-color: green; color: white; padding: 10px;">
+                <?php
+                   echo $_SESSION['success'];
+                   unset($_SESSION['success']);
+                ?>
+            </div>
+        <?php endif; ?>
         <nav class="navbar">
             <ul>
                 <li><a href="home.php" name="home">Home</a></li>
