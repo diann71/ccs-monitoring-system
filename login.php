@@ -90,7 +90,7 @@ include "connector.php";
             height: 22%;
         }
         h1{     
-            margin-top: 25px;
+            margin-top: 30px;
             align-items: center;
         }
     </style>

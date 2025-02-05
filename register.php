@@ -156,7 +156,7 @@ environment.
             <form action="register.php" method="post">
                 <div class="col">
                         <label style="margin-bottom: -20px;">Idno</label><br>
-                        <input type="text" name="idno" placeholder="Id number" required><br>
+                        <input type="number" name="idno" placeholder="Id number" required><br>
                         <label style="margin-bottom: -20px;">Lastname</label><br>
                         <input type="text" name="lastname" placeholder="Lastname" required><br>
                         <label style="margin-bottom: -20px;">Firstname</label><br>
