@@ -2,7 +2,6 @@
 
 include "connector.php";
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,9 +10,11 @@ include "connector.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
         .container{
-            width: 100%;
-            height: 10px;
             background: white;
             border-radius: 0px;
             font-family: Arial, sans-serif;
@@ -73,6 +74,7 @@ include "connector.php";
                 <li><a href="home.php" name="home">Home</a></li>
             </ul>
         </nav>
+        <h1>Welcome Student</h1>
         <a href="logout.php" name="logout">Logout</a>
     </div>
 </body>

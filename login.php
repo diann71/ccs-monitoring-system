@@ -119,7 +119,7 @@ include "connector.php";
 
         <!--<a href="#login-form">LOGIN</a>
         <a href="#signup-form">SIGN UP</a>-->
-        <h1>CSS SIT-IN MONITORING SYSTEM</h1>
+        <h1>CCS SIT-IN MONITORING SYSTEM</h1>
         <form action="login.php" method="post">
             <label for="username" style="margin-bottom: -20px;">Username</label><br>
             <input type="text" id="username" name="username" placeholder="Username" required><br>

@@ -137,7 +137,7 @@ if(isset($_POST["submit"])){
         <div class="cont">
             <img id="logo" src="images/logo.png">
             <img id="css" src="images/css.png">
-            <h1 id="side">CSS SIT-IN MONITORING SYSTEM</h1>
+            <h1 id="side">CCS SIT-IN MONITORING SYSTEM</h1>
             <pre>Hello and welcome to the Sit-In Monitoring 
 System of the CSS Computer Laboratories. 
 This system is designed to efficiently 
@@ -156,7 +156,7 @@ environment.
             <form action="register.php" method="post">
                 <div class="col">
                         <label style="margin-bottom: -20px;">Idno</label><br>
-                        <input type="number" name="idno" placeholder="Id number" required><br>
+                        <input type="text" name="idno" placeholder="Id number" required><br>
                         <label style="margin-bottom: -20px;">Lastname</label><br>
                         <input type="text" name="lastname" placeholder="Lastname" required><br>
                         <label style="margin-bottom: -20px;">Firstname</label><br>
