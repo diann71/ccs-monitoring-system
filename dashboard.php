@@ -32,27 +32,40 @@ include "connector.php";
             background-color: blue;
             color: white;
         }
+        nav{
+        }
         ul{
+            display: flex;
+            justify-content: flex-end;
+            margin: 0;
             width: 100%;
             padding: 0;
-            background-color: blue;
             list-style-type: none;
             overflow: hidden;
+            border-bottom: 1px solid black;
         }
         li{
             display: inline;
-            float: right;
         }
         li a{
+            margin-top: 9px;
             display: block;
             padding: 15px 16px;
             text-decoration: none;
-            color: white;
+            color: black;
             text-align: center;
         }
         li a:hover{
             background-color: white;
             color: blue
+        }
+        img{
+            width: 55px;
+            margin-right: 590px;
+        }
+        h1{
+            display: inline-block;
+            margin-left: 0;
         }
     </style>
 </head>
@@ -68,14 +81,17 @@ include "connector.php";
         <?php endif; ?>
         <nav class="navbar">
             <ul>
-                <li><a href="home.php" name="home">Home</a></li>
-                <li><a href="home.php" name="home">Home</a></li>
-                <li><a href="home.php" name="home">Home</a></li>
-                <li><a href="home.php" name="home">Home</a></li>
+                <img id="ccs" src="images/ccs.png">
+                <li><a href="home.php" name="home">View Announcement</a></li>
+                <li><a href="home.php" name="home">View Monitoring System</a></li>
+                <li><a href="home.php" name="home">Sit-in Rules</a></li>
+                <li><a href="home.php" name="home">Lab rules and Regulation</a></li>
             </ul>
         </nav>
-        <h1>Welcome Student</h1>
-        <a href="logout.php" name="logout">Logout</a>
     </div>
+    <div>
+    <a href="logout.php" name="logout">Logout</a>
+    </div>
+
 </body>
 </html>
