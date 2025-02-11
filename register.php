@@ -44,20 +44,20 @@ if(isset($_POST["submit"])){
 </head>
 <body class="flex items-center justify-center min-h-screen bg-gray-100 p-4">
     <!-- Left Side -->
-    <div class="flex flex-col items-center  bg-white shadow-lg h-full md:w-96 h-auto p-6 rounded-l-3xl">
-        <div class="flex flex-col md:flex-row items-center justify-center md:space-x-4">
+    <div class="flex flex-col items-center  bg-white shadow-lg md:w-96 h-auto p-6 rounded-l-3xl">
+         <div class="flex flex-col md:flex-row items-center justify-center md:space-x-4">
             <img src="images/logo.png" class="w-[130px]">
             <img src="images/css.png" class="w-[105px] pb-2">
         </div>
         <h1 class="text-xl font-semibold text-gray-800 pb-2 ">CCS SIT-IN MONITORING SYSTEM</h1>
-        <p class="text-gray-600 text-center mt-2 text-1g">
+        <p class="text-gray-600 text-center mt-2 text-1g  p-2">
             Hello and welcome to the Sit-In Monitoring System of the CSS Computer Laboratories.
             This system helps track and manage student sit-ins efficiently.
         </p>
     </div>
 
     <!-- Right Side -->
-    <div class="bg-white shadow-lg w-sm md:w-[700px] h-auto p-6 rounded-r-3xl">
+    <div class="bg-white  shadow-lg w-sm md:w-[700px] h-auto p-6 rounded-r-3xl">
         <h1 class="text-xl font-semibold text-center text-gray-800">CREATE ACCOUNT</h1>
         <img src="images/profile.png" class="w-12 mx-auto mt-2">
         <p class="text-center text-gray-600">Sign up to continue</p>
