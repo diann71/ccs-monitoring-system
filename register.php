@@ -39,153 +39,76 @@ if(isset($_POST["submit"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign up</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .cont{
-            background: white;
-            margin-right: -24px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            width: 350px;
-            height: 530px;
-            border-radius: 0;
-            border-top-left-radius: 40px;
-            border-bottom-left-radius: 40px;
-            text-align: center;
-            /*background: linear-gradient(to right, #441752, #DDA853);*/
-        }
-        .container{
-            border-radius: 0;
-            border-top-right-radius: 40px;
-            border-bottom-right-radius: 40px;
-            width: 700px;
-            height: 530px;
-            margin: 25px;
-            background: white;
-            padding: 20px;  
-            box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-        .col{
-            float: left;
-        }
-        .col1{
-            float: right;
-        }
-        label{
-            padding-left: 0px;
-        }
-        input{
-            width: 300px;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 0;
-        }
-        input[type=submit]{
-            align-items: center;
-            margin-right: -48px;
-            float: right;
-            width: 20%;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 20px;
-        }
-        select {
-            width: 320px;
-            padding: 9px;
-            background-color: white;
-            float: left;
-        }
-        h1{
-            margin-top: 20px;
-            margin-bottom: 20px;
-            align-items: center;
-            font-size: 20px;
-        }
-        #side{
-            padding-top: 100px;
-            color: black;
-            font-size: 25px;
-        }
-        pre{
-            color: black;
-            font-family: Arial, sans-serif;
-        }
-        p{
-            font-weight: bold;
-        }
-        #profile{
-            width: 10%;
-            justify-content: center;
-        }
-        #logo{
-            width: 30%;
-            height: 19%;
-        }
-        #css{
-            width: 30%;
-            height: 20%;
-        }
-        .cont h1{
-            margin-top: -50px;
-        }
-    </style>
+    <title>Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>  
-        <div class="cont">
-            <img id="logo" src="images/logo.png">
-            <img id="css" src="images/css.png">
-            <h1 id="side">CCS SIT-IN MONITORING SYSTEM</h1>
-            <pre>Hello and welcome to the Sit-In Monitoring 
-System of the CSS Computer Laboratories. 
-This system is designed to efficiently 
-track and manage student sit-ins, 
-ensuring proper usage of lab resources 
-while maintaining a smooth and organized 
-environment.
+<body class="flex items-center justify-center min-h-screen bg-gray-100 p-4">
+    <!-- Left Side -->
+    <div class="flex flex-col items-center  bg-white shadow-lg h-full md:w-96 h-auto p-6 rounded-l-3xl">
+        <div class="flex flex-col md:flex-row items-center justify-center md:space-x-4">
+            <img src="images/logo.png" class="w-[130px]">
+            <img src="images/css.png" class="w-[105px] pb-2">
+        </div>
+        <h1 class="text-xl font-semibold text-gray-800 pb-2 ">CCS SIT-IN MONITORING SYSTEM</h1>
+        <p class="text-gray-600 text-center mt-2 text-1g">
+            Hello and welcome to the Sit-In Monitoring System of the CSS Computer Laboratories.
+            This system helps track and manage student sit-ins efficiently.
+        </p>
+    </div>
 
-            </pre>
-        </div>
-        <div class="container">
-        
-            <h1>CREATE ACCOUNT</h1>
-            <img id="profile" src="images/profile.png">
-            <p>Sign up to continue</p>
-            <form action="register.php" method="post">
-                <div class="col">
-                        <label style="margin-bottom: -20px;">Idno</label><br>
-                        <input type="text" name="idno" placeholder="Id number" required><br>
-                        <label style="margin-bottom: -20px;">Lastname</label><br>
-                        <input type="text" name="lastname" placeholder="Lastname" required><br>
-                        <label style="margin-bottom: -20px;">Firstname</label><br>
-                        <input type="text" name="firstname" placeholder="Firstname" required><br>
-                        <label style="margin-bottom: -20px;">Midname</label><br>
-                        <input type="text" name="midname" placeholder="Midname" required><br>
+    <!-- Right Side -->
+    <div class="bg-white shadow-lg w-sm md:w-[700px] h-auto p-6 rounded-r-3xl">
+        <h1 class="text-xl font-semibold text-center text-gray-800">CREATE ACCOUNT</h1>
+        <img src="images/profile.png" class="w-12 mx-auto mt-2">
+        <p class="text-center text-gray-600">Sign up to continue</p>
+
+        <form action="register.php" method="post" class="mt-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Left Column -->
+                <div>
+                    <label class="block text-gray-700 font-bold pb-1">ID No.</label>
+                    <input type="text" name="idno" placeholder="ID Number" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
+
+                    <label class="block text-gray-700 font-bold pb-1" >Last Name</label>
+                    <input type="text" name="lastname" placeholder="Last Name" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
+
+                    <label class="block text-gray-700 font-bold pb-1">First Name</label>
+                    <input type="text" name="firstname" placeholder="First Name" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
+
+                    <label class="block text-gray-700 font-bold pb-1">Middle Name</label>
+                    <input type="text" name="midname" placeholder="Middle Name" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
                 </div>
-                <div class="col1">
-                        <label style="margin-bottom: -10px;">Course</label><br>
-                        <select style="margin-bottom: 10px;" name="course" required>
-                            <option value="" disabled selected>Select a course</option>
-                            <option value="1">BSIT</option>
-                            <option value="2">BSCS</option>
-                        </select>
-                        <label style="margin-bottom: -10px;">Year Level</label><br>
-                        <select name="year" required>
-                            <option value="" disabled selected>Select a level</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                        <label style="margin-bottom: -20px; margin-top: 48px;">Username</label><br>
-                        <input type="text" name="username" placeholder="Username" required><br>
-                        <label style="margin-bottom: -20px;">Password</label><br>
-                        <input type="password" name="password" placeholder="Password" required><br>
+
+                <!-- Right Column -->
+                <div>
+                    <label class="block text-gray-700 font-bold pb-1">Course</label>
+                    <select name="course" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-px" required>
+                        <option value="" disabled selected>Select a course</option>
+                        <option value="1">BSIT</option>
+                        <option value="2">BSCS</option>
+                    </select>
+
+                    <label class="block text-gray-700 mt-2 font-bold pb-1">Year Level</label>
+                    <select name="year" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-px" required>
+                        <option value="" disabled selected>Select a level</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+
+                    <label class="block text-gray-700 mt-2 font-bold pb-1">Username</label>
+                    <input type="text" name="username" placeholder="Username" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
+
+                    <label class="block text-gray-700 font-bold pb-1">Password</label>
+                    <input type="password" name="password" placeholder="Password" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400" required>
                 </div>
-                <input type="submit" name="submit" value="Sign up">
-            </form>
-        </div>
+            </div>
+
+            <div class="flex justify-center mt-6">
+                <input type="submit" name="submit" value="Sign Up" class="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition">
+            </div>
+        </form>
+    </div>
 </body>
 </html>
