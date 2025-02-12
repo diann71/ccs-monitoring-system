@@ -1,8 +1,32 @@
 <?php session_start();
 
-include "connector.php";
 include "nav.php";
+include "connector.php";
+include "authenticator.php";
 
+if(!isset($_SESSION['idno'])){
+    $_SESSION['error'] = "Please log in to view your profile.";
+    header("Location: login.php"); 
+    exit();
+}
+
+$idno = $_SESSION["idno"];
+
+$result = mysqli_query($mysql, "SELECT * FROM students WHERE idno = '$idno'");
+$row = mysqli_fetch_assoc($result);
+
+if($row){
+    $idno = $row['idno'];
+    $lastname = $row['lastname'];
+    $firstname = $row['firstname'];
+    $midname = $row['midname'];
+    $course = $row['course'];
+    $year = $row['year'];
+} else {
+    $_SESSION['error'] = "Profile not found.";
+    header("Location: dashboard.php"); 
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,35 +34,20 @@ include "nav.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <style>
-        body{
-            margin: 0;
-            font-family: Arial, sans-serif;
-            font-size: 15px;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: white;
-        }
-        .cont{
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 90px;
-            border-radius: 20px;
-            border: 1px solid black;
-            width: 1000px;
-            height: 530px;
-            background: white;
-            padding: 20px;  
-            box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
-    <div class="cont">
-        <h1>hi</h1>
-
+    <div class="h-screen grid place-items-center">
+    <div class="w-96 border-2 border-solid p-6 shadow-lg rounded-lg ">
+        <p>Id No: <?php echo $idno; ?></p>
+        <p>Last Name: <?php echo $lastname;?></p>
+        <p>First Name: <?php echo $firstname;?></p>
+        <p>Middle Name: <?php echo $midname;?></p>
+        <p>Course: <?php echo $course;?></p>
+        <p>Year: <?php echo $year;?></p>
     </div>
+    <div>
+         <a href="edit.php" class="block px-4 py-2 hover:bg-gray-200">Edit</a>
+    </div>
+</div>
 </body>
 </html>

@@ -16,38 +16,32 @@
         </div>
     <?php endif; ?>
 
-    <!-- Navbar -->
-    <nav class="bg-white shadow-md fixed w-full top-0 left-0">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Left Logo -->
-                <div class="flex items-center float-left">
-                    <img class="h-8 w-auto" src="images/ccs.png" alt="CCS Logo">
-                    <h1 class="ml-3 text-lg font-semibold">CCS Sit-In Monitoring System</h1>
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden md:flex justify-end flex-1 space-x-6">
-                    <a href="home.php" class="hover:text-blue-600">View Announcement</a>
-                    <a href="home.php" class="hover:text-blue-600">View Remaining Session</a>
-                    <a href="home.php" class="hover:text-blue-600">Sit-in Rules</a>
-                    <a href="home.php" class="hover:text-blue-600">Lab Rules & Regulations</a>
-                    <a href="home.php" class="hover:text-blue-600">History</a>
-                    <a href="home.php" class="hover:text-blue-600">Reservation</a>
-                </div>
-
-                <!-- Profile Section
-                <div class="relative">
-                    <button type="button" class="relative flex items-center space-x-2 rounded-full bg-gray-800 p-1 text-white focus:ring-2 focus:ring-white focus:ring-offset-2">
-                        <img class="w-8 h-8 rounded-full" src="images/profile.png" alt="Profile">
-                    </button>
-                </div>
-                -->
+    <nav class="flex items-center justify-between border-b border-black p-4 shadow-md">
+        <div class="flex items-center space-x-4">
+            <img src="images/ccs.png" alt="Logo" class="w-14">
+            <h1 class="text-2xl font-medium">CCS SIT-IN MONITORING SYSTEM</h1>
+        </div>
+        <ul class="pl-80 hidden md:flex space-x-6 text-lg uppercase">
+            <li><a href="home.php" class="hover:text-blue-600">View Announcement</a></li>
+            <li><a href="home.php" class="hover:text-blue-600">View Remaining Session</a></li>
+            <li><a href="home.php" class="hover:text-blue-600">Sit-in Rules</a></li>
+            <li><a href="home.php" class="hover:text-blue-600">Lab Rules & Regulation</a></li>
+            <li><a href="home.php" class="hover:text-blue-600">History</a></li>
+            <li><a href="home.php" class="hover:text-blue-600">Reservation</a></li>
+        </ul>
+        <div class="relative">
+            <img src="images/profile.png" alt="Profile" class="w-10 cursor-pointer" id="profileMenu">
+            <div class="absolute right-0 mt-2 w-40 bg-white shadow-lg hidden" id="dropdownMenu">
+                <a href="profile.php" class="block px-4 py-2 hover:bg-gray-200">PROFILE</a>
+                <a href="logout.php" class="block px-4 py-2 hover:bg-gray-200">LOGOUT</a>
             </div>
         </div>
     </nav>
 
-    <!-- Content Spacer to Avoid Overlap -->
-    <div class="mt-16"></div>
+    <script>
+        document.getElementById('profileMenu').addEventListener('click', function() {
+            document.getElementById('dropdownMenu').classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

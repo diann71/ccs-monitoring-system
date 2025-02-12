@@ -18,6 +18,12 @@ include "connector.php";
             if($row){
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['idno'] = $row['idno'];
+                $_SESSION['lastname'] = $row['lastname'];
+                $_SESSION['firstname'] = $row['firstname'];
+                $_SESSION['midname'] = $row['midname'];
+                $_SESSION['course'] = $row['course'];
+                $_SESSION['year'] = $row['year'];
+                $_SESSION['password'] = $row['password'];
 
                 $_SESSION['success'] = "Login Successfully!";
                 header('Location: dashboard.php');
