@@ -13,7 +13,7 @@ include "authenticator.php";
     <title>Profile</title>
 </head>
 <body>
-    <div class="h-screen grid place-items-center">
+    <div class="h-lvh grid place-items-center">
     <div class="w-96 border-2 border-solid p-6 shadow-lg rounded-lg ">
         <p>Id No: <?php echo $idno; ?></p>
         <p>Last Name: <?php echo $lastname;?></p>
