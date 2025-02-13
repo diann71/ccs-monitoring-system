@@ -1,16 +1,22 @@
 <?php 
 include "connector.php";
 
-    if(isset($_SESSION['username'])){
-        $idno = $_SESSION['idno'];
-        $lastname = $_SESSION['lastname'];
-        $firstname = $_SESSION['firstname'];
-        $midname = $_SESSION['midname'];
-        $course = $_SESSION['course'];
-        $year = $_SESSION['year'];
-        $password = $_SESSION['password'];
-    }
-    else{
-        $_SESSION['error'] = "User not logged in";
-    }
+$idno = $_SESSION["idno"];
+
+$result = mysqli_query($mysql, "SELECT * FROM students WHERE idno = '$idno'");
+$row = mysqli_fetch_assoc($result);
+
+if($row){
+    $idno = $row['idno'];
+    $lastname = $row['lastname'];
+    $firstname = $row['firstname'];
+    $midname = $row['midname'];
+    $course = $row['course'];
+    $year = $row['year'];
+} else {
+    $_SESSION['error'] = "Profile not found.";
+    header("Location: dashboard.php"); 
+    exit();
+}
+
 ?>  

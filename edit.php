@@ -3,6 +3,7 @@ session_start();
 
 include "nav.php";
 include "connector.php";
+include "authenticator.php";
 
     if(isset($_POST["update"])){
         $idno = mysqli_real_escape_string($mysql, $_POST["idno"]);
@@ -65,34 +66,34 @@ include "connector.php";
                 <!-- Left Column -->
                 <div>
                     <label class="block text-gray-700 font-bold pb-1">ID No.</label>
-                    <input type="text" name="idno" placeholder="ID Number" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
+                    <input type="text" name="idno" placeholder="ID Number" value="<?php echo $idno ?>" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
 
                     <label class="block text-gray-700 font-bold pb-1" >Last Name</label>
-                    <input type="text" name="lastname" placeholder="Last Name" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
+                    <input type="text" name="lastname" placeholder="Last Name" value="<?php echo $lastname ?>" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
 
                     <label class="block text-gray-700 font-bold pb-1">First Name</label>
-                    <input type="text" name="firstname" placeholder="First Name" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
+                    <input type="text" name="firstname" placeholder="First Name" value="<?php echo $firstname ?>" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
 
                     <label class="block text-gray-700 font-bold pb-1">Middle Name</label>
-                    <input type="text" name="midname" placeholder="Middle Name" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
+                    <input type="text" name="midname" placeholder="Middle Name" value="<?php echo $midname ?>" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
                 </div>
 
                 <!-- Right Column -->
                 <div>
                     <label class="block text-gray-700 font-bold pb-1">Course</label>
-                    <select name="course" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-px" required>
+                    <select name="course" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-px"  required>
                         <option value="" disabled selected>Select a course</option>
-                        <option value="1">BSIT</option>
-                        <option value="2">BSCS</option>
+                        <option value="1" <?php echo ($course == 'BSIT') ? 'selected' : ''; ?>>BSIT</option>
+                        <option value="2" <?php echo ($course == 'BSCS') ? 'selected' : ''; ?>>BSCS</option>
                     </select>
 
                     <label class="block text-gray-700 mt-2 font-bold pb-1">Year Level</label>
                     <select name="year" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-px" required>
                         <option value="" disabled selected>Select a level</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                        <option value="1" <?php echo ($year == '1') ? 'selected' : ''; ?>>1</option>
+                        <option value="2" <?php echo ($year == '2') ? 'selected' : ''; ?>>2</option>
+                        <option value="3" <?php echo ($year == '3') ? 'selected' : ''; ?>>3</option>
+                        <option value="4" <?php echo ($year == '4') ? 'selected' : ''; ?>>4</option>
                     </select>
                 </div>
             </div>
