@@ -61,9 +61,22 @@ include "connector.php";
             <h1 class="text-xl font-semibold text-center text-gray-800 p-3">EDIT PROFILE</h1>
 
             <form action="register.php" method="post" class="mt-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Left Column -->
-                <div>
+            <div class=" md:grid-cols-2 gap-4">
+
+                <div class="grid grid-row-1">
+
+                     <!--<div class="flex flex-col items-center">
+   
+                        <img id="profilePreview" class="w-24 h-24 rounded-full border object-cover" src="uploads/<?php echo $image ?? 'default-profile.png'; ?>" alt="Profile Picture">
+                        
+
+                        <label class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 mt-4">
+                            Choose Image
+                            <input type="file" name="profile_picture" class="hidden" accept="image/*" onchange="previewImage(event)">
+                        </label>
+                        
+                    </div>-->
+
                     <label class="block text-gray-700 font-bold pb-1">ID No.</label>
                     <input type="text" name="idno" placeholder="ID Number" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
 
@@ -75,10 +88,7 @@ include "connector.php";
 
                     <label class="block text-gray-700 font-bold pb-1">Middle Name</label>
                     <input type="text" name="midname" placeholder="Middle Name" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
-                </div>
 
-                <!-- Right Column -->
-                <div>
                     <label class="block text-gray-700 font-bold pb-1">Course</label>
                     <select name="course" class="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-px" required>
                         <option value="" disabled selected>Select a course</option>
