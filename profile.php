@@ -54,7 +54,7 @@ if($row){
         </div>
         <div class="grid p-6">
             <a href="name.php" class="p-2 w-full border border-black text-black  hover:bg-gray-100 text-left">Name</a>
-            <a href="name.php" class="p-2 w-full border border-black text-black  hover:bg-gray-100 text-left">Username</a>
+            <a href="username.php" class="p-2 w-full border border-black text-black  hover:bg-gray-100 text-left">Username</a>
             <a href="name.php" class="p-2 w-full border border-black text-black  hover:bg-gray-100 text-left">Course & Level</a>
         </div>
         

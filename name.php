@@ -1,4 +1,5 @@
 <?php 
+ob_start(); // Start output buffering
 session_start();
 
 include "nav.php";
@@ -21,12 +22,12 @@ if(isset($_POST["update"])){
         exit();
     }
     else {
-        $result = "UPDATE students SET idno = '$idno', lastname ='$lastname', firstname ='$firstname', midname ='$midname', course ='$course', `year` ='$year' ";
+        $result = "UPDATE students SET lastname ='$lastname', firstname ='$firstname', midname ='$midname', course ='$course', `year` ='$year'  WHERE idno = '$idno'";
         $row = mysqli_query($mysql, $result);
        
         if($row) {
             $_SESSION['success'] = "Edited Successfully";
-            header("Location: profile.php"); // Redirect to login page with success message
+            header("Location: profile.php"); 
             exit();
         } else {
             $_SESSION['error'] = "Student not found!";
@@ -35,9 +36,9 @@ if(isset($_POST["update"])){
         }
     }
 }
-    
+ob_end_flush(); // End output buffering
 ?>
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

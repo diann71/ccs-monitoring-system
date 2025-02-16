@@ -13,10 +13,6 @@ if($row){
     $midname = $row['midname'];
     $course = $row['course'];
     $year = $row['year'];
-} else {
-    $_SESSION['error'] = "Profile not found.";
-    header("Location: dashboard.php"); 
-    exit();
 }
 
 ?>  
