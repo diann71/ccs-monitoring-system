@@ -115,7 +115,7 @@
             <img src="images/ccs.png" alt="Logo" class="w-14">
             <h1 class="text-2xl font-medium">CCS SIT-IN MONITORING SYSTEM</h1>
         </div>
-        <ul class="pl-80 hidden md:flex space-x-6 text-lg uppercase">
+        <ul class="hidden md:flex space-x-6 text-lg uppercase">
             <li><a href="home.php" class="hover:text-blue-600">View Announcement</a></li>
             <li><a href="home.php" class="hover:text-blue-600">View Remaining Session</a></li>
             <li><a href="home.php" class="hover:text-blue-600">Sit-in Rules</a></li>

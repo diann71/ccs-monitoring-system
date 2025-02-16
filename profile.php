@@ -9,7 +9,6 @@ if(!isset($_SESSION['idno'])){
     header("Location: login.php"); 
     exit(); 
 }
-
 $idno = $_SESSION["idno"];
 
 $result = mysqli_query($mysql, "SELECT * FROM students WHERE idno = '$idno'");
