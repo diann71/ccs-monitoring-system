@@ -9,6 +9,7 @@ if(!isset($_SESSION['idno'])){
     header("Location: login.php"); 
     exit(); 
 }
+
 $idno = $_SESSION["idno"];
 
 $result = mysqli_query($mysql, "SELECT * FROM students WHERE idno = '$idno'");
@@ -35,17 +36,28 @@ if($row){
     <title>Profile</title>
 </head>
 <body>
-    <div class="h-screen grid place-items-center">
-    <div class="mt-10 w-1/2 h-full border-2 border-solid p-6 shadow-lg rounded-lg ">
-        <p>Id No: <?php echo $idno; ?></p>
-        <p>Last Name: <?php echo $lastname;?></p>
-        <p>First Name: <?php echo $firstname;?></p>
-        <p>Middle Name: <?php echo $midname;?></p>
-        <p>Course: <?php echo $course;?></p>
-        <p>Year: <?php echo $year;?></p>
-    </div>
-    <div>
-         <a href="edit.php" class="block px-4 py-2 hover:bg-gray-200">Edit</a>
+    <div class="mt-20 h-lvh place-items-center">
+    <div class="w-2/5 h-3/4 border-2 border-solid shadow-lg rounded-lg ">
+        <div class="w-full bg-blue-800 py-3">
+            <h1 class="w-full font-bold text-white text-center">Profile</h1>
+        </div>
+        <div class="flex flex-col items-center">
+                    <!-- Display Current Profile Picture -->
+                    <img class="mt-10 mb-4 w-24 h-24 rounded-full border border-black object-cover" src="uploads/<?php echo $profile_picture; ?>" alt="">
+                    <h1 class="font-bold mb-7"> <?php echo $firstname . ' ' . $midname . ' ' . $lastname?></p>
+                    
+                    <!-- File Input (No Preview)
+                    <label class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 mt-4">
+                        Choose Image
+                        <input type="file" name="profile_picture" class="hidden" accept="image/*">
+                    </label> -->
+        </div>
+        <div class="grid p-6">
+            <a href="name.php" class="p-2 w-full border border-black text-black  hover:bg-gray-100 text-left">Name</a>
+            <a href="name.php" class="p-2 w-full border border-black text-black  hover:bg-gray-100 text-left">Username</a>
+            <a href="name.php" class="p-2 w-full border border-black text-black  hover:bg-gray-100 text-left">Course & Level</a>
+        </div>
+        
     </div>
 
 </div>
