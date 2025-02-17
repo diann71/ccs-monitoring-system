@@ -49,7 +49,7 @@ ob_end_flush(); // End output buffering
 <body>
     <form action="name.php" method="post">
             <div class=" grid place-items-center">
-                <div class="mt-10 mb-10 w-1/4 h-9/10 g-white border border-black border-solid rounded-xl">
+                <div class="mt-10 mb-10 w-1/4 h-9/10 border border-black  rounded-3xl overflow-hidden">
                     <div class="w-full bg-blue-800 py-3">
                         <h1 class="w-full font-bold text-white text-center">Profile picture</h1>
                     </div>

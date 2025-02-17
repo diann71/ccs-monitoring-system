@@ -55,15 +55,14 @@ ob_end_flush(); // End output buffering
 <body>
     <form action="username.php" method="post">
             <div class=" grid place-items-center">
-                <div class="mt-10 mb-10 w-2/5 h-9/10 g-white border border-black border-solid rounded-xl">
+                <div class="mt-10 mb-10 w-1/3 h-3/4 border border-black border-solid rounded-3xl">
                     <div class="p-6">
-                        <h1 class="text-left font-bold text-xl pb-5">Name</h1>
                         
                         <label class="block text-gray-700 font-bold pb-1 " >Username</label>
                         <input type="text" name="username" placeholder="Username" value="<?php echo $username ?>" class="w-full border border-black p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
 
                         <label class="block text-gray-700 font-bold pb-1 " >Password</label>
-                        <input type="password" name="password" placeholder="Password" value="<?php echo $password ?>" class="w-full border border-black p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
+                        <input type="password" name="password" placeholder="Password" value="<?php echo $password ?>" class="w-full border border-black p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-5" required>
                         <div class="text-center">
                             <button type="submit" name="update" class=" block px-4 py-2 w-full mb-5 bg-blue-600 rounded-3xl text-white text-bold hover:bg-blue-700 cursor-pointer">  
                                 Save Changes

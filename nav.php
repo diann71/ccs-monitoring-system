@@ -18,31 +18,36 @@
 <div class="min-h-full">
     <nav class="bg-white shadow">
         <div class="px-4 sm:px-6 lg:px-8">
-            <div class="flex h-16 items-center justify-between">
-                <!-- Logo & Navigation Links -->
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
                 <div class="flex items-center">
                     <a href="#">
-                        <img src="images/ccs.png" alt="Logo" class="size-9">
-                    </a>    
-                    <div class="hidden md:flex ml-10">
-                        <a href="dashboard.php" class="px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">Dashboard</a>
-                        <a href="#" class="px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">View Announcement</a>
-                        <a href="#" class="px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">View Remaining Session</a>
-                        <a href="#" class="px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">Sit-in Rules</a>
-                        <a href="#" class="px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">Lab Rules & Regulation</a>
-                        <a href="#" class="px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">History</a>
-                        <a href="#" class="px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">Reservation</a>
-                    </div>
+                        <img src="images/ccs.png" alt="Logo" class="size-11">
+                    </a>
                 </div>
+
+                <!-- Right side: Navigation Links and Profile Dropdown -->
+                <div class="flex items-center ml-auto">
+                    <!-- Navigation Links -->
+                    <div class="hidden md:flex">
+                        <a href="dashboard.php" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300 mr">Dashboard</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">View Announcement</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">View Remaining Session</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">Sit-in Rules</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">Lab Rules & Regulation</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">History</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300 mr-5">Reservation</a>
+                    </div>
                 
                 <!-- Profile Dropdown -->
-                <div class="relative">
-                    <button id="profileMenu" class="flex items-center rounded-full bg-black-200 p-1 focus:ring-2 focus:ring-white">
-                        <img class="size-8 rounded-full border border-black" src="uploads/<?php echo $profile_picture; ?>" alt="">
-                    </button>
-                    <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-32 rounded-md bg-white shadow-lg ring-1 ring-black/5">
-                        <a href="profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-800 hover:text-white">Profile</a>
-                        <a href="logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-800 hover:text-white">Sign out</a>
+                    <div class="hidden md:flex relative">
+                        <button id="profileMenu" class="flex items-center rounded-full bg-black-200 p-1 focus:ring-2 focus:ring-white">
+                            <img class="size-8 rounded-full border border-black" src="uploads/<?php echo $profile_picture; ?>" alt="">
+                        </button>
+                        <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-32 rounded-md bg-white shadow-lg ring-1 ring-black/5">
+                            <a href="profile.php" class="block px-4 py-2 font-medium text-sm text-gray-700 hover:bg-blue-800 hover:text-white">Profile</a>
+                            <a href="logout.php" class="block px-4 py-2 font-medium text-sm text-gray-700 hover:bg-blue-800 hover:text-white">Sign out</a>
+                        </div>
                     </div>
                 </div>
 

@@ -15,8 +15,8 @@ include "authenticator.php"
     </style>    
 </head>
 <body>
-        <div class="p-6 flex flex-row gap-20 h-screen">
-            <div class="mt-5 mb-10 w-1/3 h-1/2 border-2 border-solid shadow-lg rounded-lg ">
+        <div class="mt-10 p-6 flex flex-row gap-20 h-screen">
+            <div class="mt-5 mb-10 w-1/3 h-1/2 border border-black shadow-lg rounded-3xl overflow-hidden ">
                 <div class="w-full bg-blue-800 py-3">
                     <h1 class="w-full font-bold text-white text-center">Student Information</h1>
                 </div>
@@ -42,13 +42,13 @@ include "authenticator.php"
                 
             </div>
 
-            <div class="mt-5 mb-10 w-1/3 h-1/2 border-2 border-solid shadow-lg rounded-lg">
+            <div class="mt-5 mb-10 w-1/3 h-1/2 border border-black shadow-lg rounded-3xl overflow-hidden">
                 <div class="w-full bg-blue-800 py-3">
                     <h1 class="w-full font-bold text-white text-center">Announcements</h1>
                 </div>
             </div>
 
-            <div class="mt-5 mb-10 w-1/3 h-1/2 border-2 border-solid shadow-lg rounded-lg">
+            <div class="mt-5 mb-10 w-1/3 h-1/2 border border-black shadow-lg rounded-3xl overflow-hidden">
                <div class="w-full bg-blue-800 py-3">
                     <h1 class="w-full font-bold text-white text-center">Rules and Regulations</h1>
                 </div>
@@ -57,3 +57,4 @@ include "authenticator.php"
         </div>
 </body>
 </html>
+
