@@ -1,3 +1,5 @@
+
+
 <?php 
 ob_start(); // Start output buffering
 session_start();
@@ -6,8 +8,17 @@ include "nav.php";
 include "connector.php";
 include "authenticator.php";
 
+$idno = $_SESSION["idno"];
+
+$result = mysqli_query($mysql, "SELECT username, password FROM students WHERE idno = '$idno'");
+$row = mysqli_fetch_assoc($result);
+
+if($row){
+    $username = $row['username'];
+    $password = $row['password'];
+}
+
 if(isset($_POST["update"])){
-    $idno = mysqli_real_escape_string($mysql, $_POST["idno"]);
     $username = mysqli_real_escape_string($mysql, $_POST["username"]);
     $password = mysqli_real_escape_string($mysql, $_POST["password"]);
 
@@ -42,7 +53,7 @@ ob_end_flush(); // End output buffering
     <title>Document</title>
 </head>
 <body>
-    <form action="name.php" method="post">
+    <form action="username.php" method="post">
             <div class=" grid place-items-center">
                 <div class="mt-10 mb-10 w-2/5 h-9/10 g-white border border-black border-solid rounded-xl">
                     <div class="p-6">

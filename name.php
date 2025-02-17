@@ -49,10 +49,11 @@ ob_end_flush(); // End output buffering
 <body>
     <form action="name.php" method="post">
             <div class=" grid place-items-center">
-                <div class="mt-10 mb-10 w-2/5 h-9/10 g-white border border-black border-solid rounded-xl">
+                <div class="mt-10 mb-10 w-1/4 h-9/10 g-white border border-black border-solid rounded-xl">
+                    <div class="w-full bg-blue-800 py-3">
+                        <h1 class="w-full font-bold text-white text-center">Edit name</h1>
+                    </div>
                     <div class="p-6">
-                        <h1 class="text-left font-bold text-xl pb-5">Name</h1>
-                        
                         <label class="block text-gray-700 font-bold pb-1 " >Idno</label>
                         <input type="text" name="idno" placeholder="Last Name" value="<?php echo $idno ?>" class="w-full border border-black p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
 
