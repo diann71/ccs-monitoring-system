@@ -14,15 +14,7 @@ include "authenticator.php"
     <style>
     </style>    
 </head>
-<body class="">
-        <?php if(isset($_SESSION["success"])): ?>
-            <div style="background-color: green; color: white; padding: 10px;">
-                <?php
-                   echo $_SESSION['success'];
-                   unset($_SESSION['success']);
-                ?>
-            </div>
-        <?php endif; ?>
+<body>
         <div class="p-6 flex flex-row gap-20 h-screen">
             <div class="mt-5 mb-10 w-1/3 h-1/2 border-2 border-solid shadow-lg rounded-lg ">
                 <div class="w-full bg-blue-800 py-3">

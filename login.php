@@ -51,44 +51,48 @@ include "connector.php";
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div class="bg-white p-6 rounded-2xl shadow-lg text-center w-96">
-        <?php if (isset($_SESSION['error'])): ?>
-            <div class="bg-red-500 text-white p-2 mb-4 rounded-md">
-                <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
-            </div>
-        <?php endif; ?>
-        
-        <?php if(isset($_SESSION['success'])): ?>
-            <div class="bg-green-500 text-white p-2 mb-4 rounded-md">
-                <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
-            </div>
-        <?php endif; ?>
-        
-        <div class="flex flex-col md:flex-row items-center justify-center md:space-x-4">
-            <img src="images/logo.png" class="w-[130px]">
-            <img src="images/css.png" class="w-[105px] pb-2">
+    <div class="bg-white rounded-2xl shadow-lg text-center w-96">
+        <div class="">
+            <?php if (isset($_SESSION['error'])): ?>
+                <div class="bg-red-500 text-white p-2 mb-4 rounded-md">
+                    <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
+                </div>
+            <?php endif; ?>
+            
+            <?php if(isset($_SESSION['success'])): ?>
+                <div class="bg-green-500 text-white p-2 mb-4 rounded-md">
+                    <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+                </div>
+            <?php endif; ?>
         </div>
-        
-        <h1 class="text-3xl font-bold mb-6">CCS SIT-IN MONITORING SYSTEM</h1>
-        
-        <form action="login.php" method="post" class="space-y-4">
-            <div>
-                <label for="username" class="block text-left text-base pb-1 font-semibold">Username</label>
-                <input type="text" id="username" name="username" placeholder="Username" required 
-                       class="w-full  text-base px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-400">
+
+        <div class="p-6">
+            <div class="flex flex-col md:flex-row items-center justify-center md:space-x-4">
+                <img src="images/logo.png" class="w-[130px]">
+                <img src="images/css.png" class="w-[105px] pb-2">
             </div>
-            <div>
-                <label for="password" class="block text-left text-base pb-1 font-semibold">Password</label>
-                <input type="password" id="password" name="password" placeholder="Password" required 
-                       class="w-full  text-base px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2">
-            </div>
-            <input type="submit" name="submit" value="Login" 
-                   class="w-[150px] bg-blue-600 text-white py-2 rounded-3xl hover:bg-blue-700 cursor-pointer float-left mb-2">
-        </form>
-        
-        <a href="register.php" class="block mt-4">
-            <button class="w-[150px] bg-gray-200 text-black py-2 rounded-3xl hover:bg-gray-300 float-right mb-2">Sign up</button>
-        </a>
+            
+            <h1 class="text-3xl font-bold mb-6">CCS SIT-IN MONITORING SYSTEM</h1>
+            
+            <form action="login.php" method="post" class="space-y-4">
+                <div>
+                    <label for="username" class="block text-left text-base pb-1 font-semibold">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Username" required 
+                        class="w-full  text-base px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-400">
+                </div>
+                <div>
+                    <label for="password" class="block text-left text-base pb-1 font-semibold">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Password" required 
+                        class="w-full  text-base px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2">
+                </div>
+                <input type="submit" name="submit" value="Login" 
+                    class="w-[150px] bg-blue-600 text-white py-2 rounded-3xl hover:bg-blue-700 cursor-pointer float-left mb-2">
+            </form>
+            
+            <a href="register.php" class="block mt-4">
+                <button class="w-[150px] bg-gray-200 text-black py-2 rounded-3xl hover:bg-gray-300 float-right mb-8">Sign up</button>
+            </a>
+        </div>
     </div>
 </body>
 </html>
