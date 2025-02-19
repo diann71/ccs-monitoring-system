@@ -6,23 +6,27 @@ include "nav.php";
 include "connector.php";
 include "authenticator.php";
 
-if(isset($_POST["update"])){
-    $idno = mysqli_real_escape_string($mysql, $_POST["idno"]);
-        
-    $lastname = mysqli_real_escape_string($mysql, $_POST["lastname"]);
-    $firstname = mysqli_real_escape_string($mysql, $_POST["firstname"]);
-    $midname = mysqli_real_escape_string($mysql, $_POST["midname"]);
-    $course = mysqli_real_escape_string($mysql, $_POST["course"]);
-    $year = mysqli_real_escape_string($mysql, $_POST["year"]);
+$idno = $_SESSION['idno'];
 
-    if(empty($idno) || empty($lastname) || empty($firstname) || empty($midname) || empty($course) ||
-    empty($year)){
+$result = mysqli_query($mysql, "SELECT `profile` FROM students WHERE idno = '$idno'");
+$row = mysqli_fetch_assoc($result);
+
+if($row){
+    $profile = $row['profile'];
+}
+
+if(isset($_POST["submit"])){
+    $idno = mysqli_real_escape_string($mysql, $_POST["idno"]);
+
+    $profile = mysqli_real_escape_string($mysql, $_POST["profile"]);
+
+    if(empty($profile)){
         $_SESSION['error'] = "All fields should be filled.";
         header("Location: edit.php"); // Reload the page with error
         exit();
     }
     else {
-        $result = "UPDATE students SET lastname ='$lastname', firstname ='$firstname', midname ='$midname', course ='$course', `year` ='$year'  WHERE idno = '$idno'";
+        $result = "UPDATE students SET `profile` = '$profile'  WHERE idno = '$idno'";
         $row = mysqli_query($mysql, $result);
        
         if($row) {
@@ -48,21 +52,19 @@ ob_end_flush(); // End output buffering
 </head>
 <body>
     <form action="name.php" method="post">
-            <div class=" grid place-items-center">
+            <div class="bg-zinc-300 grid place-items-center">
                 <div class="mt-10 mb-10 w-1/4 h-9/10 border border-black  rounded-3xl overflow-hidden">
                     <div class="w-full bg-blue-800 py-3">
                         <h1 class="w-full font-bold text-white text-center">Profile picture</h1>
                     </div>
                     <div class="p-6">
                         <div class="flex flex-col items-center">
-                            <!-- Display Current Profile Picture -->
-                            <img class="mt-10 mb-4 w-24 h-24 rounded-full border border-black object-cover" src="uploads/<?php echo $profile_picture; ?>" alt="">
-                            
+                            <img class="mt-8 mb-4 w-48 h-48 rounded-full border border-black object-cover" src="uploads/<?php echo $profile; ?>" alt="">
                             <!-- File Input (No Preview) -->
-                            <label class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 mt-4">
-                                Upload new photo
-                                <input type="file" name="profile_picture" class="hidden" accept="image/*">
-                            </label>
+                            <div class="flex gap-5">
+                                <label class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 mt-4">Choose photo<input type="file" name="profile" class="hidden" accept="image/*"></label>
+                                <input type="submit" name="submit" value="Save Changes" class=" cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg mt-4">
+                            </div>
                         </div>
                     </div>
                 </div>

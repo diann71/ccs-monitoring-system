@@ -15,15 +15,16 @@ include "authenticator.php"
     </style>    
 </head>
 <body>
-        <div class="mt-10 p-6 flex flex-row gap-20 h-screen">
-            <div class="mt-5 mb-10 w-1/3 h-1/2 border border-black shadow-lg rounded-3xl overflow-hidden ">
-                <div class="w-full bg-blue-800 py-3">
+    <div class="bg-zinc-300 ">
+        <div class=" p-6 flex flex-row gap-20 h-screen">
+            <div class="mt-5 mb-10 w-1/3 h-1/2 bg-zinc-200 border border-black shadow-2xl rounded-3xl overflow-hidden ">
+                <div class="w-full bg-blue-700 py-3">
                     <h1 class="w-full font-bold text-white text-center">Student Information</h1>
                 </div>
 
                 <div class="flex flex-col items-center">
                     <!-- Display Current Profile Picture -->
-                    <img class="mt-8 mb-4 w-48 h-48 rounded-full border border-black object-cover" src="uploads/<?php echo $profile_picture; ?>" alt="">
+                    <img class="mt-8 mb-4 w-48 h-48 rounded-full border border-black object-cover" src="uploads/<?php echo $profile; ?>" alt="">
                     
                     <!-- File Input (No Preview)
                     <label class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 mt-4">
@@ -42,19 +43,20 @@ include "authenticator.php"
                 
             </div>
 
-            <div class="mt-5 mb-10 w-1/3 h-1/2 border border-black shadow-lg rounded-3xl overflow-hidden">
-                <div class="w-full bg-blue-800 py-3">
+            <div class="mt-5 mb-10 w-1/3 h-1/2 bg-zinc-200 border border-black shadow-lg rounded-3xl overflow-hidden">
+                <div class="w-full bg-blue-700 py-3">
                     <h1 class="w-full font-bold text-white text-center">Announcements</h1>
                 </div>
             </div>
 
-            <div class="mt-5 mb-10 w-1/3 h-1/2 border border-black shadow-lg rounded-3xl overflow-hidden">
-               <div class="w-full bg-blue-800 py-3">
+            <div class="mt-5 mb-10 w-1/3 h-1/2 bg-zinc-200 border border-black shadow-lg rounded-3xl overflow-hidden">
+               <div class="w-full bg-blue-700 py-3">
                     <h1 class="w-full font-bold text-white text-center">Rules and Regulations</h1>
                 </div>
             </div>
 
         </div>
+    </div>
 </body>
 </html>
 

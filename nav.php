@@ -8,7 +8,7 @@
 </head>
 <body class="bg-white font-sans ">
     <?php if(isset($_SESSION["success"])): ?>
-        <div class="bg-green-500 text-white p-2 text-center">
+        <div class="bg-green-500 text-black p-2 text-center">
             <?php
                echo $_SESSION['success'];
                unset($_SESSION['success']);
@@ -16,13 +16,13 @@
         </div>
     <?php endif; ?>
 <div class="min-h-full">
-    <nav class="bg-white shadow">
+    <nav class="bg-zinc-500 shadow">
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <div class="flex items-center">
                     <a href="#">
-                        <img src="images/ccs.png" alt="Logo" class="size-11">
+                        <img src="images/ccs.jpg" alt="Logo" class="size-12">
                     </a>
                 </div>
 
@@ -30,21 +30,21 @@
                 <div class="flex items-center ml-auto">
                     <!-- Navigation Links -->
                     <div class="hidden md:flex">
-                        <a href="dashboard.php" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300 mr">Dashboard</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">View Announcement</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">View Remaining Session</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">Sit-in Rules</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">Lab Rules & Regulation</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300">History</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-800 hover:text-white transition duration-300 mr-5">Reservation</a>
+                        <a href="dashboard.php" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-white hover:bg-blue-700 hover:text-white transition duration-300 mr">Dashboard</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-white hover:bg-blue-700 hover:text-white transition duration-300">View Announcement</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-white hover:bg-blue-700 hover:text-white transition duration-300">View Remaining Session</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-white hover:bg-blue-700 hover:text-white transition duration-300">Sit-in Rules</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-white hover:bg-blue-700 hover:text-white transition duration-300">Lab Rules & Regulation</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-white hover:bg-blue-700 hover:text-white transition duration-300">History</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-white hover:bg-blue-700 hover:text-white transition duration-300 mr-5">Reservation</a>
                     </div>
                 
                 <!-- Profile Dropdown -->
-                    <div class="hidden md:flex relative">
-                        <button id="profileMenu" class="flex items-center rounded-full bg-black-200 p-1 focus:ring-2 focus:ring-white">
-                            <img class="size-8 rounded-full border border-black" src="uploads/<?php echo $profile_picture; ?>" alt="">
+                    <div class="relative">
+                        <button id="profileMenu" class="flex items-center rounded-full bg-black-200 p-1 focus:ring-1 focus:ring-black">
+                            <img class="size-8 rounded-full border border-black" src="uploads/<?php echo $profile; ?>" alt="">
                         </button>
-                        <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-32 rounded-md bg-white shadow-lg ring-1 ring-black/5">
+                        <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-32 border border-black rounded-md bg-white shadow-lg ring-1 ring-black/5">
                             <a href="profile.php" class="block px-4 py-2 font-medium text-sm text-gray-700 hover:bg-blue-800 hover:text-white">Profile</a>
                             <a href="logout.php" class="block px-4 py-2 font-medium text-sm text-gray-700 hover:bg-blue-800 hover:text-white">Sign out</a>
                         </div>

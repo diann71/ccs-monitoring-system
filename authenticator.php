@@ -13,6 +13,7 @@ if($row){
     $midname = $row['midname'];
     $course = $row['course'];
     $year = $row['year'];
+    $profile = $row['profile'];
 }
 
 ?>  
