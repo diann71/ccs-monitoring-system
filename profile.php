@@ -36,14 +36,14 @@ if($row){
     <title>Profile</title>
 </head>
 <body>
-    <div class="bg-zinc-300 pt-20 h-lvh place-items-center">
-    <div class="w-1/4 h-1/2 border bg-zinc-200 border-black shadow-lg rounded-3xl overflow-hidden">
+    <div class="pt-20 h-lvh place-items-center">
+    <div class="w-1/4 h-1/2 borde border-black shadow-lg rounded-3xl overflow-hidden">
         <div class="w-full bg-blue-700 py-3">
             <h1 class="w-full font-bold text-white text-center">Profile</h1>
         </div>
         <div class="flex flex-col items-center">
                     <!-- Display Current Profile Picture -->
-                    <img class="mt-10 mb-4 w-24 h-24 rounded-full border border-black object-cover" src="uploads/<?php echo $profile_picture; ?>" alt="">
+                    <img class="mt-10 mb-4 w-24 h-24 rounded-full border border-black object-cover" src="uploads/<?php echo $profile; ?>" alt="">
                     <h1 class="font-bold mb-7"> <?php echo $firstname . ' ' . $midname . ' ' . $lastname?></p>
                     
                     <!-- File Input (No Preview)

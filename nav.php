@@ -1,3 +1,16 @@
+<?php
+include "connector.php";
+
+$idno = $_SESSION["idno"];
+
+$result = mysqli_query($mysql, "SELECT `profile` FROM students WHERE idno = '$idno'");
+$row = mysqli_fetch_assoc($result);
+
+if($row){
+    $profile = $row["profile"];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="h-full">
 <head>
@@ -16,7 +29,7 @@
         </div>
     <?php endif; ?>
 <div class="min-h-full">
-    <nav class="bg-zinc-500 shadow">
+    <nav class="shadow">
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
@@ -30,19 +43,20 @@
                 <div class="flex items-center ml-auto">
                     <!-- Navigation Links -->
                     <div class="hidden md:flex">
-                        <a href="dashboard.php" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-white hover:bg-blue-700 hover:text-white transition duration-300 mr">Dashboard</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-white hover:bg-blue-700 hover:text-white transition duration-300">View Announcement</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-white hover:bg-blue-700 hover:text-white transition duration-300">View Remaining Session</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-white hover:bg-blue-700 hover:text-white transition duration-300">Sit-in Rules</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-white hover:bg-blue-700 hover:text-white transition duration-300">Lab Rules & Regulation</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-white hover:bg-blue-700 hover:text-white transition duration-300">History</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-white hover:bg-blue-700 hover:text-white transition duration-300 mr-5">Reservation</a>
+                        <a href="dashboard.php" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300 mr">Dashboard</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">View Announcement</a>
+                        <a href="rooms.php" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Available Rooms</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">View Remaining Session</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Sit-in Rules</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Lab Rules & Regulation</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">History</a>
+
                     </div>
                 
                 <!-- Profile Dropdown -->
                     <div class="relative">
                         <button id="profileMenu" class="flex items-center rounded-full bg-black-200 p-1 focus:ring-1 focus:ring-black">
-                            <img class="size-8 rounded-full border border-black" src="uploads/<?php echo $profile; ?>" alt="">
+                            <img class="size-8 rounded-full" src="uploads/<?php echo $profile; ?>" alt="">
                         </button>
                         <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-32 border border-black rounded-md bg-white shadow-lg ring-1 ring-black/5">
                             <a href="profile.php" class="block px-4 py-2 font-medium text-sm text-gray-700 hover:bg-blue-800 hover:text-white">Profile</a>

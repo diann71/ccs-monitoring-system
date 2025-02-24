@@ -14,6 +14,7 @@ if($row){
     $course = $row['course'];
     $year = $row['year'];
     $profile = $row['profile'];
+    $session = $row['session'];
 }
 
 ?>  
