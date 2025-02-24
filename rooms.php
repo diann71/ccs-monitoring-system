@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
     $row = mysqli_fetch_assoc($result);
 
     if($row){
-        echo "Done reserved";
+        
     }
 
 
