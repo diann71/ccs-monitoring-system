@@ -37,7 +37,7 @@ if($row){
 </head>
 <body>
     <div class="pt-20 h-lvh place-items-center">
-    <div class="w-1/4 h-1/2 borde border-black shadow-lg rounded-3xl overflow-hidden">
+    <div class="w-1/4 h-3/2 borde border-black shadow-lg rounded-3xl overflow-hidden">
         <div class="w-full bg-blue-700 py-3">
             <h1 class="w-full font-bold text-white text-center">Profile</h1>
         </div>

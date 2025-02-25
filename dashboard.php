@@ -9,13 +9,13 @@ $idno = $_SESSION["idno"];
 $result = mysqli_query($mysql, "SELECT * FROM students WHERE idno = '$idno'");
 $row = mysqli_fetch_assoc($result);
 
-if ($row['session'] > 0) {
-    $query = "UPDATE students SET session = session - 1 WHERE idno = '$idno'";
-    mysqli_query($mysql, $query);
-    echo "Session deducted successfully!";
+/*if ($row['session'] > 0) {
+        $query = "UPDATE students SET session = session - 1 WHERE idno = '$idno'";
+        mysqli_query($mysql, $query);
 } else {
     echo "No remaining sessions!";
-}
+}*/
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,8 +28,9 @@ if ($row['session'] > 0) {
 </head>
 <body>
     <div class="">
-        <div class=" p-6 flex flex-row gap-20 h-screen">
-            <div class="mt-5 mb-10 w-1/3 h-1/2 border border-black shadow-2xl rounded-3xl overflow-hidden ">
+        <div class="p-6 flex flex-col lg:flex-row gap-6 lg:gap-20 h-auto lg:h-screen">
+            <!-- Student Information Card -->
+            <div class="mt-14 mb-10 w-full lg:w-1/3 h-[30rem] border border-black shadow-2xl overflow-hidden">
                 <div class="w-full bg-blue-700 py-3">
                     <h1 class="w-full font-bold text-white text-center">Student Information</h1>
                 </div>
@@ -37,12 +38,6 @@ if ($row['session'] > 0) {
                 <div class="flex flex-col items-center">
                     <!-- Display Current Profile Picture -->
                     <img class="mt-8 mb-4 w-48 h-48 rounded-full object-cover" src="uploads/<?php echo $profile; ?>" alt="">
-                    
-                    <!-- File Input (No Preview)
-                    <label class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 mt-4">
-                        Choose Image
-                        <input type="file" name="profile_picture" class="hidden" accept="image/*">
-                    </label> -->
                 </div>
 
                 <div class="p-6">
@@ -52,23 +47,68 @@ if ($row['session'] > 0) {
                     <p><span class="font-bold">Year:</span> <?php echo $year; ?></p>
                     <p><span class="font-bold">Sessions:</span> <?php echo $session; ?></p>
                 </div>
-
-                
-            </div>
-
-            <div class="mt-5 mb-10 w-1/3 h-1/2 border border-black shadow-lg rounded-3xl overflow-hidden">
-                <div class="w-full bg-blue-700 py-3">
-                    <h1 class="w-full font-bold text-white text-center">Announcements</h1>
-                </div>
-            </div>
-
-            <div class="mt-5 mb-10 w-1/3 h-1/2 border border-black shadow-lg rounded-3xl overflow-hidden">
-               <div class="w-full bg-blue-700 py-3">
-                    <h1 class="w-full font-bold text-white text-center">Rules and Regulations</h1>
-                </div>
-            </div>
-
         </div>
+
+        <!-- Announcements Card -->
+        <div class="overflow-y-auto mt-14 mb-10 w-full lg:w-1/3 h-[30rem] border border-black shadow-lg overflow-hidden">
+            <div class="sticky top-0 w-full bg-blue-700 py-3">
+                <h1 class="w-full font-bold text-white text-center">Announcements</h1>
+            </div>
+            <div class="p-5">
+                <h1 class="font-bold pb-2">CSS Admin | 2025-Feb-25</h1>
+                <div class="border border-solid">
+                    <p class="p-5">The College of Computer Studies will open the registration of students for the Sit-in privilege starting tomorrow. Thank you! Lab Supervisor</p>
+                </div>
+            </div>
+            <div class="p-5">
+                <h1 class="font-bold pb-2">CCS Admin | 2024-May-08</h1>
+                <div class="border border-solid">
+                    <p class="p-5">Important Announcement: We are excited to announce the launch of our new website! 🎉 Explore our latest products and services now!</p>
+                </div>
+            </div>
+            <div class="p-5">
+                <h1 class="font-bold pb-2">CSS Admin | 2025-Feb-25</h1>
+                <div class="border border-solid">
+                    <p class="p-5">The College of Computer Studies will open the registration of students for the Sit-in privilege starting tomorrow. Thank you! Lab Supervisor</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rules and Regulations Card -->
+        <div class="overflow-y-auto h-[30rem] mt-14 mb-10 w-full lg:w-1/3 border border-black shadow-lg overflow-hidden">
+            <div class="sticky top-0 left-0 w-full bg-blue-700 py-3">
+                <h1 class="w-full font-bold text-white text-center">Rules and Regulations</h1>
+            </div>
+            <div class="pt-2 p-5">
+                <h2 class="font-bold text-center">University of Cebu</h2>
+                <h2 class="font-bold text-center">COLLEGE OF INFORMATION & COMPUTER STUDIES</h2>
+                <h1 class="font-bold pt-4">LABORATORY RULES AND REGULATIONS</h1>
+                <p>To avoid embarrassment and maintain camaraderie with your friends and superiors at our laboratories, please observe the following:</p>
+                <p class="pt-4">1. Maintain silence, proper decorum, and discipline inside the laboratory. Mobile phones, walkmans and other personal pieces of equipment must be switched off.</p>
+                <p class="pt-4">2. Games are not allowed inside the lab. This includes computer-related games, card games and other games that may disturb the operation of the lab.</p>
+                <p class="pt-4">3. Surfing the Internet is allowed only with the permission of the instructor. Downloading and installing of software are strictly prohibited.</p>
+                <p class="pt-4">4. Getting access to other websites not related to the course (especially pornographic and illicit sites) is strictly prohibited.</p>
+                <p class="pt-4">5. Deleting computer files and changing the set-up of the computer is a major offense.</p>
+                <p class="pt-4">6. Observe computer time usage carefully. A fifteen-minute allowance is given for each use. Otherwise, the unit will be given to those who wish to "sit-in".</p>
+                <p class="pt-4">7. Observe proper decorum while inside the laboratory.
+                    <p> - Do not get inside the lab unless the instructor is present.</p>
+                    <p> - All bags, knapsacks, and the likes must be deposited at the counter</p>
+                    <p> - Follow the seating arrangement of your instructor.</p>
+                    <p> - At the end of class, all software programs must be closed.</p>
+                    <p> - Return all chairs to their proper places after using.</p></p>
+                <p class="pt-4">8. Chewing gum, eating, drinking, smoking, and other forms of vandalism are prohibited inside the lab.</p>
+                <p class="pt-4">9. Anyone causing a continual disturbance will be asked to leave the lab. Acts or gestures offensive to the members of the community, including public display of physical intimacy, are not tolerated.</p>
+                <p class="pt-4">10. Persons exhibiting hostile or threatening behavior such as yelling, swearing, or disregarding requests made by lab personnel will be asked to leave the lab.</p>
+                <p class="pt-4">11. For serious offense, the lab personnel may call the Civil Security Office (CSU) for assistance.</p>
+                <p class="pt-4">12. Any technical problem or difficulty must be addressed to the laboratory supervisor, student assistant or instructor immediately</p>
+
+                <h1 class="font-bold pt-5">DISCIPLINARY ACTION</h1>
+                <p class="pt-4">First Offense - The Head or the Dean or OIC recommends to the Guidance Center for a suspension from classes for each offender.</p>
+                <P class="pt-4">Second and Subsequent Offenses - A recommendation for a heavier sanction will be endorsed to the Guidance Center.</P>
+            </div>
+        </div>
+    </div>
+
     </div>
 <!--<div class="bg-white py-10">
     <div class=" px-6 lg:px-8">

@@ -69,7 +69,7 @@ include "connector.php";
         <div class="p-6">
             <div class="flex flex-col md:flex-row items-center justify-center md:space-x-4">
                 <img src="images/logo.png" class="w-[130px]">
-                <img src="images/css.png" class="w-[105px] pb-2">
+                <img src="images/ccs.jpg" class="w-[105px] pb-2">
             </div>
             
             <h1 class="text-3xl font-bold mb-6">CCS SIT-IN MONITORING SYSTEM</h1>

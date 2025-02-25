@@ -25,7 +25,7 @@ if(isset($_POST["submit"])){
         $allowed_types = ["jpg", "jpeg", "png", "gif"];
         if (!in_array($imageFileType, $allowed_types)) {
             $_SESSION['error'] = "Only JPG, JPEG, PNG, and GIF files are allowed.";
-            header("Location: profile.php");
+            header("Location: profilepic.php");
             exit();
         }
 
@@ -35,7 +35,7 @@ if(isset($_POST["submit"])){
             $updateQuery = "UPDATE students SET `profile` = '$file_name' WHERE idno = '$idno'";
             if (mysqli_query($mysql, $updateQuery)) {
                 $_SESSION['success'] = "Profile picture updated successfully.";
-                header("Location: profilepic.php");
+                header("Location: profile.php");
                 exit();
             } else {
                 $_SESSION['error'] = "Database update failed.";
@@ -64,7 +64,7 @@ ob_end_flush();
     <title>Document</title>
 </head>
 <body>
-    <form action="/PHP/profilepic.php" method="post" enctype="multipart/form-data">
+    <form action="profilepic.php" method="post" enctype="multipart/form-data">
         <div class="grid place-items-center">
             <div class="mt-10 mb-10 w-1/4 h-9/10 border border-black rounded-3xl overflow-hidden">
                 <div class="w-full bg-blue-800 py-3">

@@ -48,7 +48,7 @@ if(isset($_POST["submit"])){
         <div class="flex flex-col items-center justify-center w-80 md:w-96 p-6 bg-white rounded-l-3xl min-h-[600px] border-r border-gray-300">
             <div class="flex flex-col md:flex-row items-center justify-center md:space-x-4">
                 <img src="images/logo.png" class="w-32 mb-2">
-                <img src="images/css.png" class="w-24 mb-3">
+                <img src="images/ccs.jpg" class="w-24 mb-3">
             </div>
             <h1 class="text-xl font-semibold text-gray-800 text-center">CCS SIT-IN MONITORING SYSTEM</h1>
             <p class="text-gray-600 text-center mt-2">
