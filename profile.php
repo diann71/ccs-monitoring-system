@@ -43,7 +43,7 @@ if($row){
         </div>
         <div class="flex flex-col items-center">
                     <!-- Display Current Profile Picture -->
-                    <img class="mt-10 mb-4 w-24 h-24 rounded-full border border-black object-cover" src="uploads/<?php echo $profile; ?>" alt="">
+                    <img class="mt-10 mb-4 w-24 h-24 rounded-full object-cover" src="uploads/<?php echo $profile; ?>" alt="">
                     <h1 class="font-bold mb-7"> <?php echo $firstname . ' ' . $midname . ' ' . $lastname?></p>
                     
                     <!-- File Input (No Preview)

@@ -10,30 +10,45 @@ include "connector.php";
             $_SESSION["error"] = "All fields should be filled.";
             header('location: login.php');
             exit();
-        }
-        else{
-            $result = mysqli_query($mysql, "SELECT * FROM students WHERE username = '$username' AND `password` ='$password' ") or die("Could not execute the select query.");
-            $row = mysqli_fetch_assoc($result);
+        }else{
+            $admin_result = mysqli_query($mysql, "SELECT * FROM `admin` WHERE username = '$username' AND `password` = '$password' ");
+            $admin_row = mysqli_fetch_assoc($admin_result);
 
-            if($row){
-                $_SESSION['username'] = $row['username'];
-                $_SESSION['idno'] = $row['idno'];
+            if($admin_row){
+                $_SESSION['idno'] = $row['admin_id'];
                 $_SESSION['lastname'] = $row['lastname'];
                 $_SESSION['firstname'] = $row['firstname'];
                 $_SESSION['midname'] = $row['midname'];
-                $_SESSION['course'] = $row['course'];
-                $_SESSION['year'] = $row['year'];
+                $_SESSION['username'] = $row['username'];
                 $_SESSION['password'] = $row['password'];
-
+                
                 $_SESSION['success'] = "Login Successfully!";
-                header('Location: dashboard.php');
+                header('Location: admin_dashboard.php');
                 exit();
+            }else{
+                $result = mysqli_query($mysql, "SELECT * FROM students WHERE username = '$username' AND `password` ='$password' ") or die("Could not execute the select query.");
+                $row = mysqli_fetch_assoc($result);
+    
+                if($row){
+                    $_SESSION['username'] = $row['username'];
+                    $_SESSION['idno'] = $row['idno'];
+                    $_SESSION['lastname'] = $row['lastname'];
+                    $_SESSION['firstname'] = $row['firstname'];
+                    $_SESSION['midname'] = $row['midname'];
+                    $_SESSION['course'] = $row['course'];
+                    $_SESSION['year'] = $row['year'];
+                    $_SESSION['password'] = $row['password'];
+    
+                    $_SESSION['success'] = "Login Successfully!";
+                    header('Location: dashboard.php');
+                    exit();
+                }
+                else{
+                    $_SESSION["error"] = "User not Found";
+                    header('Location: login.php'); // Redirect to login page
+                    exit();
+                } 
             }
-            else{
-                $_SESSION["error"] = "User not Found";
-                header('Location: login.php'); // Redirect to login page
-                exit();
-            } 
         }
     }
 ?>
