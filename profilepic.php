@@ -66,7 +66,7 @@ ob_end_flush();
 <body>
     <form action="profilepic.php" method="post" enctype="multipart/form-data">
         <div class="grid place-items-center">
-            <div class="mt-10 mb-10 w-1/4 h-9/10 border border-black rounded-3xl overflow-hidden">
+            <div class="mt-10 mb-10 w-1/4 h-9/10 border border-solid shadow-2xl  overflow-hidden">
                 <div class="w-full bg-blue-800 py-3">
                     <h1 class="w-full font-bold text-white text-center">Profile picture</h1>
                 </div>

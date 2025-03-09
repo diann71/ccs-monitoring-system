@@ -6,6 +6,7 @@ include "connector.php";
         $username = mysqli_real_escape_string($mysql, $_POST["username"]);
         $password = mysqli_real_escape_string($mysql, $_POST["password"]);
 
+
         if(empty($username) || empty($password)) {
             $_SESSION["error"] = "All fields should be filled.";
             header('location: login.php');

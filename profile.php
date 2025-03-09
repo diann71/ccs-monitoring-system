@@ -37,7 +37,7 @@ if($row){
 </head>
 <body>
     <div class="pt-20 h-lvh place-items-center">
-    <div class="w-1/4 h-3/2 borde border-black shadow-lg rounded-3xl overflow-hidden">
+    <div class="w-1/4 h-3/2 borde border-black shadow-2xl overflow-hidden">
         <div class="w-full bg-blue-700 py-3">
             <h1 class="w-full font-bold text-white text-center">Profile</h1>
         </div>
@@ -53,10 +53,9 @@ if($row){
                     </label> -->
         </div>
         <div class="grid p-6">
-            <a href="name.php" class="p-2 w-full border border-black text-black
-            rounded-t-2xl  hover:bg-gray-100 text-left">Name</a>
+            <a href="name.php" class="p-2 w-full border border-black text-black  hover:bg-gray-100 text-left">Name</a>
             <a href="username.php" class="p-2 w-full border border-black text-black  hover:bg-gray-100 text-left">Username</a>
-            <a href="profilepic.php" class="p-2 w-full border border-black text-black rounded-b-2xl  hover:bg-gray-100 text-left">Profile picture</a>
+            <a href="profilepic.php" class="p-2 w-full border border-black text-black  hover:bg-gray-100 text-left">Profile picture</a>
         </div>
         
     </div>

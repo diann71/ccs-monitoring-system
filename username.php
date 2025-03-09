@@ -55,7 +55,7 @@ ob_end_flush(); // End output buffering
 <body>
     <form action="username.php" method="post">
             <div class=" grid place-items-center">
-                <div class="mt-10 mb-10 w-1/3 h-3/4  border border-black border-solid rounded-3xl">
+                <div class="mt-10 mb-10 w-1/3 h-3/4 border border-solid shadow-2xl">
                     <div class="p-6">
                         
                         <label class="block text-gray-700 font-bold pb-1 " >Username</label>

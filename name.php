@@ -49,7 +49,7 @@ ob_end_flush(); // End output buffering
 <body>
     <form action="name.php" method="post">
             <div class="grid pt-10 pb-30 h-full place-items-center ">
-                <div class=" w-1/4 h-9/10 border border-black rounded-3xl overflow-hidden">
+                <div class=" w-1/4 h-9/10 border border-solid shadow-2xl overflow-hidden">
                     <div class="bg-blue-700 py-3">
                         <h1 class="w-full font-bold text-white text-center">Edit name</h1>
                     </div>
