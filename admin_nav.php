@@ -1,5 +1,5 @@
 <?php
-include "admin_nav.php";
+include "connector.php";
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ include "admin_nav.php";
         </div>
     <?php endif; ?>
 <div class="min-h-full">
-    <nav class="    shadow">
+    <nav class="shadow">
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
@@ -34,26 +34,15 @@ include "admin_nav.php";
                 <div class="flex items-center ml-auto">
                     <!-- Navigation Links -->
                     <div class="hidden md:flex">
-                        <a href="dashboard.php" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300 mr">Dashboard</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">View Announcement</a>
-                        <a href="rooms.php" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Available Rooms</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">View Remaining Session</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Sit-in Rules</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Lab Rules & Regulation</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">History</a>
+                        <a href="admin_dashboard.php" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300 mr">Search</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Student List</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Announcements</a>
+                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Current Sit-in Record</a>
+                            <a href="logout.php" class="flex items-center justify-center bg-red-600 h-12 px-3 py-2 text-base font-medium text-white hover:bg-red-700 hover:text-white">Sign out</a>
 
                     </div>
                 
                 <!-- Profile Dropdown -->
-                    <div class="relative">
-                        <button id="profileMenu" class="flex items-center rounded-full bg-black-200 p-1 focus:ring-1 focus:ring-black">
-                            <img class="size-8 rounded-full" src="uploads/<?php echo $profile; ?>" alt="">
-                        </button>
-                        <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-32 border border-black rounded-md bg-white shadow-lg ring-1 ring-black/5">
-                            <a href="profile.php" class="block px-4 py-2 font-medium text-sm text-gray-700 hover:bg-blue-800 hover:text-white">Profile</a>
-                            <a href="logout.php" class="block px-4 py-2 font-medium text-sm text-gray-700 hover:bg-blue-800 hover:text-white">Sign out</a>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Mobile Menu Button -->

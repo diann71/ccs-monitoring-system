@@ -41,7 +41,7 @@ $row = mysqli_fetch_assoc($result);
                 </div>
 
                 <div class="p-6">
-                    <p><span class="font-bold">Id No:</span> <?php echo $idno; ?></p>
+                    <p><span class="font-bold">Hi Wleco</span> <?php echo $idno; ?></p>
                     <p><span class="font-bold">Name:</span> <?php echo $firstname . ' ' . $midname . ' ' . $lastname?></p>
                     <p><span class="font-bold">Course:</span> <?php echo $course; ?></p>
                     <p><span class="font-bold">Year:</span> <?php echo $year; ?></p>
