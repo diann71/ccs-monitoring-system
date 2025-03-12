@@ -6,8 +6,9 @@ include "admin_auth.php";
 
 $idno = $_SESSION["idno"];
 
-$result = mysqli_query($mysql, "SELECT * FROM `admin` WHERE idno = '$idno'");
+$result = mysqli_query($mysql, "SELECT * FROM admin WHERE admin_id = '$idno'");    
 $row = mysqli_fetch_assoc($result);
+ 
 
 ?>
 <!DOCTYPE html>

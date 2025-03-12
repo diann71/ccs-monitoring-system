@@ -21,7 +21,7 @@ include "connector.php";
     <?php endif; ?>
 <div class="min-h-full">
     <nav class="shadow">
-        <div class="px-4 sm:px-6 lg:px-8">
+        <div class="px-2">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <div class="flex items-center">
@@ -36,7 +36,7 @@ include "connector.php";
                     <div class="hidden md:flex">
                         <a href="admin_dashboard.php" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300 mr">Search</a>
                         <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Student List</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Announcements</a>
+                        <a href="admin_annc.php" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Announcements</a>
                         <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Current Sit-in Record</a>
                             <a href="logout.php" class="flex items-center justify-center bg-red-600 h-12 px-3 py-2 text-base font-medium text-white hover:bg-red-700 hover:text-white">Sign out</a>
 
@@ -59,13 +59,12 @@ include "connector.php";
 
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="hidden md:hidden space-y-1 px-2 pb-3 sm:px-3">
-            <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white">Dashboard</a>
-            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">View Announcement</a>
-            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">View Remaining Session</a>
-            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">Sit-in Rules</a>
-            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">Lab Rules & Regulation</a>
-            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">History</a>
-            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">Reservation</a>
+            <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white">Search</a>
+            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">Student List</a>
+            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">Announcements</a>
+            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">Current Sit-in Record</a>
+            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">Sign out</a>
+
 
             <div class="border-t border-gray-700 pt-4 pb-3">        
                 <div class="mt-3 space-y-1 px-2">
@@ -98,10 +97,6 @@ include "connector.php";
 </html>
 
 <script>
-    document.getElementById('profileMenu').addEventListener('click', function() {
-        document.getElementById('dropdownMenu').classList.toggle('hidden');
-    });
-    
     document.getElementById('mobileMenuButton').addEventListener('click', function() {
         document.getElementById('mobileMenu').classList.toggle('hidden');
         document.getElementById('menuOpenIcon').classList.toggle('hidden');

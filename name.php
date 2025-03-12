@@ -44,7 +44,7 @@ ob_end_flush(); // End output buffering
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Name</title>
 </head>
 <body>
     <form action="name.php" method="post">

@@ -4,18 +4,22 @@ include "connector.php";
 include "nav.php";
 include "authenticator.php";
 
-$idno = $_SESSION["idno"];
-
-$result = mysqli_query($mysql, "SELECT * FROM students WHERE idno = '$idno'");
+$result = mysqli_query($mysql, "SELECT * FROM announcements");    
 $row = mysqli_fetch_assoc($result);
 
+if($row){
+    $announcement_id = $row['announcement_id'];
+    $title = $row['title'];
+    $description = $row['description'];
+    $created_at = $row['created_at'];
+    $admin_id = $row['admin_id'];
+}
 /*if ($row['session'] > 0) {
         $query = "UPDATE students SET session = session - 1 WHERE idno = '$idno'";
         mysqli_query($mysql, $query);
 } else {
     echo "No remaining sessions!";
 }*/
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,22 +59,16 @@ $row = mysqli_fetch_assoc($result);
                 <h1 class="w-full font-bold text-white text-center">Announcements</h1>
             </div>
             <div class="p-5">
-                <h1 class="font-bold pb-2">CSS Admin | 2025-Feb-25</h1>
-                <div class="border border-solid">
-                    <p class="p-5">The College of Computer Studies will open the registration of students for the Sit-in privilege starting tomorrow. Thank you! Lab Supervisor</p>
-                </div>
-            </div>
-            <div class="p-5">
-                <h1 class="font-bold pb-2">CCS Admin | 2024-May-08</h1>
-                <div class="border border-solid">
-                    <p class="p-5">Important Announcement: We are excited to announce the launch of our new website! 🎉 Explore our latest products and services now!</p>
-                </div>
-            </div>
-            <div class="p-5">
-                <h1 class="font-bold pb-2">CSS Admin | 2025-Feb-25</h1>
-                <div class="border border-solid">
-                    <p class="p-5">The College of Computer Studies will open the registration of students for the Sit-in privilege starting tomorrow. Thank you! Lab Supervisor</p>
-                </div>
+                <?php 
+                   $result = mysqli_query($mysql, "SELECT * FROM announcements");
+
+                    while($row  = mysqli_fetch_assoc($result)){
+                        echo "<h1 class='font-bold pb-2'> $title </h1>";
+                        echo "<div class='border border-solid'>";
+                        echo "<p class='p-5'> $description </p>";
+                        echo "</div>";
+                     }
+                ?>
             </div>
         </div>
 

@@ -50,7 +50,7 @@ ob_end_flush(); // End output buffering
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Username</title>
 </head>
 <body>
     <form action="username.php" method="post">

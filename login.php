@@ -16,7 +16,7 @@ include "connector.php";
             $admin_row = mysqli_fetch_assoc($admin_result);
 
             if($admin_row){
-                $_SESSION['idno'] = $row['idno'];
+                $_SESSION['idno'] = $row['admin_idno'];
                 $_SESSION['lastname'] = $row['lastname'];
                 $_SESSION['firstname'] = $row['firstname'];
                 $_SESSION['midname'] = $row['midname'];

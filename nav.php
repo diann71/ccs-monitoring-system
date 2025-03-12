@@ -56,7 +56,7 @@ if($row){
                 <!-- Profile Dropdown -->
                     <div class="relative">
                         <button id="profileMenu" class="flex items-center rounded-full bg-black-200 p-1 focus:ring-1 focus:ring-black">
-                            <img class="size-8 rounded-full" src="uploads/<?php echo $profile; ?>" alt="">
+                            <img class="size-8  rounded-full" src="uploads/<?php echo $profile; ?>" alt="">
                         </button>
                         <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-32 border border-black rounded-md bg-white shadow-lg ring-1 ring-black/5">
                             <a href="profile.php" class="block px-4 py-2 font-medium text-sm text-gray-700 hover:bg-blue-800 hover:text-white">Profile</a>
