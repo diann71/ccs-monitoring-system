@@ -12,7 +12,7 @@ if($row){
     $title = $row['title'];
     $description = $row['description'];
     $created_at = $row['created_at'];
-    $admin_id = $row['admin_id'];
+
 }
 /*if ($row['session'] > 0) {
         $query = "UPDATE students SET session = session - 1 WHERE idno = '$idno'";
