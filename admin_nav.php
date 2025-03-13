@@ -1,3 +1,4 @@
+
 <?php
 include "connector.php";
 ?>
@@ -34,10 +35,10 @@ include "connector.php";
                 <div class="flex items-center ml-auto">
                     <!-- Navigation Links -->
                     <div class="hidden md:flex">
-                        <a href="admin_dashboard.php" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300 mr">Search</a>
+                        <a href="search.php" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300 mr">Search</a>
                         <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Student List</a>
                         <a href="admin_annc.php" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Announcements</a>
-                        <a href="#" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Current Sit-in Record</a>
+                        <a href="admin_sitin.php" class="flex items-center justify-center h-12 px-3 py-2 text-base font-medium text-black hover:bg-blue-700 hover:text-white transition duration-300">Current Sit-in Record</a>
                             <a href="logout.php" class="flex items-center justify-center bg-red-600 h-12 px-3 py-2 text-base font-medium text-white hover:bg-red-700 hover:text-white">Sign out</a>
 
                     </div>

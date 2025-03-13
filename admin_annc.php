@@ -18,8 +18,6 @@ if(isset($_POST["submit"])){
 
         if($row){
             $_SESSION["error"] = "Announcement added successfully!";
-            header("Location: admin_annc.php");
-            exit();
         } else{
             $_SESSION["error"] = "Failed to add announcement: " . mysqli_error($mysql);
             header("Location: admin_annc.php");
@@ -38,18 +36,22 @@ if(isset($_POST["submit"])){
     <title>Announcements</title>
 </head>
 <body>
-    <form action="admin_annc.php" method="post">
-        <div>
-            <label for="title">Title</label>
-            <input type="text" name="title" class="">
-        </div>
-        <div>
-            <label for="description">DDescription</label>
-            <input type="text" name="description" class="">
-        </div>
-        <div class="">
-            <input type="submit" name="submit" value="Submit" class="">
-        </div>
-    </form>
+    <div class="flex justify-center pt-10 pb-10">
+        <form action="admin_annc.php" method="post">
+            <div class="w-[800px] p-20 border border-solid  shadow-2xl">
+                <div class="pb-4">
+                    <label for="title" class="block text-left text-base pb-2 font-semibold">Title</label>
+                    <input type="text" name="title" class="w-full  text-base px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-400">
+                </div>
+                <div class="pb-4">
+                    <label for="description" class="block text-left text-base pb-2 font-semibold">Description</label>
+                    <textarea name="description" class="w-full h-96 text-base px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-400" style="resize: none;"></textarea>
+                </div>
+                <div class="">
+                    <input type="submit" name="submit" value="Submit" class="w-[150px] bg-blue-600 text-white py-2 hover:bg-blue-700 cursor-pointer mb-2">
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

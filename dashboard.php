@@ -34,7 +34,7 @@ if($row){
     <div class="">
         <div class="p-6 flex flex-col lg:flex-row gap-6 lg:gap-20 h-auto lg:h-screen">
             <!-- Student Information Card -->
-            <div class="mt-14 mb-10 w-full lg:w-1/3 h-[30rem] border border-black shadow-2xl overflow-hidden">
+            <div class="mt-14 mb-10 w-full lg:w-1/3 h-[30rem] border shadow-2xl overflow-hidden">
                 <div class="w-full bg-blue-700 py-3">
                     <h1 class="w-full font-bold text-white text-center">Student Information</h1>
                 </div>
@@ -54,18 +54,18 @@ if($row){
         </div>
 
         <!-- Announcements Card -->
-        <div class="overflow-y-auto mt-14 mb-10 w-full lg:w-1/3 h-[30rem] border border-black shadow-lg overflow-hidden">
+        <div class="overflow-y-auto mt-14 mb-10 w-full lg:w-1/3 h-[30rem] border shadow-2xl overflow-hidden">
             <div class="sticky top-0 w-full bg-blue-700 py-3">
                 <h1 class="w-full font-bold text-white text-center">Announcements</h1>
             </div>
             <div class="p-5">
                 <?php 
-                   $result = mysqli_query($mysql, "SELECT * FROM announcements");
+                   $result = mysqli_query($mysql, "SELECT * FROM announcements ORDER BY created_at DESC LIMIT 5");
 
                     while($row  = mysqli_fetch_assoc($result)){
-                        echo "<h1 class='font-bold pb-2'> $title </h1>";
+                        echo "<h1 class='font-bold pb-2'>" .  htmlspecialchars($row['title']) . "</h1>";
                         echo "<div class='border border-solid'>";
-                        echo "<p class='p-5'> $description </p>";
+                        echo "<p class='p-5'>" . htmlspecialchars($row['description']) . "</p>";
                         echo "</div>";
                      }
                 ?>
@@ -73,7 +73,7 @@ if($row){
         </div>
 
         <!-- Rules and Regulations Card -->
-        <div class="overflow-y-auto h-[30rem] mt-14 mb-10 w-full lg:w-1/3 border border-black shadow-lg overflow-hidden">
+        <div class="overflow-y-auto h-[30rem] mt-14 mb-10 w-full lg:w-1/3 border shadow-2xl overflow-hidden">
             <div class="sticky top-0 left-0 w-full bg-blue-700 py-3">
                 <h1 class="w-full font-bold text-white text-center">Rules and Regulations</h1>
             </div>
