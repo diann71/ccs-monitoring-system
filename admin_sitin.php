@@ -1,66 +1,60 @@
 <?php 
 session_start();
-include "authenticator.php";
+
 include "connector.php";
-include "admin_nav.php";
+include "admin_nav.php";    
+
+$query_current = "SELECT students.idno, students.lastname, students.firstname, students.midname, students.course, sit_in.year, sit_in.time_in 
+            FROM sit_in
+            JOIN students ON sit_in.idno = students.idno
+            WHERE sit_in.time_out IS NULL";
+
+$result_current = mysqli_query($mysql, $query_current);
+
+$query_timeout = "SELECT students.idno, students.lastname, students.firstname, students.midname, students.course, students.year, sit_in.time_in, sit_in.time_out
+            FROM sit_in
+            JOIN students ON sit_in.idno = students.idno
+            WHERE sit_in.time_out IS NULL";
+
+$result_timeout = mysqli_query($mysql, $query_timeout);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Search</title>
 </head>
 <body>
-<div class="grid grid-cols-8 gap-x-10 gap-y-4 p-10">
-        <!-- Reservation ID -->
-        <div>
-            <p class="font-semibold">Reservation ID:</p>
-            <p><?php echo $idno?></p>
-        </div>
-        
-        <!-- Room ID -->
-        <div>
-            <p class="font-semibold">Room ID:</p>
-            <p><?php echo $lastname?></p>
-        </div>
-
-        <!-- Idno -->
-        <div>
-            <p class="font-semibold">Idno:</p>
-            <p><?php echo $firstname?></p>
-        </div>
-
-        <!-- Start Time -->
-        <div>
-            <p class="font-semibold">Start Time:</p>
-            <p><?php echo $midname?></p>
-        </div>
-
-        <!-- End Time -->
-        <div>
-            <p class="font-semibold">End Time:</p>
-            <p><?php echo $course?></p>
-        </div>
-
-        <!-- Status -->
-        <div>
-            <p class="font-semibold">Status:</p>
-            <p><?php echo $year?></p>
-        </div>
-
-        <!-- Created At -->
-        <div>
-            <p class="font-semibold">Created at:</p>
-            <p><?php echo $created_at?></p>
-        </div>
-
-        <!-- Updated At -->
-        <div>
-            <p class="font-semibold">Updated at:</p>
-            <p><?php echo $updated_at?></p>
-        </div>
+    <div class="flex justify-center pt-10 pb-10">
+        <?php while ($row = mysqli_fetch_assoc($result_current)): ?>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Midname</th>
+                        <th>Course</th>
+                        <th>Year</th>
+                        <th>Time In</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><?php echo $row['idno']; ?></td>
+                        <td><?php echo $row['lastname']; ?></td>
+                        <td><?php echo $row['firstname']; ?></td>
+                        <td><?php echo $row['midname']; ?></td>
+                        <td><?php echo $row['course']; ?></td>
+                        <td><?php echo $row['year']; ?></td>
+                        <td><?php echo $row['time_in']; ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        <?php endwhile; ?>
     </div>
 </body>
 </html>

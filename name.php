@@ -55,16 +55,16 @@ ob_end_flush(); // End output buffering
                     </div>
                     <div class="p-6">
                         <label class="block text-gray-700 font-bold pb-1 " >Idno</label>
-                        <input type="text" name="idno" placeholder="Last Name" value="<?php echo $idno ?>" class="w-full border border-black p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
+                        <input type="text" name="idno" placeholder="Last Name" value="<?php echo $idno ?>" class="w-full border border-solid p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" disabled>
 
                         <label class="block text-gray-700 font-bold pb-1 " >Last Name</label>
-                        <input type="text" name="lastname" placeholder="Last Name" value="<?php echo $lastname ?>" class="w-full border border-black p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
+                        <input type="text" name="lastname" placeholder="Last Name" value="<?php echo $lastname ?>" class="w-full border border-solid p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
 
                         <label class="block text-gray-700 font-bold pb-1">First Name</label>
-                        <input type="text" name="firstname" placeholder="First Name" value="<?php echo $firstname ?>" class="w-full border border-black p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
+                        <input type="text" name="firstname" placeholder="First Name" value="<?php echo $firstname ?>" class="w-full border border-solid p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
 
                         <label class="block text-gray-700 font-bold pb-1">Middle Name</label>
-                        <input type="text" name="midname" placeholder="Middle Name" value="<?php echo $midname ?>" class="w-full border border-black p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
+                        <input type="text" name="midname" placeholder="Middle Name" value="<?php echo $midname ?>" class="w-full border border-solid p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
                         <label class="block text-gray-700 font-bold pb-1">Course</label>
                         <select name="course" class="w-full border border-black p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-px" required>
                             <option value="" disabled selected>Select a course</option>
@@ -73,7 +73,7 @@ ob_end_flush(); // End output buffering
                         </select>
 
                         <label class="block text-gray-700 mt-2 font-bold pb-1">Year Level</label>
-                        <select name="year" class="w-full border border-black p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-10" required>
+                        <select name="year" class="w-full border border-solid p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-10" required>
                             <option value="" disabled selected>Select a level</option>
                             <option value="1" <?php echo ($year == '1') ? 'selected' : ''; ?>>1</option>
                             <option value="2" <?php echo ($year == '2') ? 'selected' : ''; ?>>2</option>
