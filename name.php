@@ -55,7 +55,7 @@ ob_end_flush(); // End output buffering
                     </div>
                     <div class="p-6">
                         <label class="block text-gray-700 font-bold pb-1 " >Idno</label>
-                        <input type="text" name="idno" placeholder="Last Name" value="<?php echo $idno ?>" class="w-full border border-solid p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" disabled>
+                        <input type="text" name="idno" placeholder="Last Name" value="<?php echo $idno ?>" class="w-full border border-solid p-2 mb-2" readonly>
 
                         <label class="block text-gray-700 font-bold pb-1 " >Last Name</label>
                         <input type="text" name="lastname" placeholder="Last Name" value="<?php echo $lastname ?>" class="w-full border border-solid p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2" required>
