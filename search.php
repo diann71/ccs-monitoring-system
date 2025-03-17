@@ -3,6 +3,8 @@ session_start();
 include "connector.php";
 include "admin_nav.php";
 
+$hideSearch = false; // Default state
+
 if (isset($_POST['submit'])) {
     $search = $_POST['search'];
     $search_param = "%$search%";
@@ -19,37 +21,39 @@ if (isset($_POST['submit'])) {
     $result = mysqli_stmt_get_result($stmt);
 
     if ($result && mysqli_num_rows($result) > 0) {
+        $hideSearch = true; // Hide search after results appear
         echo '<form action="" method="post">';
         while ($row = mysqli_fetch_assoc($result)) {
             echo ' 
-            <div class="grid pt-10 pb-30 h-full place-items-center ">
-                <div class="w-1/4 h-9/10 border border-solid shadow-2xl overflow-hidden">
-                    <div class="bg-blue-700 py-3">
-                        <h1 class="w-full font-bold text-white text-center">Sit-in Registration</h1>
+                <div class="grid pt-10 pb-30 h-full place-items-center">
+                    <div class="w-full max-w-lg border border-gray-300 shadow-lg bg-white rounded-lg overflow-hidden">
+                        <div class="bg-blue-700 py-4">
+                            <h1 class="text-white text-center text-lg font-bold">Sit-in Registration</h1>
+                        </div>
+                        <div class="p-6">
+                            <input type="hidden" name="idno[]" value="' . $row['idno'] . '">
+
+                            <label class="block text-gray-700 font-semibold pb-1">ID No:</label>
+                            <input type="text" value="' . $row['idno'] . '" class="w-full border border-gray-300 p-2 rounded-md bg-gray-100" disabled>
+
+                            <label class="block text-gray-700 font-semibold pb-1 mt-4">Last Name:</label>
+                            <input type="text" value="' . $row['lastname'] . '" class="w-full border border-gray-300 p-2 rounded-md bg-gray-100" disabled>
+
+                            <label class="block text-gray-700 font-semibold pb-1 mt-4">First Name:</label>
+                            <input type="text" value="' . $row['firstname'] . '" class="w-full border border-gray-300 p-2 rounded-md bg-gray-100" disabled>
+
+                            <label class="block text-gray-700 font-semibold pb-1 mt-4">Course:</label>
+                            <input type="text" value="' . $row['course'] . '" class="w-full border border-gray-300 p-2 rounded-md bg-gray-100" disabled>
+
+                            <label class="block text-gray-700 font-semibold pb-1 mt-4">Sit-in Purpose:</label>
+                            <select name="sitin_purpose[]" class="w-full border border-gray-300 p-2 rounded-md bg-white">
+                                <option value="Programming">Programming</option>
+                                <option value="C">C</option>
+                                <option value="C++">C++</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="p-6">
-                        <input type="hidden" name="idno[]" value="' . $row['idno'] . '">
-                        <label class="block text-gray-700 font-bold pb-1">ID No:</label>
-                        <input type="text" value="' . $row['idno'] . '" class="w-full border border-black p-2" disabled>
-
-                        <label class="block text-gray-700 font-bold pb-1">Last Name:</label>
-                        <input type="text" value="' . $row['lastname'] . '" class="w-full border border-black p-2" disabled>
-
-                        <label class="block text-gray-700 font-bold pb-1">First Name:</label>
-                        <input type="text" value="' . $row['firstname'] . '" class="w-full border border-black p-2" disabled>
-
-                        <label class="block text-gray-700 font-bold pb-1">Course:</label>
-                        <input type="text" value="' . $row['course'] . '" class="w-full border border-black p-2" disabled>
-
-                        <label class="block text-gray-700 font-bold pb-1">Sit-in Purpose</label>
-                        <select name="sitin_purpose[]" class="w-full border border-black p-2 rounded mb-4">
-                            <option value="Programming">Programming</option>
-                            <option value="C">C</option>
-                            <option value="C++">C++</optio  n>
-                        </select>
-                    </div>
-                </div>
-            </div>';
+                </div>';
         }
         echo '<div class="text-center mt-4">
                 <button type="submit" name="register_sitin" class="px-4 py-2 bg-blue-600 text-white rounded">Register Sit-in</button>
@@ -122,17 +126,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register_sitin'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search</title>
+    <title>Search Students</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.onload = function() {
+            var hideSearch = <?php echo json_encode($hideSearch); ?>;
+            if (hideSearch) {
+                document.getElementById("search-container").style.display = "none";
+            }
+        };
+    </script>
 </head>
-<body>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="flex items-center justify-center">
-        <div class="border border-solid shadow-2xl w-1/4 h-48 text-center">
-            <div class="mt-20">
-                <form action="" method="post">
-                    <input type="text" class="border border-solid w-2/3 p-2" name="search" placeholder="Search">
-                    <input type="submit" class="border border-solid px-3 p-2 bg-blue-600 text-white" name="submit" value="Search">
-                </form>
-            </div>
+        <div id="search-container" class="bg-white shadow-2xl rounded-lg p-6 w-96">
+            <form action="" method="post" class="mt-4">
+                <input type="text" name="search" placeholder="Enter ID, Name, or Course" 
+                    class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button type="submit" name="submit" 
+                    class="mt-3 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Search</button>
+            </form>
         </div>
     </div>
 </body>
