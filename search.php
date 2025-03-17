@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
                         <select name="sitin_purpose[]" class="w-full border border-black p-2 rounded mb-4">
                             <option value="Programming">Programming</option>
                             <option value="C">C</option>
-                            <option value="C++">C++</option>
+                            <option value="C++">C++</optio  n>
                         </select>
                     </div>
                 </div>
@@ -67,35 +67,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register_sitin'])) {
 
     foreach ($idnos as $index => $idno) {
         $sitin_purpose = $sitin_purposes[$index];
-        
-        $query = "SELECT * FROM sit_in_records WHERE idno = ? AND time_out IS NULL";
-        $stmt = mysqli_prepare($mysql, $query);
-        mysqli_stmt_bind_param($stmt, "s", $idno);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
 
-        if ($result->num_rows > 0) {
-            echo "<script>alert('Student with ID $idno is still currently sitting in and has not logged out yet.'); window.location.href='admindashboard.php';</script>";
+        if (!$mysql) {
+            die("Database connection failed: " . mysqli_connect_error());
+        }
+        $studentQuery = "SELECT lastname, firstname, midname, course, year FROM students WHERE idno = ?";
+        $studentStmt = mysqli_prepare($mysql, $studentQuery);
+        mysqli_stmt_bind_param($studentStmt, "s", $idno);
+        mysqli_stmt_execute($studentStmt);
+        $studentResult = mysqli_stmt_get_result($studentStmt);
+
+        if ($row = mysqli_fetch_assoc($studentResult)) {
+            $lastname = $row['lastname'];
+            $firstname = $row['firstname'];
+            $midname = $row['midname'];
+            $course = $row['course'];
+            $year = $row['year'];
+        } else {
+            echo "<script>alert('Student ID $idno not found!');</script>";
             continue;
         }
         
-        $qry = "SELECT firstname, lastname, course FROM students WHERE idno = ?";
-        $stm = mysqli_prepare($mysql, $qry);
-        mysqli_stmt_bind_param($stm, "s", $idno);
-        mysqli_stmt_execute($stm);
-        $myresult = mysqli_stmt_get_result($stm);
+        // Check if student is already sitting in
+        $checkStmt = mysqli_prepare($mysql, "SELECT * FROM sit_in WHERE idno = ? AND time_out IS NULL");
 
-        if ($row = mysqli_fetch_assoc($myresult)) {
-            $firstname = $row['firstname'];
-            $lastname = $row['lastname'];
-            $course = $row['course'];
-            
-            $insertStmt = mysqli_prepare($mysql, "INSERT INTO sit_in_records (idno, lastname, firstname, course, sitin_purpose, time_in) VALUES (?, ?, ?, ?, ?, NOW())");
-            mysqli_stmt_bind_param($insertStmt, "sssss", $idno, $lastname, $firstname, $course, $sitin_purpose);
-            mysqli_stmt_execute($insertStmt);
+        if (!$checkStmt) {
+            die("Query Preparation Failed: " . mysqli_error($mysql));
         }
+
+        mysqli_stmt_bind_param($checkStmt, "s", $idno);
+        mysqli_stmt_execute($checkStmt);
+        $checkResult = mysqli_stmt_get_result($checkStmt);
+
+        if ($checkResult->num_rows > 0) {
+            echo "<script>alert('Student with ID $idno is still currently sitting in and has not logged out yet.'); window.location.href='admindashboard.php';</script>";
+            continue;
+        }
+
+        // Insert into sit_in_records
+        $insertStmt = mysqli_prepare($mysql, "INSERT INTO sit_in (idno, lastname, firstname, midname, course, year, sitin_purpose, time_in) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+        if (!$insertStmt) {
+            die("Query Preparation Failed: " . mysqli_error($mysql));
+        }
+        mysqli_stmt_bind_param($insertStmt, "sssssis", $idno, $lastname, $firstname, $midname, $course, $year, $sitin_purpose);
+        mysqli_stmt_execute($insertStmt);
     }
-    echo "<script>alert('Sit-in registered successfully!'); window.location.href='admindashboard.php';</script>";
+
+    echo "<script>alert('Sit-in registered successfully!'); window.location.href='admin_dashboard.php';</script>";
 }
 ?>
 
