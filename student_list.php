@@ -16,7 +16,7 @@ if(isset($_POST['delete'])){
     mysqli_stmt_execute($stmt);
 
     if(mysqli_stmt_execute($stmt)){
-        $_SESSION['success'] = "Student deleted successfully.";
+        $_SESSION['success'] = "Student deleted successfully!";
     } else {
         $_SESSION['error'] = "Failed to delete student: " . mysqli_error($mysql);
     }
@@ -27,6 +27,19 @@ if(isset($_POST['delete'])){
     exit();
 
 }
+if(isset($_POST['submit'])){
+    $search = $_POST['search'];
+    $query = "SELECT * FROM students WHERE idno LIKE '%$search%' OR lastname LIKE '%$search%' OR course LIKE '%$search%'";
+    $result = mysqli_query($mysql, $query);
+}
+if(isset($_POST['sort_id'])){
+    $query = "SELECT * FROM students ORDER BY idno ASC";
+    $result = mysqli_query($mysql, $query);
+}
+if(isset($_POST['sort_names'])){
+    $query = "SELECT * FROM students ORDER BY lastname ASC";
+    $result = mysqli_query($mysql, $query);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,12 +47,36 @@ if(isset($_POST['delete'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 <div class="flex justify-center pt-5 pb-10">
     <div class="grid grid-rows-1 gap-4 w-full">
         <div>
             <h1 class="bg-gray-600 text-white text-xl text-center py-2">Student List</h1>
+        </div>
+        <div class="flex justify-end">
+            <div class="pr-16">
+                <form action="" method="post" class="flex items-center space-x-4">
+                    <div>
+                        <button name="sort_id" class="w-24 border border-solid p-2 font-semibold">
+                            <i class="fas fa-sort-numeric-down"></i> Sort Id
+                        </button>
+                        <button name="sort_name" class="w-32 border border-solid p-2 font-semibold">
+                            <i class="fas fa-sort-alpha-down"></i> Sort Names
+                        </button>
+                    </div>
+                    <div>
+                        <input type="text" name="search" placeholder="Enter ID, Name, or Course" 
+                            class="pl-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button type="submit" name="submit" 
+                            class="p-2 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </form> 
+            </div>
         </div>
         <div class="grid grid-cols-9 text-center border-b-2 pb-2">
             <p class="font-bold text-center">ID</p>
@@ -67,7 +104,7 @@ if(isset($_POST['delete'])){
                 <p class=" text-center"><?php echo $row['password']; ?></p>
                 <form action='' method='post'>
                     <input type="hidden" name="idno" value="<?php echo $row['idno']; ?>">
-                    <button type='submit' name='delete' class='bg-red-600 text-white py-1 px-3 rounded'>Delete</button>
+                    <button type='submit' name='delete' class='w-20 bg-red-600 text-white py-1 px-3 rounded'>Delete</button>
                 </form>
             </div>
         <?php endwhile; ?>

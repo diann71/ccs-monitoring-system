@@ -4,34 +4,13 @@ session_start();
 include "connector.php";
 include "admin_nav.php";    
 
-$query_current = "SELECT students.idno, students.lastname, students.firstname, students.midname, students.course, students.year, sit_in.sitin_purpose, sit_in.time_in 
+$query_completed = "SELECT students.idno, students.lastname, students.firstname, students.midname, students.course, students.year, sit_in.sitin_purpose, sit_in.time_in, sit_in.time_out 
             FROM sit_in
             JOIN students ON sit_in.idno = students.idno
-            WHERE sit_in.time_out IS NULL";
-
-$result_current = mysqli_query($mysql, $query_current);
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['timeout'])) {
-    $idno = $_POST['idno'];
-
-    // Update time_out to the current time
-    $update_query = "UPDATE sit_in SET time_out = NOW() WHERE idno = ? AND time_out IS NULL";
-    $stmt = mysqli_prepare($mysql, $update_query);
-    mysqli_stmt_bind_param($stmt, "s", $idno);
-    
-    if (mysqli_stmt_execute($stmt)) {
-        echo "<script>alert('Time Out Successful!'); window.location.href='admin_sitin.php';</script>";
-    } else {
-        echo "<script>alert('Error: " . mysqli_error($mysql) . "');</script>";
-    }
-
-    mysqli_stmt_close($stmt);
-}
-
-
+            WHERE sit_in.time_out IS NOT NULL
+            ORDER BY sit_in.time_out DESC"; // Show latest records first
+$result_completed = mysqli_query($mysql, $query_completed);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['timeout'])) {
 <div class="flex justify-center pt-2 pb-10">
     <div class="grid grid-rows-1 gap-4 w-full">
         <div>
-            <h1 class="bg-gray-600 text-white text-xl text-center py-2">Current Sit-in</h1>
+            <h1 class="bg-gray-600 text-white text-xl text-center py-2">Sit-in Record</h1>
         </div>
         <div class="grid grid-cols-9 text-center border-b-2 pb-2">
             <p class="font-bold text-center">ID</p>
@@ -54,12 +33,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['timeout'])) {
             <p class="font-bold text-center">Year</p>
             <p class="font-bold text-center">Sit-in Purpose</p>
             <p class="font-bold text-center">Time In</p>
-            <p class="font-bold text-center">Action</p>
+            <p class="font-bold text-center">Time Out</p>
         </div>
         <!-- Add rows dynamically here -->
 
-        <?php while ($row = mysqli_fetch_assoc($result_current)): ?>
-            <div class="grid grid-cols-9 text-center border-b-2">
+        <?php while ($row = mysqli_fetch_assoc($result_completed)): ?>
+            <div class="grid grid-cols-9 text-center border-b-2 pb-2">
                 <p class="text-center"><?php echo $row['idno']; ?></p>
                 <p class="text-center"><?php echo $row['lastname']; ?></p>
                 <p class="text-center"><?php echo $row['firstname']; ?></p>
@@ -68,10 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['timeout'])) {
                 <p class="text-center"><?php echo $row['year']; ?></p>
                 <p class="text-center"><?php echo $row['sitin_purpose']; ?></p>
                 <p class="text-center"><?php echo $row['time_in']; ?></p>
-                <form action="" method="post">
-                    <input type="hidden" name="idno" value="<?php echo $row['idno']; ?>">
-                    <button type="submit" name="timeout" class="px-4 py-2 bg-red-600 text-white rounded">Time Out</button>
-                </form>
+                <p class="text-center"><?php echo $row['time_out']; ?></p>
              </div>
         <?php endwhile; ?>
     </div>
@@ -79,3 +55,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['timeout'])) {
 
 </body>
 </html>
+

@@ -27,8 +27,8 @@ if (isset($_POST['submit'])) {
             echo ' 
                 <div class="grid pt-10 pb-30 h-full place-items-center">
                     <div class="w-full max-w-lg border border-gray-300 shadow-lg bg-white rounded-lg overflow-hidden">
-                        <div class="bg-blue-700 py-4">
-                            <h1 class="text-white text-center text-lg font-bold">Sit-in Registration</h1>
+                        <div class="bg-gray-600 py-2">
+                            <h1 class="text-white text-center text-xl font-bold">Sit-in Registration</h1>
                         </div>
                         <div class="p-6">
                             <input type="hidden" name="idno[]" value="' . $row['idno'] . '">
@@ -52,13 +52,14 @@ if (isset($_POST['submit'])) {
                                 <option value="C++">C++</option>
                             </select>
                         </div>
+
+                        <div class="text-center pb-5">
+                            <button type="submit" name="register_sitin" class="px-4 py-2 bg-blue-600 text-white rounded">Sit-in</button>
+                        </div>
                     </div>
-                </div>';
-        }
-        echo '<div class="text-center mt-4">
-                <button type="submit" name="register_sitin" class="px-4 py-2 bg-blue-600 text-white rounded">Register Sit-in</button>
-              </div>
+                </div> 
               </form>';
+        }
     } else {
         echo "No students found.";
     }
