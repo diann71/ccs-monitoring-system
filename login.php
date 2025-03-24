@@ -70,13 +70,13 @@ include "connector.php";
     <div class="bg-white rounded-2xl shadow-lg text-center w-96">
         <div class="">
             <?php if (isset($_SESSION['error'])): ?>
-                <div class="bg-red-500 text-white p-2 mb-4 rounded-md">
+                <div class="bg-red-500 text-white p-2 mb-4">
                     <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
                 </div>
             <?php endif; ?>
             
             <?php if(isset($_SESSION['success'])): ?>
-                <div class="bg-green-500 text-white p-2 mb-4 rounded-md">
+                <div class="bg-green-500 text-white p-2 mb-4">
                     <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
                 </div>
             <?php endif; ?>
