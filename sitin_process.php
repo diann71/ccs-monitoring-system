@@ -16,7 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = mysqli_stmt_get_result($stmt);
 
         if ($result->num_rows > 0) {
-            echo "<script>alert('Student with ID $idno is still currently sitting in and has not logged out yet.'); window.location.href='admindashboard.php';</script>";
+            echo "<script>alert('Student with ID $idno is still currently sitting in and has not logged out yet.'); 
+            window.location.href='admin_dashboard.php';</script>";
             continue; 
         }
 

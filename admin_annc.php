@@ -102,11 +102,11 @@ if (isset($_POST['update'])) {
 
     <div class="flex justify-center pt-5 pb-10">
         <div class="w-[800px] border border-solid shadow-2xl">
-            <div class="bg-gray-700 py-2">
+            <!--div class="bg-gray-700 py-2">
                 <h1 class="font-semibold text-white text-center text-xl">
                     <?php echo isset($editData) ? "Edit Announcement" : "Create Announcement"; ?>
                 </h1>
-            </div>
+            </div-->
 
             <div class="p-10">
                 <form action="admin_annc.php" method="post">

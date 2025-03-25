@@ -53,18 +53,15 @@ if(isset($_POST['sort_names'])){
 <body>
 <div class="flex justify-center pt-5 pb-10">
     <div class="grid grid-rows-1 gap-4 w-full">
-        <div>
-            <h1 class="bg-gray-600 text-white text-xl text-center py-2">Student List</h1>
-        </div>
         <div class="flex justify-end">
             <div class="pr-16">
                 <form action="" method="post" class="flex items-center space-x-4">
                     <div>
-                        <button name="sort_id" class="w-24 border border-solid p-2 font-semibold">
-                            <i class="fas fa-sort-numeric-down"></i> Sort Id
+                        <button name="sort_id" class="w-26 border border-solid p-2 font-semibold">
+                            <i class="fas fa-sort-numeric-down"></i> Sort by Id
                         </button>
-                        <button name="sort_name" class="w-32 border border-solid p-2 font-semibold">
-                            <i class="fas fa-sort-alpha-down"></i> Sort Names
+                        <button name="sort_name" class="w-36 border border-solid p-2 font-semibold">
+                            <i class="fas fa-sort-alpha-down"></i> Sort by Name
                         </button>
                     </div>
                     <div>
@@ -78,30 +75,26 @@ if(isset($_POST['sort_names'])){
                 </form> 
             </div>
         </div>
-        <div class="grid grid-cols-9 text-center border-b-2 pb-2">
+        <div class="grid grid-cols-7 text-center border-b-2 pb-2">
             <p class="font-bold text-center">ID</p>
             <p class="font-bold text-center">Lastname</p>
             <p class="font-bold text-center">Firstname</p>
             <p class="font-bold text-center">Midname</p>
             <p class="font-bold text-center">Course</p>
             <p class="font-bold text-center">Year</p>
-            <p class="font-bold text-center">Username</p>
-            <p class="font-bold text-center">Password</p>
             <p class="font-bold text-center">Action</p>
         </div>
         <!-- Add rows dynamically here -->
 
         <?php while ($row = mysqli_fetch_assoc($result)): ?>
             
-            <div class="grid grid-cols-9 text-center border-b-2 pb-2">
+            <div class="grid grid-cols-7 text-center border-b-2 pb-2">
                 <p class=" text-center"><?php echo $row['idno']; ?></p>
                 <p class=" text-center"><?php echo $row['lastname']; ?></p>
                 <p class=" text-center"><?php echo $row['firstname']; ?></p>
                 <p class=" text-center"><?php echo $row['midname']; ?></p>
                 <p class=" text-center"><?php echo $row['course']; ?></p>
                 <p class=" text-center"><?php echo $row['year']; ?></p>
-                <p class=" text-center"><?php echo $row['username']; ?></p>
-                <p class=" text-center"><?php echo $row['password']; ?></p>
                 <form action='' method='post'>
                     <input type="hidden" name="idno" value="<?php echo $row['idno']; ?>">
                     <button type='submit' name='delete' class='w-20 bg-red-600 text-white py-1 px-3 rounded'>Delete</button>

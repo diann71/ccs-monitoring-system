@@ -9,61 +9,72 @@ if (isset($_POST['submit'])) {
     $search = $_POST['search'];
     $search_param = "%$search%";
 
-    $query = "SELECT * FROM students WHERE idno LIKE ? OR lastname LIKE ? OR firstname LIKE ? OR midname LIKE ? OR course LIKE ? OR year LIKE ?";
-    $stmt = mysqli_prepare($mysql, $query);
-    
-    if (!$stmt) {
-        die("Query Preparation Failed: " . mysqli_error($mysql));
-    }
-
-    mysqli_stmt_bind_param($stmt, "ssssss", $search_param, $search_param, $search_param, $search_param, $search_param, $search_param);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-
-    if ($result && mysqli_num_rows($result) > 0) {
-        $hideSearch = true; // Hide search after results appear
-        echo '<form action="" method="post">';
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo ' 
-                <div class="grid pt-10 pb-30 h-full place-items-center">
-                    <div class="w-full max-w-lg border border-gray-300 shadow-lg bg-white rounded-lg overflow-hidden">
-                        <div class="bg-gray-600 py-2">
-                            <h1 class="text-white text-center text-xl font-bold">Sit-in Registration</h1>
-                        </div>
-                        <div class="p-6">
-                            <input type="hidden" name="idno[]" value="' . $row['idno'] . '">
-
-                            <label class="block text-gray-700 font-semibold pb-1">ID No:</label>
-                            <input type="text" value="' . $row['idno'] . '" class="w-full border border-gray-300 p-2 rounded-md bg-gray-100" disabled>
-
-                            <label class="block text-gray-700 font-semibold pb-1 mt-4">Last Name:</label>
-                            <input type="text" value="' . $row['lastname'] . '" class="w-full border border-gray-300 p-2 rounded-md bg-gray-100" disabled>
-
-                            <label class="block text-gray-700 font-semibold pb-1 mt-4">First Name:</label>
-                            <input type="text" value="' . $row['firstname'] . '" class="w-full border border-gray-300 p-2 rounded-md bg-gray-100" disabled>
-
-                            <label class="block text-gray-700 font-semibold pb-1 mt-4">Course:</label>
-                            <input type="text" value="' . $row['course'] . '" class="w-full border border-gray-300 p-2 rounded-md bg-gray-100" disabled>
-
-                            <label class="block text-gray-700 font-semibold pb-1 mt-4">Sit-in Purpose:</label>
-                            <select name="sitin_purpose[]" class="w-full border border-gray-300 p-2 rounded-md bg-white">
-                                <option value="Programming">Programming</option>
-                                <option value="C">C</option>
-                                <option value="C++">C++</option>
-                            </select>
-                        </div>
-
-                        <div class="text-center pb-5">
-                            <button type="submit" name="register_sitin" class="px-4 py-2 bg-blue-600 text-white rounded">Sit-in</button>
-                        </div>
-                    </div>
-                </div> 
-              </form>';
-        }
+    if(empty($search)){
+        echo "<script>alert('Please enter a ID, Name or Course!');window.location.href='search.php';</script>";
     } else {
-        echo "No students found.";
+
+        
+    
+
+        $query = "SELECT * FROM students WHERE idno LIKE ? OR lastname LIKE ? OR firstname LIKE ? OR midname LIKE ? OR course LIKE ? OR year LIKE ? LIMIT 1";
+        $stmt = mysqli_prepare($mysql, $query);
+        
+        if (!$stmt) {
+            die("Query Preparation Failed: " . mysqli_error($mysql));
+        }
+
+        mysqli_stmt_bind_param($stmt, "ssssss", $search_param, $search_param, $search_param, $search_param, $search_param, $search_param);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if ($result && mysqli_num_rows($result) > 0) {
+            $hideSearch = true; // Hide search after results appear
+            echo '<form action="" method="post">';
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo ' 
+                    <div class="grid pt-10 pb-30 h-full place-items-center">
+                        <div class="w-full max-w-lg border border-gray-300 shadow-lg bg-white rounded-lg overflow-hidden">
+                            <div class="bg-gray-600 py-2">
+                                <h1 class="text-white text-center text-xl font-bold">Sit-in Registration</h1>
+                            </div>
+                            <div class="p-6">
+                                <input type="hidden" name="idno[]" value="' . $row['idno'] . '">
+
+                                <label class="block text-gray-700 font-semibold pb-1">ID No:</label>
+                                <input type="text" value="' . $row['idno'] . '" class="w-full border border-gray-300 p-2 rounded-md bg-gray-100" disabled>
+
+                                <label class="block text-gray-700 font-semibold pb-1 mt-4">Last Name:</label>
+                                <input type="text" value="' . $row['lastname'] . '" class="w-full border border-gray-300 p-2 rounded-md bg-gray-100" disabled>
+
+                                <label class="block text-gray-700 font-semibold pb-1 mt-4">First Name:</label>
+                                <input type="text" value="' . $row['firstname'] . '" class="w-full border border-gray-300 p-2 rounded-md bg-gray-100" disabled>
+
+                                <label class="block text-gray-700 font-semibold pb-1 mt-4">Course:</label>
+                                <input type="text" value="' . $row['course'] . '" class="w-full border border-gray-300 p-2 rounded-md bg-gray-100" disabled>
+
+                                <label class="block text-gray-700 font-semibold pb-1 mt-4">Sit-in Purpose:</label>
+                                <select name="sitin_purpose[]" class="w-full border border-gray-300 p-2 rounded-md bg-white">
+                                    <option value="Programming">Programming</option>
+                                    <option value="Research">Research</option>
+                                    <option value="Networking">Networking</option>
+                                </select>
+
+                                <label class="block text-gray-700 font-semibold pb-1 mt-4">Session:</label>
+                                <input type="text" value="' . $row['session'] . '" class="w-full border border-gray-300 p-2 rounded-md bg-gray-100" disabled>
+                            </div>
+
+                            <div class="text-center pb-5">
+                                <button type="submit" name="register_sitin" class="px-4 py-2 bg-blue-600 text-white rounded">Sit-in</button>
+                            </div>
+                        </div>
+                    </div> 
+                </form>';
+            }
+        } else {
+            echo "No students found.";
+        }
+        mysqli_stmt_close($stmt);
     }
-    mysqli_stmt_close($stmt);
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register_sitin'])) {
@@ -105,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register_sitin'])) {
         $checkResult = mysqli_stmt_get_result($checkStmt);
 
         if ($checkResult->num_rows > 0) {
-            echo "<script>alert('Student with ID $idno is still currently sitting in and has not logged out yet.'); window.location.href='admindashboard.php';</script>";
+            echo "<script>alert('Student with ID $idno is still currently sitting in and has not logged out yet.'); window.location.href='search.php';</script>";
             continue;
         }
 

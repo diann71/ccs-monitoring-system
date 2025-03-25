@@ -21,9 +21,6 @@ $result_completed = mysqli_query($mysql, $query_completed);
 <body>
 <div class="flex justify-center pt-2 pb-10">
     <div class="grid grid-rows-1 gap-4 w-full">
-        <div>
-            <h1 class="bg-gray-600 text-white text-xl text-center py-2">Sit-in Record</h1>
-        </div>
         <div class="grid grid-cols-9 text-center border-b-2 pb-2">
             <p class="font-bold text-center">ID</p>
             <p class="font-bold text-center">Lastname</p>

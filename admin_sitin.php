@@ -28,6 +28,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['timeout'])) {
 
     mysqli_stmt_close($stmt);
 }
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['timeout'])) {
+    $idno = $_POST['idno'];
+
+    // Update time_out to the current time
+    $update_session = "UPDATE students SET session = session -1 WHERE idno = ?";
+    $stmt = mysqli_prepare($mysql, $update_session);
+    mysqli_stmt_bind_param($stmt, "s", $idno);
+    
+    if (mysqli_stmt_execute($stmt)) {
+        echo "<script>alert('Time Out Successful!'); window.location.href='admin_sitin.php';</script>";
+    } else {
+        echo "<script>alert('Error: " . mysqli_error($mysql) . "');</script>";
+    }
+
+    mysqli_stmt_close($stmt);
+}
+
 
 
 ?>
@@ -42,9 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['timeout'])) {
 <body>
 <div class="flex justify-center pt-2 pb-10">
     <div class="grid grid-rows-1 gap-4 w-full">
-        <div>
-            <h1 class="bg-gray-600 text-white text-xl text-center py-2">Current Sit-in</h1>
-        </div>
         <div class="grid grid-cols-9 text-center border-b-2 pb-2">
             <p class="font-bold text-center">ID</p>
             <p class="font-bold text-center">Lastname</p>
