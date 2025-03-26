@@ -45,7 +45,7 @@ if($row){
                 </div>
 
                 <div class="p-6">
-                    <p><span class="font-bold">Hi Wleco</span> <?php echo $idno; ?></p>
+                    <p><span class="font-bold">Hi Welcome</span> <?php echo $idno; ?></p>
                     <p><span class="font-bold">Name:</span> <?php echo $firstname . ' ' . $midname . ' ' . $lastname?></p>
                     <p><span class="font-bold">Course:</span> <?php echo $course; ?></p>
                     <p><span class="font-bold">Year:</span> <?php echo $year; ?></p>
@@ -58,16 +58,20 @@ if($row){
             <div class="sticky top-0 w-full bg-blue-700 py-3">
                 <h1 class="w-full font-bold text-white text-center">Announcements</h1>
             </div>
-            <div class="p-5">
+            <div class='pt-5 p-10 h-96 overflow-y-auto'> 
                 <?php 
-                   $result = mysqli_query($mysql, "SELECT * FROM announcements ORDER BY created_at DESC LIMIT 5");
+                    $result = mysqli_query($mysql, "SELECT * FROM announcements ORDER BY created_at DESC");
 
-                    while($row  = mysqli_fetch_assoc($result)){
-                        echo "<h1 class='font-bold pb-2'>" .  htmlspecialchars($row['title']) . "</h1>";
-                        echo "<div class='border border-solid'>";
-                        echo "<p class='p-5'>" . htmlspecialchars($row['description']) . "</p>";
-                        echo "</div>";
-                     }
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<div class='p-2'>";
+                        echo "<div class='border border-solid p-5'>";
+                        echo "<h1 class='font-bold text-md'>" . htmlspecialchars(strtoupper($row['title'])) . "</h1>";
+                        echo "<p class='text-xs'>Created " . htmlspecialchars($row['created_at']) . "</p>";
+                        echo "<p class='pt-5 text-sm'>" . htmlspecialchars($row['description']) . "</p>";
+                        echo "<div class='pt-2 flex gap-2'>";
+
+                        echo "</div></div></div>";
+                    }
                 ?>
             </div>
         </div>

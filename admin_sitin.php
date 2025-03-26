@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['timeout'])) {
 </head>
 <body>
 <div class="flex justify-center pt-2 pb-10">
-    <div class="grid grid-rows-1 gap-4 w-full">
+    <div class="grid grid-rows-1 gap-4 w-full pt-5 px-20">
         <div class="grid grid-cols-9 text-center border-b-2 pb-2">
             <p class="font-bold text-center">ID</p>
             <p class="font-bold text-center">Lastname</p>

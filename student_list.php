@@ -52,8 +52,8 @@ if(isset($_POST['sort_names'])){
 </head>
 <body>
 <div class="flex justify-center pt-5 pb-10">
-    <div class="grid grid-rows-1 gap-4 w-full">
-        <div class="flex justify-end">
+    <div class="grid grid-rows-1 gap-4 w-full px-20">
+        <div class="flex justify-end ">
             <div class="pr-16">
                 <form action="" method="post" class="flex items-center space-x-4">
                     <div>
@@ -75,7 +75,7 @@ if(isset($_POST['sort_names'])){
                 </form> 
             </div>
         </div>
-        <div class="grid grid-cols-7 text-center border-b-2 pb-2">
+        <div class="grid grid-cols-7 text-center border-b-2 pb-2 ">
             <p class="font-bold text-center">ID</p>
             <p class="font-bold text-center">Lastname</p>
             <p class="font-bold text-center">Firstname</p>
