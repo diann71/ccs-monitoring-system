@@ -19,7 +19,25 @@ if($row){
         mysqli_query($mysql, $query);
 } else {
     echo "No remaining sessions!";
-}*/
+}
+    
+<?php if (empty($announcements)): ?>
+                    <p class="text-muted mb-0">No announcements available.</p>
+                <?php else: ?>
+                    <?php foreach ($announcements as $announcement): ?>
+                        <div class="mb-4">
+                            <h6 class="mb-1"><?php echo htmlspecialchars($announcement['title']); ?></h6>
+                            <p class="text-muted small mb-1">
+                                Posted by <?php echo htmlspecialchars($announcement['firstname'] . ' ' . $announcement['lastname']); ?> 
+                                on <?php echo date('M d, Y h:i A', strtotime($announcement['created_at'])); ?>
+                            </p>
+                            <p class="mb-0"><?php echo nl2br(htmlspecialchars($announcement['content'])); ?></p>
+                        </div>
+                        <?php if ($announcement !== end($announcements)): ?>
+                            <hr>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,6 +90,7 @@ if($row){
 
                         echo "</div></div></div>";
                     }
+                    
                 ?>
             </div>
         </div>

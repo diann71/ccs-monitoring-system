@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     foreach ($idnos as $index => $idno) {
         $sitin_purpose = $sitin_purposes[$index];
+        $lab = $lab[$index];
     
         $query = "SELECT * FROM sit_in WHERE idno = ? AND time_out IS NULL";
 
@@ -34,8 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $course = $row['year'];
 
             // insert sitin record
-            $insertStmt = mysqli_prepare($mysql, "INSERT INTO sit_in (idno, lastname, firstname, midname, course, year sitin_purpose, time_in) VALUES (?, ?, ?, ?, ?, ?NOW())");
-            mysqli_stmt_bind_param($insertStmt, "ssss", $idno, $name, $course, $sitin_purpose);
+            $insertStmt = mysqli_prepare($mysql, "INSERT INTO sit_in (idno, lastname, firstname, midname, course, year sitin_purpose, lab, time_in) VALUES (?, ?, ?, ?, ?, ?, ?NOW())");
+            mysqli_stmt_bind_param($insertStmt, "sssss", $idno, $name, $course, $sitin_purpose, $lab);
             mysqli_stmt_execute($insertStmt);
         }
     }

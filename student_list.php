@@ -40,6 +40,13 @@ if(isset($_POST['sort_names'])){
     $query = "SELECT * FROM students ORDER BY lastname ASC";
     $result = mysqli_query($mysql, $query);
 }
+if(isset($_POST['session_reset'])){
+    $idno = $_POST['idno'];
+    $reset_session = "UPDATE students set session = 30 WHERE idno = ?";
+    $stmt = mysqli_prepare($mysql, $reset_session);
+    mysqli_stmt_bind_param($stmt, "s", $idno);
+    mysqli_stmt_execute($stmt);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,28 +82,31 @@ if(isset($_POST['sort_names'])){
                 </form> 
             </div>
         </div>
-        <div class="grid grid-cols-7 text-center border-b-2 pb-2 ">
+        <div class="grid grid-cols-8     text-center border-b-2 pb-2 ">
             <p class="font-bold text-center">ID</p>
             <p class="font-bold text-center">Lastname</p>
             <p class="font-bold text-center">Firstname</p>
             <p class="font-bold text-center">Midname</p>
             <p class="font-bold text-center">Course</p>
             <p class="font-bold text-center">Year</p>
+            <p class="font-bold text-center">Session</p>
             <p class="font-bold text-center">Action</p>
         </div>
         <!-- Add rows dynamically here -->
 
         <?php while ($row = mysqli_fetch_assoc($result)): ?>
             
-            <div class="grid grid-cols-7 text-center border-b-2 pb-2">
+            <div class="grid grid-cols-8 text-center border-b-2 pb-2">
                 <p class=" text-center"><?php echo $row['idno']; ?></p>
                 <p class=" text-center"><?php echo $row['lastname']; ?></p>
                 <p class=" text-center"><?php echo $row['firstname']; ?></p>
                 <p class=" text-center"><?php echo $row['midname']; ?></p>
                 <p class=" text-center"><?php echo $row['course']; ?></p>
                 <p class=" text-center"><?php echo $row['year']; ?></p>
+                <p class=" text-center"><?php echo $row['session']; ?></p>
                 <form action='' method='post'>
                     <input type="hidden" name="idno" value="<?php echo $row['idno']; ?>">
+                    <button type='submit' name='session_reset' class='w-20 bg-green-600 text-white py-1 px-3 rounded'>Reset</button>
                     <button type='submit' name='delete' class='w-20 bg-red-600 text-white py-1 px-3 rounded'>Delete</button>
                 </form>
             </div>

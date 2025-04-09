@@ -59,6 +59,13 @@ if (isset($_POST['submit'])) {
                                     <option value="Networking">Networking</option>
                                 </select>
 
+                                <label class="block text-gray-700 font-semibold pb-1 mt-4">Laboratory</label>
+                                <select name="lab[]" class="w-full border border-gray-300 p-2 rounded-md bg-white">
+                                    <option value="524">524</option>
+                                    <option value="526">526</option>
+                                    <option value="528">528</option>
+                                </select>
+
                                 <label class="block text-gray-700 font-semibold pb-1 mt-4">Session:</label>
                                 <input type="text" value="' . $row['session'] . '" class="w-full border border-gray-300 p-2 rounded-md bg-gray-100" disabled>
                             </div>
@@ -80,9 +87,14 @@ if (isset($_POST['submit'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register_sitin'])) {
     $idnos = $_POST['idno'];
     $sitin_purposes = $_POST['sitin_purpose'];
+    $lab = $_POST['lab'];
+    
+    
 
     foreach ($idnos as $index => $idno) {
         $sitin_purpose = $sitin_purposes[$index];
+        $lab = $lab[$index];
+        
 
         if (!$mysql) {
             die("Database connection failed: " . mysqli_connect_error());
@@ -121,11 +133,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register_sitin'])) {
         }
 
         // Insert into sit_in_records
-        $insertStmt = mysqli_prepare($mysql, "INSERT INTO sit_in (idno, lastname, firstname, midname, course, year, sitin_purpose, time_in) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+        $insertStmt = mysqli_prepare($mysql, "INSERT INTO sit_in (idno, lastname, firstname, midname, course, year, sitin_purpose, lab, time_in) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())");
         if (!$insertStmt) {
             die("Query Preparation Failed: " . mysqli_error($mysql));
         }
-        mysqli_stmt_bind_param($insertStmt, "sssssis", $idno, $lastname, $firstname, $midname, $course, $year, $sitin_purpose);
+        mysqli_stmt_bind_param($insertStmt, "sssssiss", $idno, $lastname, $firstname, $midname, $course, $year, $sitin_purpose, $lab);
         mysqli_stmt_execute($insertStmt);
     }
 

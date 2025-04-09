@@ -77,11 +77,12 @@
               <div class="bg-white p-6 rounded-lg shadow-2xl">
                   <h3 class="text-lg font-semibold mb-4">Previous Sit-in Records</h3>
                   <div class="overflow-x-auto">
-                      <div class="grid grid-cols-4 text-center border-b-2 pb-2 mb-2">
+                      <div class="grid grid-cols-5 text-center border-b-2 pb-2 mb-2">
                           <p class="font-bold text-center">ID</p>
                           <p class="font-bold text-center">Full Name</p>
                           <p class="font-bold text-center">Course & Year</p>
-                          <p class="font-bold text-center">Time In/Out</p>
+                          <p class="font-bold text-center">Time In</p>
+                          <p class="font-bold text-center">Time Out</p>
                       </div>
                       <div class="space-y-2 max-h-[400px] overflow-y-auto">
                           <?php 
@@ -90,14 +91,14 @@
                                   $fullName = htmlspecialchars($row['lastname']) . ", " . htmlspecialchars($row['firstname']) . " " . htmlspecialchars($row['midname']);
                                   $courseYear = htmlspecialchars($row['course']) . " - " . htmlspecialchars($row['year']);
                                   $timeIn = date('M d, Y h:i A', strtotime($row['time_in']));
-                                  $timeOut = date('M d, Y h:i A', strtotime($row['time_out']));
-                                  $timeInOut = $timeIn . " / " . $timeOut;
+                                  $timeOut = date('M d, Y h:i A', strtotime($row['time_out']));;
                                   
-                                  echo "<div class='grid grid-cols-4 text-center border-b pb-2'>";
+                                  echo "<div class='grid grid-cols-5 text-center border-b pb-2'>";
                                   echo "<p class='text-center'>" . htmlspecialchars($row['idno']) . "</p>";
-                                  echo "<p class='text-center'>" . $fullName . "</p>";
+                                  echo "<p class='text-center '>" . $fullName . "</p>";
                                   echo "<p class='text-center'>" . $courseYear . "</p>";
-                                  echo "<p class='text-center text-sm'>" . $timeInOut . "</p>";
+                                  echo "<p class='text-center text-sm'>" . $timeIn . "</p>";
+                                  echo "<p class='text-center text-sm'>" . $timeOut . "</p>";
                                   echo "</div>";
                               }
                           } else {

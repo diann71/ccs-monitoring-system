@@ -4,7 +4,7 @@ session_start();
 include "connector.php";
 include "admin_nav.php";    
 
-$query_current = "SELECT students.idno, students.lastname, students.firstname, students.midname, students.course, students.year, sit_in.sitin_purpose, sit_in.time_in 
+$query_current = "SELECT students.idno, students.lastname, students.firstname, students.midname, students.course, students.year, sit_in.sitin_purpose, sit_in.lab, sit_in.time_in 
             FROM sit_in
             JOIN students ON sit_in.idno = students.idno
             WHERE sit_in.time_out IS NULL";
@@ -35,6 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['timeout'])) {
     $update_session = "UPDATE students SET session = session -1 WHERE idno = ?";
     $stmt = mysqli_prepare($mysql, $update_session);
     mysqli_stmt_bind_param($stmt, "s", $idno);
+
+    if($update_session == 0) {
+        $reset_session = "UPDATE students set session = 30 WHERE idno = ?";
+        $stmt = mysqli_prepare($mysql, $reset_session);
+        mysqli_stmt_bind_param($stmt, "s", $idno);
+    }
     
     if (mysqli_stmt_execute($stmt)) {
         echo "<script>alert('Time Out Successful!'); window.location.href='admin_sitin.php';</script>";
@@ -59,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['timeout'])) {
 <body>
 <div class="flex justify-center pt-2 pb-10">
     <div class="grid grid-rows-1 gap-4 w-full pt-5 px-20">
-        <div class="grid grid-cols-9 text-center border-b-2 pb-2">
+        <div class="grid grid-cols-10 text-center border-b-2 pb-2">
             <p class="font-bold text-center">ID</p>
             <p class="font-bold text-center">Lastname</p>
             <p class="font-bold text-center">Firstname</p>
@@ -67,13 +73,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['timeout'])) {
             <p class="font-bold text-center">Course</p>
             <p class="font-bold text-center">Year</p>
             <p class="font-bold text-center">Sit-in Purpose</p>
+            <p class="font-bold text-center">Laboratory</p>
             <p class="font-bold text-center">Time In</p>
             <p class="font-bold text-center">Action</p>
         </div>
         <!-- Add rows dynamically here -->
 
         <?php while ($row = mysqli_fetch_assoc($result_current)): ?>
-            <div class="grid grid-cols-9 text-center border-b-2">
+            <div class="grid grid-cols-10 text-center border-b-2">
                 <p class="text-center"><?php echo $row['idno']; ?></p>
                 <p class="text-center"><?php echo $row['lastname']; ?></p>
                 <p class="text-center"><?php echo $row['firstname']; ?></p>
@@ -81,6 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['timeout'])) {
                 <p class="text-center"><?php echo $row['course']; ?></p>
                 <p class="text-center"><?php echo $row['year']; ?></p>
                 <p class="text-center"><?php echo $row['sitin_purpose']; ?></p>
+                <p class="text-center"><?php echo $row['lab']; ?></p>
                 <p class="text-center"><?php echo $row['time_in']; ?></p>
                 <form action="" method="post">
                     <input type="hidden" name="idno" value="<?php echo $row['idno']; ?>">
