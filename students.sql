@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Apr 09, 2025 at 08:40 PM
+-- Generation Time: Apr 14, 2025 at 05:26 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -79,9 +79,24 @@ INSERT INTO `announcements` (`announcement_id`, `title`, `description`, `created
 --
 
 CREATE TABLE `feedback` (
-  `feedback_id` int(11) NOT NULL,
-  `content` varchar(100) NOT NULL
+  `id` int(11) NOT NULL,
+  `idno` int(11) DEFAULT NULL,
+  `feedback_text` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`id`, `idno`, `feedback_text`, `created_at`) VALUES
+(1, 22668339, 'asdasd', '2025-04-10 18:23:59'),
+(2, 22668339, 'asdadasdasd', '2025-04-13 12:13:55'),
+(3, 22668339, 'asdddsadasdasda', '2025-04-13 14:46:38'),
+(4, 22668339, 'asasddasdd', '2025-04-13 16:11:52'),
+(5, 22668339, 'asdadas it was godo and awse om buta asndakdndak nsadkanskdandpnaspdnaskpdnsapkdskadaksndakndakddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', '2025-04-13 19:43:16'),
+(6, 22668336, 'it was nice\r\n', '2025-04-14 06:02:38'),
+(7, 22668336, 'adada bati', '2025-04-14 06:07:23');
 
 -- --------------------------------------------------------
 
@@ -140,7 +155,14 @@ CREATE TABLE `sit_in` (
 --
 
 INSERT INTO `sit_in` (`id`, `idno`, `lastname`, `firstname`, `midname`, `course`, `year`, `sitin_purpose`, `lab`, `time_in`, `time_out`) VALUES
-(38, 22668339, 'Bahan', 'Aldrian', 'Orillosa', 'BSCS', 1, 'Networking', '528', '2025-04-09 18:02:57', '2025-04-09 18:19:28');
+(51, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, 'Programming', '524', '2025-04-13 18:37:13', '2025-04-13 18:50:15'),
+(52, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, 'Programming', '524', '2025-04-13 19:02:13', '2025-04-13 19:26:51'),
+(53, 22668336, 'Abadiano', 'Mary Rose', 'Casue', 'BSIT', 2, 'Programming', '524', '2025-04-14 04:51:14', '2025-04-14 04:51:19'),
+(54, 22668336, 'Abadiano', 'Mary Rose', 'Casue', 'BSIT', 2, 'Programming', '524', '2025-04-14 04:51:25', '2025-04-14 04:52:44'),
+(55, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, 'Programming', '524', '2025-04-14 04:51:46', '2025-04-14 04:52:43'),
+(56, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, 'Programming', '524', '2025-04-14 05:07:38', '2025-04-14 05:07:47'),
+(57, 22668336, 'Abadiano', 'Mary Rose', 'Casue', 'BSIT', 2, 'Programming', '524', '2025-04-14 05:07:43', '2025-04-14 05:07:48'),
+(58, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, 'Research', '528', '2025-04-14 06:18:33', '2025-04-14 06:18:36');
 
 -- --------------------------------------------------------
 
@@ -167,8 +189,9 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `idno`, `lastname`, `firstname`, `midname`, `course`, `year`, `username`, `password`, `profile`, `session`) VALUES
-(1, 22668339, 'Bahan', 'Aldrian', 'Orillosa', 'BSCS', 1, 'aldrian123123', '123', '67bd4e9c014bd_ccs.jpg', 29),
-(2, 1111, 'Alonzo', 'Clint', 'Sss', 'BSIT', 3, 'clint', '123', '', 30);
+(1, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, 'aldrian123123', '123', '67fb5dbc15c92_profile.png', 29),
+(3, 22668336, 'Abadiano', 'Mary Rose', 'Casue', 'BSIT', 2, 'abads', '123', '', 30),
+(4, 1111, 'Bahan', 'asadas', 'asdasd', 'BSIT', 1, '123123', '123', '', 30);
 
 --
 -- Indexes for dumped tables
@@ -191,7 +214,7 @@ ALTER TABLE `announcements`
 -- Indexes for table `feedback`
 --
 ALTER TABLE `feedback`
-  ADD PRIMARY KEY (`feedback_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `reservations`
@@ -237,6 +260,12 @@ ALTER TABLE `announcements`
   MODIFY `announcement_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
@@ -252,13 +281,13 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `sit_in`
 --
 ALTER TABLE `sit_in`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

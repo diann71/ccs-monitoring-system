@@ -1,5 +1,5 @@
 <?php
-include "connection.php"; // Database connection
+include "../database/connection.php"; // Database connection
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['idnos'] = $_POST['idno'];  

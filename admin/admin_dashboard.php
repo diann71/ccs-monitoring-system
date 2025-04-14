@@ -1,8 +1,8 @@
 <?php
   session_start();
-  include "connector.php";
-  include "admin_nav.php";
-  include "admin_auth.php";
+  include "../database/connector.php";
+  include "../admin/admin_nav.php";
+  include "../database/admin_auth.php";
   
   $idno = $_SESSION["idno"];
   
@@ -90,8 +90,8 @@
                               while ($row = mysqli_fetch_assoc($sitInRecords)) {
                                   $fullName = htmlspecialchars($row['lastname']) . ", " . htmlspecialchars($row['firstname']) . " " . htmlspecialchars($row['midname']);
                                   $courseYear = htmlspecialchars($row['course']) . " - " . htmlspecialchars($row['year']);
-                                  $timeIn = date('M d, Y h:i A', strtotime($row['time_in']));
-                                  $timeOut = date('M d, Y h:i A', strtotime($row['time_out']));;
+                                  $timeIn = date('M d, Y - h:i A', strtotime($row['time_in']));
+                                  $timeOut = date('M d, Y - h:i A', strtotime($row['time_out']));;
                                   
                                   echo "<div class='grid grid-cols-5 text-center border-b pb-2'>";
                                   echo "<p class='text-center'>" . htmlspecialchars($row['idno']) . "</p>";

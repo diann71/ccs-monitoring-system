@@ -1,6 +1,6 @@
 <?php session_start();
 
-include "connector.php";
+include "../database/connector.php";
 
     if(isset($_POST['submit'])){
         $username = mysqli_real_escape_string($mysql, $_POST["username"]);
@@ -9,7 +9,7 @@ include "connector.php";
 
         if(empty($username) || empty($password)) {
             $_SESSION["error"] = "All fields should be filled.";
-            header('location: login.php');
+            header('location: ../auth/login.php');
             exit();
         }else{
             $admin_result = mysqli_query($mysql, "SELECT * FROM `admin` WHERE username = '$username' AND `password` = '$password' ");
@@ -24,7 +24,7 @@ include "connector.php";
                 $_SESSION['password'] = $row['password'];
                 
                 $_SESSION['success'] = "Login Successfully!";
-                header('Location: admin_dashboard.php');
+                header('Location: ../admin/admin_dashboard.php');
                 exit();
             }else{
                 $result = mysqli_query($mysql, "SELECT * FROM students WHERE username = '$username' AND `password` ='$password' ") or die("Could not execute the select query.");
@@ -41,12 +41,12 @@ include "connector.php";
                     $_SESSION['password'] = $row['password'];
     
                     $_SESSION['success'] = "Login Successfully!";
-                    header('Location: dashboard.php');
+                    header('Location: ../user/dashboard.php');
                     exit();
                 }
                 else{
                     $_SESSION["error"] = "User not Found";
-                    header('Location: login.php'); // Redirect to login page
+                    header('Location:../auth/login.php'); // Redirect to login page
                     exit();
                 } 
             }
@@ -84,8 +84,8 @@ include "connector.php";
 
         <div class="p-6">
             <div class="flex flex-col md:flex-row items-center justify-center md:space-x-4">
-                <img src="images/logo.png" class="w-[130px]">
-                <img src="images/ccs.jpg" class="w-[105px] pb-2">
+                <img src="../images/logo.png" class="w-[130px]">
+                <img src="../images/ccs.jpg" class="w-[105px] pb-2">
             </div>
             
             <h1 class="text-3xl font-bold mb-6">CCS SIT-IN MONITORING SYSTEM</h1>

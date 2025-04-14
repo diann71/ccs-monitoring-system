@@ -1,8 +1,8 @@
 <?php session_start();
 
-include "nav.php";
-include "connector.php";
-include "authenticator.php";
+include "../user/nav.php";
+include "../database/connector.php";
+include "../database/authenticator.php";
 
 if(!isset($_SESSION['idno'])){
     $_SESSION['error'] = "Please log in to view your profile.";

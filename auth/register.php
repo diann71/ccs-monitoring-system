@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include 'connector.php';
+include '../database/connector.php';
 
 if(isset($_POST["submit"])){
     $idno = mysqli_real_escape_string($mysql, $_POST["idno"]);
@@ -15,7 +15,7 @@ if(isset($_POST["submit"])){
     if(empty($idno) || empty($lastname) || empty($firstname) || empty($midname) || empty($course) ||
        empty($year) || empty($username) || empty($password)){
         $_SESSION['error'] = "All fields should be filled.";
-        header("Location: register.php"); // Reload the page with error
+        header("Location: ../auth/register.php"); // Reload the page with error
         exit();
     }
     else {
@@ -24,11 +24,11 @@ if(isset($_POST["submit"])){
         
         if(mysqli_query($mysql, $result)){
             $_SESSION['success'] = "Registered Successfully";
-            header("Location: login.php"); // Redirect to login page with success message
+            header("Location: ../auth/login.php"); // Redirect to login page with success message
             exit();
         } else {
             $_SESSION['error'] = "Registration Failed!";
-            header("Location: register.php");
+            header("Location: ../auth/  register.php");
             exit();
         }
     }
@@ -47,8 +47,8 @@ if(isset($_POST["submit"])){
         <!-- Left Side -->
         <div class="flex flex-col items-center justify-center w-80 md:w-96 p-6 bg-white rounded-l-3xl min-h-[600px] border-r border-gray-300">
             <div class="flex flex-col md:flex-row items-center justify-center md:space-x-4">
-                <img src="images/logo.png" class="w-32 mb-2">
-                <img src="images/ccs.jpg" class="w-24 mb-3">
+                <img src="../images/logo.png" class="w-32 mb-2">
+                <img src="../images/ccs.jpg" class="w-24 mb-3">
             </div>
             <h1 class="text-xl font-semibold text-gray-800 text-center">CCS SIT-IN MONITORING SYSTEM</h1>
             <p class="text-gray-600 text-center mt-2">
@@ -71,7 +71,7 @@ if(isset($_POST["submit"])){
                 </div>
             <?php endif; ?>
             <h1 class="text-xl font-semibold text-center text-gray-800 pt-8">CREATE ACCOUNT</h1>
-            <img src="images/profile.png" class="w-12 mx-auto mt-2">
+            <img src="../images/profile.png" class="w-12 mx-auto mt-2">
             <p class="text-center text-gray-600 pb-2">Sign up to continue</p>
 
             <form action="register.php" method="post" class="mt-4">
