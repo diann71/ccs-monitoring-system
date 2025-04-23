@@ -5,10 +5,15 @@ include "../database/connector.php";
 include "../admin/admin_nav.php";    
 
 // Get unique values for filters
-$query_labs = "SELECT DISTINCT lab FROM sit_in WHERE lab IS NOT NULL";
-$query_purposes = "SELECT DISTINCT sitin_purpose FROM sit_in WHERE sitin_purpose IS NOT NULL";
+$query_labs = "SELECT '524' as lab UNION SELECT '526' UNION SELECT '528' UNION SELECT '530' UNION SELECT '542' UNION SELECT '544' UNION SELECT '517'";
+$query_purposes = "SELECT 'C Programming' as sitin_purpose UNION SELECT 'C#' UNION SELECT 'Java' UNION SELECT 'PHP' UNION SELECT 'Database' UNION SELECT 'Digital & Logic Design' UNION SELECT 'Embedded Systems & IOT' UNION SELECT 'Python Programming' UNION SELECT 'System Integration & Architecture' UNION SELECT 'Computer Application' UNION SELECT 'Web Design & Development' UNION SELECT 'Project Management'";
 $result_labs = mysqli_query($mysql, $query_labs);
 $result_purposes = mysqli_query($mysql, $query_purposes);
+
+// Get the earliest record date
+$query_earliest = "SELECT MIN(time_in) as earliest_date FROM sit_in";
+$result_earliest = mysqli_query($mysql, $query_earliest);
+$earliest_date = mysqli_fetch_assoc($result_earliest)['earliest_date'];
 
 // Base query
 $query = "SELECT students.idno, students.lastname, students.firstname, students.midname, students.course, students.year, 
@@ -21,10 +26,18 @@ $query = "SELECT students.idno, students.lastname, students.firstname, students.
 if (isset($_GET['start_date']) && !empty($_GET['start_date'])) {
     $start_date = mysqli_real_escape_string($mysql, $_GET['start_date']);
     $query .= " AND DATE(sit_in.time_in) >= '$start_date'";
+} else {
+    // Set default start date to earliest record
+    $start_date = date('Y-m-d', strtotime($earliest_date));
+    $query .= " AND DATE(sit_in.time_in) >= '$start_date'";
 }
 
 if (isset($_GET['end_date']) && !empty($_GET['end_date'])) {
     $end_date = mysqli_real_escape_string($mysql, $_GET['end_date']);
+    $query .= " AND DATE(sit_in.time_in) <= '$end_date'";
+} else {
+    // Set default end date to present
+    $end_date = date('Y-m-d');
     $query .= " AND DATE(sit_in.time_in) <= '$end_date'";
 }
 
@@ -88,34 +101,32 @@ $result = mysqli_query($mysql, $query);
                 <form class="mb-6 grid grid-cols-4 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
-                        <input type="date" name="start_date" value="<?php echo isset($_GET['start_date']) ? $_GET['start_date'] : ''; ?>" 
-                               class="text-sm w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        <input type="date" name="start_date" value="<?php echo isset($_GET['start_date']) ? $_GET['start_date'] : date('Y-m-d', strtotime($earliest_date)); ?>" 
+                               class="text-sm w-full rounded-md border p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
-                        <input type="date" name="end_date" value="<?php echo isset($_GET['end_date']) ? $_GET['end_date'] : ''; ?>"
-                               class="text-sm w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        <input type="date" name="end_date" value="<?php echo isset($_GET['end_date']) ? $_GET['end_date'] : date('Y-m-d'); ?>"
+                               class="text-sm w-full rounded-md border p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Lab</label>
-                        <select name="lab" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        <select name="lab" class="text-sm w-full rounded-md border p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                             <option value="">All Labs</option>
-                            <?php while ($lab = mysqli_fetch_assoc($result_labs)): ?>
-                                <option value="<?php echo htmlspecialchars($lab['lab']); ?>" 
-                                    <?php echo (isset($_GET['lab']) && $_GET['lab'] == $lab['lab']) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($lab['lab']); ?>
+                            <?php while ($row = mysqli_fetch_assoc($result_labs)): ?>
+                                <option value="<?php echo htmlspecialchars($row['lab']); ?>" <?php echo (isset($_GET['lab']) && $_GET['lab'] == $row['lab']) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($row['lab']); ?>
                                 </option>
                             <?php endwhile; ?>
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Purpose</label>
-                        <select name="purpose" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        <select name="purpose" class="text-sm w-full rounded-md border p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                             <option value="">All Purposes</option>
-                            <?php while ($purpose = mysqli_fetch_assoc($result_purposes)): ?>
-                                <option value="<?php echo htmlspecialchars($purpose['sitin_purpose']); ?>"
-                                    <?php echo (isset($_GET['purpose']) && $_GET['purpose'] == $purpose['sitin_purpose']) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($purpose['sitin_purpose']); ?>
+                            <?php while ($row = mysqli_fetch_assoc($result_purposes)): ?>
+                                <option value="<?php echo htmlspecialchars($row['sitin_purpose']); ?>" <?php echo (isset($_GET['purpose']) && $_GET['purpose'] == $row['sitin_purpose']) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($row['sitin_purpose']); ?>
                                 </option>
                             <?php endwhile; ?>
                         </select>
@@ -127,6 +138,48 @@ $result = mysqli_query($mysql, $query);
                     </div>
                 </form>
                 
+                <!-- Summary Section -->
+                <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <h3 class="text-sm font-semibold text-gray-600 mb-2">Total Records</h3>
+                            <p class="text-2xl font-bold text-blue-600"><?php echo mysqli_num_rows($result); ?></p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <h3 class="text-sm font-semibold text-gray-600 mb-2">Date Range</h3>
+                            <p class="text-sm text-gray-800">
+                                <?php 
+                                if (isset($_GET['start_date']) && !empty($_GET['start_date'])) {
+                                    echo date('M d, Y', strtotime($_GET['start_date']));
+                                } else {
+                                    echo 'All time';
+                                }
+                                echo ' - ';
+                                if (isset($_GET['end_date']) && !empty($_GET['end_date'])) {
+                                    echo date('M d, Y', strtotime($_GET['end_date']));
+                                } else {
+                                    echo 'Present';
+                                }
+                                ?>
+                            </p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <h3 class="text-sm font-semibold text-gray-600 mb-2">Filters Applied</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <?php if (isset($_GET['lab']) && !empty($_GET['lab'])): ?>
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Lab: <?php echo htmlspecialchars($_GET['lab']); ?></span>
+                                <?php endif; ?>
+                                <?php if (isset($_GET['purpose']) && !empty($_GET['purpose'])): ?>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Purpose: <?php echo htmlspecialchars($_GET['purpose']); ?></span>
+                                <?php endif; ?>
+                                <?php if (!isset($_GET['lab']) && !isset($_GET['purpose']) && !isset($_GET['start_date']) && !isset($_GET['end_date'])): ?>
+                                    <span class="text-gray-500 text-xs">No filters applied</span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="overflow-x-auto">
                     <div class="grid grid-cols-7 text-center border-b-2 py-3 bg-gray-50">
                         <p class="text-xs font-medium text-gray-500 uppercase tracking-wider">ID</p>
@@ -199,15 +252,28 @@ $result = mysqli_query($mysql, $query);
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF('l', 'mm', 'a4');
             
+            // Calculate center position
+            const pageWidth = doc.internal.pageSize.width;
+            const centerX = pageWidth / 2;
+            
+            // Add logos at the top
+            doc.addImage('../images/logo.png', 'PNG', centerX - 25, 5, 20, 20);
+            doc.addImage('../images/ccs.jpg', 'JPEG', centerX + 5, 5, 20, 20);
+            
+            // Add header text centered
             doc.setFontSize(16);
-            doc.text('Sit-in Records Report', 15, 15);
+            doc.text('University of Cebu', centerX, 35, { align: 'center' });
+            doc.setFontSize(14);
+            doc.text('College of Computer Studies', centerX, 42, { align: 'center' });
+            doc.setFontSize(12);
+            doc.text('Sit-in Records Report', centerX, 49, { align: 'center' });
             
             const data = getTableData();
             
             doc.autoTable({
                 head: [data[0]],
                 body: data.slice(1),
-                startY: 25,
+                startY: 55,
                 theme: 'grid',
                 styles: {
                     fontSize: 8,

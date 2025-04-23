@@ -106,7 +106,7 @@ if (isset($_POST['update'])) {
             </div>
 
             <!-- Create/Edit Announcement Form -->
-            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <div class="bg-white rounded-lg shadow-2xl p-6 mb-8">
                 <h2 class="text-xl font-bold mb-4"><?php echo isset($editData) ? "Edit Announcement" : "Create New Announcement"; ?></h2>
                 <form action="admin_annc.php" method="post" class="space-y-4">
                     <input type="hidden" name="announcement_id" value="<?php echo isset($editData) ? htmlspecialchars($editData['announcement_id']) : ''; ?>">
@@ -148,7 +148,7 @@ if (isset($_POST['update'])) {
             </div>
 
             <!-- Recent Announcements -->
-            <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="bg-white rounded-lg shadow-2xl p-6">
                 <h2 class="text-xl font-semibold mb-4">Recent Announcements</h2>
                 <div class="space-y-4 max-h-[500px] overflow-y-auto">
                     <?php 

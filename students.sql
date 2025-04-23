@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Apr 14, 2025 at 05:26 PM
+-- Generation Time: Apr 23, 2025 at 09:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -70,7 +70,8 @@ INSERT INTO `announcements` (`announcement_id`, `title`, `description`, `created
 (9, 'Joshua', 'bayoooooooooooot', '2025-03-13 03:53:50'),
 (10, 'Intramurals 2025!', 'Everyone should complete the tatak form.', '2025-03-13 04:10:40'),
 (11, 'Renzo', 'bayot', '2025-03-13 04:40:51'),
-(12, 'Brah bayot', 'brah bayot\r\n', '2025-03-20 04:36:32');
+(12, 'Brah bayot', 'brah bayot\r\n', '2025-03-20 04:36:32'),
+(13, 'Easter Sunday', 'God is risen', '2025-04-19 18:35:50');
 
 -- --------------------------------------------------------
 
@@ -96,7 +97,9 @@ INSERT INTO `feedback` (`id`, `idno`, `feedback_text`, `created_at`) VALUES
 (4, 22668339, 'asasddasdd', '2025-04-13 16:11:52'),
 (5, 22668339, 'asdadas it was godo and awse om buta asndakdndak nsadkanskdandpnaspdnaskpdnsapkdskadaksndakndakddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', '2025-04-13 19:43:16'),
 (6, 22668336, 'it was nice\r\n', '2025-04-14 06:02:38'),
-(7, 22668336, 'adada bati', '2025-04-14 06:07:23');
+(7, 22668336, 'adada bati', '2025-04-14 06:07:23'),
+(8, 22668339, 'bati a', '2025-04-19 18:34:52'),
+(9, 22668339, 'okay ra', '2025-04-23 19:17:50');
 
 -- --------------------------------------------------------
 
@@ -144,8 +147,8 @@ CREATE TABLE `sit_in` (
   `midname` varchar(50) NOT NULL,
   `course` varchar(50) NOT NULL,
   `year` int(11) NOT NULL,
-  `sitin_purpose` enum('Programming','Research','Networking') NOT NULL,
-  `lab` enum('524','526','528') NOT NULL,
+  `sitin_purpose` enum('C Programming','C#','Java','PHP','Database','Digital & Logic Design','Embedded Systems & IOT','Python Programming','System Integration & Architecture','Computer Application','Web Design & Development','Project Management') NOT NULL,
+  `lab` enum('524','526','528','530','542','544','517') NOT NULL,
   `time_in` timestamp NULL DEFAULT NULL,
   `time_out` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -155,14 +158,10 @@ CREATE TABLE `sit_in` (
 --
 
 INSERT INTO `sit_in` (`id`, `idno`, `lastname`, `firstname`, `midname`, `course`, `year`, `sitin_purpose`, `lab`, `time_in`, `time_out`) VALUES
-(51, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, 'Programming', '524', '2025-04-13 18:37:13', '2025-04-13 18:50:15'),
-(52, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, 'Programming', '524', '2025-04-13 19:02:13', '2025-04-13 19:26:51'),
-(53, 22668336, 'Abadiano', 'Mary Rose', 'Casue', 'BSIT', 2, 'Programming', '524', '2025-04-14 04:51:14', '2025-04-14 04:51:19'),
-(54, 22668336, 'Abadiano', 'Mary Rose', 'Casue', 'BSIT', 2, 'Programming', '524', '2025-04-14 04:51:25', '2025-04-14 04:52:44'),
-(55, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, 'Programming', '524', '2025-04-14 04:51:46', '2025-04-14 04:52:43'),
-(56, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, 'Programming', '524', '2025-04-14 05:07:38', '2025-04-14 05:07:47'),
-(57, 22668336, 'Abadiano', 'Mary Rose', 'Casue', 'BSIT', 2, 'Programming', '524', '2025-04-14 05:07:43', '2025-04-14 05:07:48'),
-(58, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, 'Research', '528', '2025-04-14 06:18:33', '2025-04-14 06:18:36');
+(62, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, '', '526', '2025-04-20 16:51:57', '2025-04-20 16:52:21'),
+(63, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, '', '524', '2025-04-23 17:50:30', '2025-04-23 19:02:03'),
+(64, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, 'C Programming', '524', '2025-04-23 19:02:11', '2025-04-23 19:02:15'),
+(65, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, 'PHP', '542', '2025-04-23 19:02:25', '2025-04-23 19:02:41');
 
 -- --------------------------------------------------------
 
@@ -189,7 +188,7 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `idno`, `lastname`, `firstname`, `midname`, `course`, `year`, `username`, `password`, `profile`, `session`) VALUES
-(1, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, 'aldrian123123', '123', '67fb5dbc15c92_profile.png', 29),
+(1, 22668339, 'Bahan', 'Aldrians', 'Orillosa', 'BSCS', 1, 'aldrian123123', '123', '67fb5dbc15c92_profile.png', 30),
 (3, 22668336, 'Abadiano', 'Mary Rose', 'Casue', 'BSIT', 2, 'abads', '123', '', 30),
 (4, 1111, 'Bahan', 'asadas', 'asdasd', 'BSIT', 1, '123123', '123', '', 30);
 
@@ -257,13 +256,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `announcement_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `announcement_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `reservations`
@@ -281,7 +280,7 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `sit_in`
 --
 ALTER TABLE `sit_in`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `students`

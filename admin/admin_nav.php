@@ -52,10 +52,10 @@ include "../database/connector.php";
                 <div class="flex items-center justify-between">
                     <!-- Logo -->
                     <div class="flex items-center">
-                        <a href="#">
+                        <a href="#" class="flex items-center">
                             <img src="../images/ccs.jpg" alt="Logo" class="size-12">
+                            <span class="ml-2 text-lg font-semibold text-gray-800">Sit-in Monitoring System</span>
                         </a>
-                        <!--span class="ml-2 text-xl font-bold text-black">Admin Dashboard</span>  Added Admin text -->
                     </div>
 
                     <!-- Right side: Navigation Links and Profile Dropdown -->
@@ -92,11 +92,17 @@ include "../database/connector.php";
                                 </svg>
                                 Current Sit-in
                             </a>
-                            <a href="sitin_record.php" class="nav-link flex items-center justify-center h-12 px-3 py-2 text-sm font-medium text-black hover:text-blue-700 transition duration-300">
+                            <a href="daily_sit_in.php" class="nav-link flex items-center justify-center h-12 px-3 py-2 text-sm font-medium text-black hover:text-blue-700 transition duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4 mr-2" viewBox="0 0 16 16">
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+                                </svg>
+                                Daily Records
+                            </a>
+                            <a href="generate_reports.php" class="nav-link flex items-center justify-center h-12 px-3 py-2 text-sm font-medium text-black hover:text-blue-700 transition duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-4 h-4 mr-2" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
                                 </svg>
-                                Sit-in Report
+                                Generate Reports
                             </a>
                             <a href="admin_feedback.php" class="nav-link flex items-center justify-center h-12 px-3 py-2 text-sm font-medium text-black hover:text-blue-700 transition duration-300">
                                 <svg class="w-4 h-4 mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">

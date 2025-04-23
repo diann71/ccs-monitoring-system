@@ -132,9 +132,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register_sitin'])) {
                                                 <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo htmlspecialchars($row['session']); ?></td>
                                                 <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                                     <select name="sitin_purpose[]" class="border border-gray-300 p-2 rounded-md bg-white">
-                                                        <option value="Programming">Programming</option>
-                                                        <option value="Research">Research</option>
-                                                        <option value="Networking">Networking</option>
+                                                        <option value="C Programming">C Programming</option>
+                                                        <option value="C#">C#</option>
+                                                        <option value="Java">Java</option>
+                                                        <option value="PHP">PHP</option>
+                                                        <option value="Database">Database</option>
+                                                        <option value="Digital & Logic Design">Digital & Logic Design</option>
+                                                        <option value="Embedded Systems & IOT">Embedded Systems & IOT</option>
+                                                        <option value="Python Programming">Python Programming</option>
+                                                        <option value="System Integration & Architecture">System Integration & Architecture</option>
+                                                        <option value="Computer Application">Computer Application</option>
+                                                        <option value="Web Design & Development">Web Design & Development</option>
+                                                        <option value="Project Management">Project Management</option>
                                                     </select>
                                                 </td>
                                                 <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -142,6 +151,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register_sitin'])) {
                                                         <option value="524">524</option>
                                                         <option value="526">526</option>
                                                         <option value="528">528</option>
+                                                        <option value="530">530</option>
+                                                        <option value="542">542</option>
+                                                        <option value="544">544</option>
+                                                        <option value="517">517</option>
                                                     </select>
                                                 </td>
                                                 <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-900">

@@ -56,8 +56,9 @@ if($row){
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <a href="#">
+                    <a href="#" class="flex items-center">
                         <img src="../images/ccs.jpg" alt="Logo" class="size-12">
+                        <span class="ml-2 text-lg font-semibold text-gray-800">Sit-in Monitoring System</span>
                     </a>
                 </div>
 
