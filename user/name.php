@@ -96,11 +96,15 @@ ob_end_flush(); // End output buffering
                     </select>
                 </div>
             </div>
-            <div class="mt-6">
+            <div class="mt-8 flex justify-center gap-4">
                 <button type="submit" name="update" 
-                    class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">
-                    Save Changes
+                    class="flex items-center justify-center bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold shadow hover:bg-blue-700 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Save
                 </button>
+                <a href="profile.php" class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg shadow-md hover:bg-gray-400 transition">Cancel</a>
             </div>
         </form>
     </div>

@@ -12,8 +12,14 @@ if($row){
     $title = $row['title'];
     $description = $row['description'];
     $created_at = $row['created_at'];
-
 }
+
+// Fetch points for the current user
+$points_query = "SELECT * FROM students WHERE idno = '$idno'";
+$points_result = mysqli_query($mysql, $points_query);
+$points_row = mysqli_fetch_assoc($points_result);
+$points = $points_row ? $points_row['points'] : 0;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,143 +27,196 @@ if($row){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>  
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+        }
+        .card-hover {
+            transition: transform 0.2s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+        }
+    </style>
 </head>
-<body class="bg-gray-00 min-h-screen">
+<body class="bg-gray-50 min-h-screen">
     <div class="max-w-7xl mx-auto p-6">
+        <!-- Welcome Section -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Welcome back, <?php echo $firstname . ' ' . $lastname; ?>!</h1>
+            <p class="text-gray-600 mt-2">Here's what's happening with your sit-in sessions today.</p>
+        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <!-- Student Information Card -->
-            <div class=" border shadow-2xl rounded-lg p-6">
-                <div class="text-center pt-5">
-                    <img class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-gray-500" src="../uploads/<?php echo $profile; ?>" alt="Profile Picture">
-                    <h2 class="text-xl font-bold mt-4">Welcome,<?php echo ' ' . $firstname . ' ' . $lastname; ?>!</h2>
+            <div class="bg-white rounded-xl shadow-2xl p-6 card-hover">
+                <div class="text-center">
+                    <div class="relative inline-block">
+                        <img class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-indigo-100" src="../uploads/<?php echo $profile; ?>" alt="Profile Picture">
+                        <div class="absolute bottom-0 right-0 bg-green-500 rounded-full p-1.5 border-2 border-white">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h2 class="text-xl font-bold mt-4 text-gray-900"><?php echo $firstname . ' ' . $lastname; ?></h2>
+                    <p class="text-gray-600"><?php echo $course; ?> - Year <?php echo $year; ?></p>
                 </div>
-                <div class="mt-6 space-y-2">
-                    <p class="flex items-center gap-2">
-                        <!-- ID Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="black" class="w-5 h-5 text-gray-600" viewBox="0 0 16 16">
-                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6m5 2.755C12.146 12.825 10.623 12 8 12s-4.146.826-5 1.755V14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1z"/>
-                        </svg>
-                        <span class="font-bold">ID No:</span> <?php echo $idno; ?>
-                    </p>
-                    <p class="flex items-center gap-2">
-                        <!-- Book Icon for Course -->
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="black"  class="w-5 h-5 text-gray-600" viewBox="0 0 16 16">
-                            <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917z"/>
-                            <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466z"/>
-                        </svg>
-                        <span class="font-bold">Course:</span> <?php echo $course; ?>
-                    </p>
-                    <p class="flex items-center gap-2">
-                        <!-- Calendar Icon for Year -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="black" viewBox="0 0 24 24" stroke="black">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 4h10M5 11h14v10H5V11z" />
-                        </svg>
-                        <span class="font-bold">Year:</span> <?php echo $year; ?>
-                    </p>
-                    <p class="flex items-center gap-2">
-                        <!-- Clock Icon for Sessions Remaining -->
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="black" class="w-5 h-5 bi bi-clock-fill" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
-                        </svg>
-                        <span class="font-bold">Sessions Remaining:</span> <?php echo $session; ?>
-                    </p>
+                <div class="mt-6 space-y-4">
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="bg-indigo-100 p-2 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">ID Number</p>
+                            <p class="text-lg font-semibold text-gray-900"><?php echo $idno; ?></p>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="bg-indigo-100 p-2 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Sessions Remaining</p>
+                            <p class="text-lg font-semibold text-gray-900"><?php echo $session; ?></p>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="bg-indigo-100 p-2 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Points</p>
+                            <p class="text-lg font-semibold text-gray-900"><?php echo $points; ?></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="mt-10 text-center">
-                    <a href="profile.php" class="inline-flex items-center bg-white text-blue-700 px-4 py-2 rounded-lg shadow hover:bg-gray-100 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 mr-1" viewBox="0 0 16 16">
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                <div class="mt-6">
+                    <a href="profile.php" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                         View Profile
                     </a>
-                </div>  
+                </div>
             </div>
+
             <!-- Announcements Card -->
-            <div class="border shadow-2xl rounded-lg col-span-2 p-6">
-                <h2 class="text-xl text-black font-bold mb-3">Recent Announcements</h2>
-                <div class="space-y-4 max-h-96 overflow-y-auto">
+            <div class="bg-white rounded-xl shadow-2xl p-6 col-span-2 card-hover">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-bold text-gray-900">Recent Announcements</h2>
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Latest Updates</span>
+                </div>
+                <div class="space-y-4 max-h-[500px] overflow-y-auto pr-2">
                     <?php 
                     $result = mysqli_query($mysql, "SELECT * FROM announcements ORDER BY created_at DESC");
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<div class='border-b pb-4'>";
-                        echo "<h3 class='font-semibold'>" . htmlspecialchars($row['title']) . "</h3>";
-                        echo "<p class='text-sm text-gray-600'>" . htmlspecialchars($row['description']) . "</p>";
-                        echo "<p class='text-xs text-gray-500 mt-2'>Posted on " . htmlspecialchars($row['created_at']) . "</p>";
+                        echo "<div class='bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors duration-200'>";
+                        echo "<div class='flex items-start justify-between'>";
+                        echo "<div>";
+                        echo "<h3 class='font-semibold text-gray-900'>" . htmlspecialchars($row['title']) . "</h3>";
+                        echo "<p class='text-sm text-gray-600 mt-1'>" . htmlspecialchars($row['description']) . "</p>";
+                        echo "</div>";
+                        echo "<span class='text-xs text-gray-500 whitespace-nowrap ml-4'>" . date('M d, Y', strtotime($row['created_at'])) . "</span>";
+                        echo "</div>";
                         echo "</div>";
                     }
                     ?>
                 </div>
-                
             </div>
         </div>
 
         <!-- Rules and Recent History Section -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
             <!-- Rules and Regulations -->
-            <div class="bg-white shadow-2xl rounded-lg p-6">
-                <h2 class="text-xl font-bold mb-4">Rules and Regulations</h2>
-                <div class="space-y-4 max-h-96 overflow-y-auto">
-                    <h2 class="text-lg text-center font-bold">University of Cebu</h2>
-                    <h2 class="text-base text-center  font-bold">COLLEGE OF INFORMATION & COMPUTER STUDIES</h2>
-                    <div class=" space-y-4 text-sm">
-                        <p>To avoid embarrassment and maintain camaraderie with your friends and superiors at our laboratories, please observe the following:</p>
-                        <p>1. Maintain silence, proper decorum, and discipline inside the laboratory. Mobile phones, walkmans, and other personal pieces of equipment must be switched off.</p>
-                        <p>2. Games are not allowed inside the lab. This includes computer-related games, card games, and other games that may disturb the operation of the lab.</p>
-                        <p>3. Surfing the Internet is allowed only with the permission of the instructor. Downloading and installing of software are strictly prohibited.</p>
-                        <p>4. Getting access to other websites not related to the course (especially pornographic and illicit sites) is strictly prohibited.</p>
-                        <p>5. Deleting computer files and changing the set-up of the computer is a major offense.</p>
-                        <p>6. Observe computer time usage carefully. A fifteen-minute allowance is given for each use. Otherwise, the unit will be given to those who wish to "sit-in".</p>
-                        <p>7. Observe proper decorum while inside the laboratory.</p>
-                        <p>- Do not get inside the lab unless the instructor is present.</p>
-                        <p>- All bags, knapsacks, and the likes must be deposited at the counter.</p>
-                        <p>- Follow the seating arrangement of your instructor.</p>
-                        <p>- At the end of class, all software programs must be closed.</p>
-                        <p>- Return all chairs to their proper places after using.</p>
-                        <p>8. Chewing gum, eating, drinking, smoking, and other forms of vandalism are prohibited inside the lab.</p>
-                        <p>9. Anyone causing a continual disturbance will be asked to leave the lab. Acts or gestures offensive to the members of the community, including public display of physical intimacy, are not tolerated.</p>
-                        <p>10. Persons exhibiting hostile or threatening behavior such as yelling, swearing, or disregarding requests made by lab personnel will be asked to leave the lab.</p>
-                        <p>11. For serious offenses, the lab personnel may call the Civil Security Office (CSU) for assistance.</p>
-                        <p>12. Any technical problem or difficulty must be addressed to the laboratory supervisor, student assistant, or instructor immediately.</p>
+            <div class="bg-white rounded-xl shadow-2xl p-6 card-hover">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-bold text-gray-900">Rules and Regulations</h2>
+                    <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Important</span>
+                </div>
+                <div class="space-y-4 max-h-[500px] overflow-y-auto pr-2">
+                    <div class="text-center mb-6">
+                        <h2 class="text-lg font-bold text-gray-900">University of Cebu</h2>
+                        <h2 class="text-base font-bold text-gray-700">COLLEGE OF INFORMATION & COMPUTER STUDIES</h2>
                     </div>
-                    <h1 class="text-base text-center  font-bold">DISCIPLINARY ACTION</h1>
-                    <div class="space-y-4 text-sm">
-                        <p>First Offense - The Head or the Dean or OIC recommends to the Guidance Center for a suspension from classes for each offender.</p>
-                        <p>Second and Subsequent Offenses - A recommendation for a heavier sanction will be endorsed to the Guidance Center.</p>
+                    <div class="space-y-3 text-sm text-gray-600">
+                        <p class="font-medium text-gray-900">To avoid embarrassment and maintain camaraderie with your friends and superiors at our laboratories, please observe the following:</p>
+                        <div class="space-y-2">
+                            <p class="flex items-start">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded-full mr-2">1</span>
+                                Maintain silence, proper decorum, and discipline inside the laboratory. Mobile phones, walkmans, and other personal pieces of equipment must be switched off.
+                            </p>
+                            <p class="flex items-start">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded-full mr-2">2</span>
+                                Games are not allowed inside the lab. This includes computer-related games, card games, and other games that may disturb the operation of the lab.
+                            </p>
+                            <p class="flex items-start">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded-full mr-2">3</span>
+                                Surfing the Internet is allowed only with the permission of the instructor. Downloading and installing of software are strictly prohibited.
+                            </p>
+                            <p class="flex items-start">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded-full mr-2">4</span>
+                                Getting access to other websites not related to the course (especially pornographic and illicit sites) is strictly prohibited.
+                            </p>
+                            <p class="flex items-start">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded-full mr-2">5</span>
+                                Deleting computer files and changing the set-up of the computer is a major offense.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <?php
-            // Fetch recent history for the logged-in user
-            $query_completed = "SELECT sit_in.idno, sit_in.sitin_purpose, sit_in.time_in, sit_in.time_out 
-                                FROM sit_in 
-                                WHERE sit_in.idno = '$idno' AND sit_in.time_out IS NOT NULL 
-                                ORDER BY sit_in.time_out DESC";
-            $result_completed = mysqli_query($mysql, $query_completed);
-
-            if (!$result_completed) {
-                die("Query failed: " . mysqli_error($mysql));
-            }
-            ?>
 
             <!-- Recent History -->
-            <div class="bg-white shadow-2xl rounded-lg p-6">
-                <h2 class="text-xl font-bold mb-4">Recent History</h2>
-                <div class="overflow-y-auto max-h-96">
-                    <div class="grid grid-cols-4 text-center border-b-2 pb-2 min-w-[600px] bg-gray-100 pt-2">
-                        <p class="font-bold">ID</p>
-                        <p class="font-bold">Purpose</p>
-                        <p class="font-bold">Time In</p>
-                        <p class="font-bold">Time Out</p>
-                    </div>
-                    <?php while ($row = mysqli_fetch_assoc($result_completed)): ?>
-                        <div class="grid grid-cols-4 text-center border-b-2 py-2 min-w-[600px] gap-3">
-                            <p class="text-sm pt-3"><?php echo $row['idno']; ?></p>
-                            <p class="text-sm pt-3"><?php echo $row['sitin_purpose']; ?></p>
-                            <p class="text-sm"><?php echo date('M d, Y - h:i A', strtotime($row['time_in'])); ?></p>
-                            <p class="text-sm"><?php echo date('M d, Y - h:i A', strtotime($row['time_out'])); ?></p>
+            <div class="bg-white rounded-xl shadow-2xl p-6 card-hover">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-bold text-gray-900">Recent History</h2>
+                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Activity Log</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <div class="min-w-full">
+                        <div class="bg-gray-50 rounded-lg">
+                            <div class="grid grid-cols-4 text-center py-3 px-4 border-b border-gray-200">
+                                <p class="font-semibold text-gray-900">ID</p>
+                                <p class="font-semibold text-gray-900">Purpose</p>
+                                <p class="font-semibold text-gray-900">Time In</p>
+                                <p class="font-semibold text-gray-900">Time Out</p>
+                            </div>
+                            <div class="divide-y divide-gray-200 max-h-[400px] overflow-y-auto">
+                                <?php 
+                                $query_completed = "SELECT sit_in.idno, sit_in.sitin_purpose, sit_in.time_in, sit_in.time_out 
+                                    FROM sit_in 
+                                    WHERE sit_in.idno = '$idno' AND sit_in.time_out IS NOT NULL 
+                                    ORDER BY sit_in.time_out DESC";
+                                $result_completed = mysqli_query($mysql, $query_completed);
+
+                                if ($result_completed && mysqli_num_rows($result_completed) > 0) {
+                                    while ($row = mysqli_fetch_assoc($result_completed)) {
+                                        echo "<div class='grid grid-cols-4 text-center py-3 px-4 hover:bg-gray-50'>";
+                                        echo "<p class='text-sm text-gray-900'>" . htmlspecialchars($row['idno']) . "</p>";
+                                        echo "<p class='text-sm text-gray-900'>" . htmlspecialchars($row['sitin_purpose']) . "</p>";
+                                        echo "<p class='text-sm text-gray-600'>" . date('M d, Y - h:i A', strtotime($row['time_in'])) . "</p>";
+                                        echo "<p class='text-sm text-gray-600'>" . date('M d, Y - h:i A', strtotime($row['time_out'])) . "</p>";
+                                        echo "</div>";
+                                    }
+                                } else {
+                                    echo "<div class='text-center py-4 text-gray-500'>No history records found</div>";
+                                }
+                                ?>
+                            </div>
                         </div>
-                    <?php endwhile; ?>
+                    </div>
                 </div>
             </div>
         </div>
