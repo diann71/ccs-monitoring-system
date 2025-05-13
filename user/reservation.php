@@ -28,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $firstname = $_SESSION['firstname'];
     $lastname = $_SESSION['lastname'];
     $middlename = $_SESSION['midname'];
+    $course = $_SESSION['course'];
+    $year = $_SESSION['year'];
     $sit_in_purpose = $_POST['sit_in_purpose'];
     $lab = $_POST['lab'];
     $time_in = date('Y-m-d H:i:s', strtotime($_POST['date'] . ' ' . $_POST['time_in']));
@@ -35,13 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $date = $_POST['date'];
     $session = $_POST['session'];
 
-    $query = "INSERT INTO reservations (idno, firstname, lastname, middlename, sit_in_purpose, lab, time_in, pc_id, date, session, status) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')";
+    $query = "INSERT INTO reservations (idno, firstname, lastname, middlename, course, year, sit_in_purpose, lab, time_in, pc_id, date, session, status) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')";
     $stmt = mysqli_prepare($mysql, $query);
-    if ($stmt === false) {
-        die("Prepare failed: " . mysqli_error($mysql));  // Show error if prepare fails
-    }
-    mysqli_stmt_bind_param($stmt, "isssssssss", $idno, $firstname, $lastname, $middlename, $sit_in_purpose, $lab, $time_in, $pc_id, $date, $session);
+
+    mysqli_stmt_bind_param($stmt, "issssissssss", $idno, $firstname, $lastname, $middlename, $course, $year, $sit_in_purpose, $lab, $time_in, $pc_id, $date, $session);
     mysqli_stmt_execute($stmt);
     
     if (mysqli_stmt_affected_rows($stmt) > 0) {
@@ -117,18 +117,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     </div>
                 <?php endif; ?>
 
-                <form method="POST" action="" class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <form method="POST" action="" class="space-y-4">
                     <div>
                         <label class="block font-medium text-gray-700 mb-1">ID Number <span class="text-red-500">*</span></label>
                         <input type="text" class="w-full px-3 py-2 border rounded" value="<?php echo htmlspecialchars($_SESSION['idno']); ?>" readonly>
                     </div>
                     <div>
                         <label class="block font-medium text-gray-700 mb-1">Full Name <span class="text-red-500">*</span></label>
-                        <input type="text"class="w-full px-3 py-2 border rounded" value="<?php echo htmlspecialchars($_SESSION['firstname'] . ' ' . $_SESSION['midname'] . ' ' . $_SESSION['lastname']); ?>" readonly>
+                        <input type="text" class="w-full px-3 py-2 border rounded" value="<?php echo htmlspecialchars($_SESSION['firstname'] . ' ' . $_SESSION['midname'] . ' ' . $_SESSION['lastname']); ?>" readonly>
                     </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-1">Course<span class="text-red-500">*</span></label>
+                        <input type="text" class="w-full px-3 py-2 border rounded" value="<?php echo htmlspecialchars($_SESSION['course']); ?>" readonly>
+                    </div>
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-1">Year<span class="text-red-500">*</span></label>
+                        <input type="text" class="w-full px-3 py-2 border rounded" value="<?php echo htmlspecialchars($_SESSION['year']); ?>" readonly>
+                    </div>
                     <div>
                         <label class="block font-medium text-gray-700 mb-1">Sit-in Purpose <span class="text-red-500">*</span></label>
                         <select name="sit_in_purpose" class="w-full px-3 py-2 border rounded" required>
@@ -147,36 +152,108 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                             <option value="Project Management">Project Management</option>
                         </select>
                     </div>
-                    <div>
-                        <label class="block font-medium text-gray-700 mb-1">Laboratory <span class="text-red-500">*</span></label>
-                        <select name="lab" class="w-full px-3 py-2 border rounded" required>
-                            <option value="">Select Laboratory</option>
-                            <option value="524">524</option>
-                            <option value="526">526</option>
-                            <option value="528">528</option>
-                            <option value="530">530</option>
-                            <option value="542">542</option>
-                            <option value="544">544</option>
-                            <option value="517">517</option>
-                        </select>
+
+                    <!-- Laboratory Selection Container -->
+                    <div class="bg-white border rounded-lg p-6 shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                            <h2 class="text-xl font-semibold text-gray-800">Select Laboratory</h2>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                            <label class="relative">
+                                <input type="radio" name="lab" value="524" class="peer sr-only" required>
+                                <div class="p-4 border rounded-lg cursor-pointer hover:bg-blue-50 peer-checked:bg-blue-100 peer-checked:border-blue-500 transition-all">
+                                    <div class="text-center">
+                                        <div class="text-lg font-semibold">Lab 524</div>
+                                        <div class="text-sm text-gray-500">Computer Lab</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="relative">
+                                <input type="radio" name="lab" value="526" class="peer sr-only">
+                                <div class="p-4 border rounded-lg cursor-pointer hover:bg-blue-50 peer-checked:bg-blue-100 peer-checked:border-blue-500 transition-all">
+                                    <div class="text-center">
+                                        <div class="text-lg font-semibold">Lab 526</div>
+                                        <div class="text-sm text-gray-500">Computer Lab</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="relative">
+                                <input type="radio" name="lab" value="528" class="peer sr-only">
+                                <div class="p-4 border rounded-lg cursor-pointer hover:bg-blue-50 peer-checked:bg-blue-100 peer-checked:border-blue-500 transition-all">
+                                    <div class="text-center">
+                                        <div class="text-lg font-semibold">Lab 528</div>
+                                        <div class="text-sm text-gray-500">Computer Lab</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="relative">
+                                <input type="radio" name="lab" value="530" class="peer sr-only">
+                                <div class="p-4 border rounded-lg cursor-pointer hover:bg-blue-50 peer-checked:bg-blue-100 peer-checked:border-blue-500 transition-all">
+                                    <div class="text-center">
+                                        <div class="text-lg font-semibold">Lab 530</div>
+                                        <div class="text-sm text-gray-500">Computer Lab</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="relative">
+                                <input type="radio" name="lab" value="542" class="peer sr-only">
+                                <div class="p-4 border rounded-lg cursor-pointer hover:bg-blue-50 peer-checked:bg-blue-100 peer-checked:border-blue-500 transition-all">
+                                    <div class="text-center">
+                                        <div class="text-lg font-semibold">Lab 542</div>
+                                        <div class="text-sm text-gray-500">Computer Lab</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="relative">
+                                <input type="radio" name="lab" value="544" class="peer sr-only">
+                                <div class="p-4 border rounded-lg cursor-pointer hover:bg-blue-50 peer-checked:bg-blue-100 peer-checked:border-blue-500 transition-all">
+                                    <div class="text-center">
+                                        <div class="text-lg font-semibold">Lab 544</div>
+                                        <div class="text-sm text-gray-500">Computer Lab</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="relative">
+                                <input type="radio" name="lab" value="517" class="peer sr-only">
+                                <div class="p-4 border rounded-lg cursor-pointer hover:bg-blue-50 peer-checked:bg-blue-100 peer-checked:border-blue-500 transition-all">
+                                    <div class="text-center">
+                                        <div class="text-lg font-semibold">Lab 517</div>
+                                        <div class="text-sm text-gray-500">Computer Lab</div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- PC Selection Container -->
+                    <div class="bg-white border rounded-lg p-6 shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <h2 class="text-xl font-semibold text-gray-800">Select PC</h2>
+                        </div>
+                        <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+                            <?php while ($pc = mysqli_fetch_assoc($result_pc)): ?>
+                                <label class="relative">
+                                    <input type="radio" name="pc_id" value="<?php echo $pc['pc_id']; ?>" class="peer sr-only" required>
+                                    <div class="aspect-square border rounded-lg cursor-pointer hover:bg-blue-50 peer-checked:bg-blue-100 peer-checked:border-blue-500 transition-all flex items-center justify-center">
+                                        <div class="text-center">
+                                            <div class="text-sm font-semibold"><?php echo htmlspecialchars($pc['pc_name']); ?></div>
+                                        </div>
+                                    </div>
+                                </label>
+                            <?php endwhile; ?>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
                     <div>
                         <label class="block font-medium text-gray-700 mb-1">Time In <span class="text-red-500">*</span></label>
                         <input type="time" name="time_in" class="w-full px-3 py-2 border rounded" min="08:00" max="17:00" step="1800" required>
                     </div>
-                    <div>
-                        <label class="block font-medium text-gray-700 mb-1">PC <span class="text-red-500">*</span></label>      
-                        <select name="pc_id" class="w-full px-3 py-2 border rounded" required>
-                            <option value="">Select PC</option>
-                            <?php while ($pc = mysqli_fetch_assoc($result_pc)): ?>
-                                <option value="<?php echo $pc['pc_id']; ?>"><?php echo htmlspecialchars($pc['pc_name']); ?></option>
-                            <?php endwhile; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block font-medium text-gray-700 mb-1">Date <span class="text-red-500">*</span></label>
                         <input type="date" name="date" class="w-full px-3 py-2 border rounded" min="<?php echo date('Y-m-d'); ?>" required>
@@ -184,7 +261,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     <div>
                         <label class="block font-medium text-gray-700 mb-1">Session <span class="text-red-500">*</span></label>
                         <input type="number" name="session" class="w-full px-3 py-2 border rounded" value="<?php echo htmlspecialchars($row['session']); ?>" min="30" max="180" step="30" required readonly>
-                    </div>
                 </div>
                 <div class="text-center">
                     <button type="submit" name="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded shadow">Submit Reservation</button>
