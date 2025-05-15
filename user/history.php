@@ -15,7 +15,7 @@ $query_completed = "SELECT students.idno, students.lastname, students.firstname,
 $result_completed = mysqli_query($mysql, $query_completed);
 
 // Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['feedback'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $idno = $_SESSION['idno'];  // Assuming student ID is stored in session
     $feedback = mysqli_real_escape_string($mysql, $_POST['feedback']); // Escape any special characters
 
@@ -24,6 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['feedback'])) {
                      VALUES ('$idno', '$feedback')";
 
     if (mysqli_query($mysql, $insert_query)) {
+        // Create notification for admin
+        require_once '../includes/notification_functions.php';
+        $message = "New feedback received from student ID: " . $idno;
+        createNotification('feedback', $message, null, 1); // Assuming admin_id is 1
+        
         echo "<script>alert('Feedback submitted successfully!'); window.location.href='dashboard.php';</script>";
     } else {
         echo "<script>alert('Error: " . mysqli_error($mysql) . "'); window.location.href='dashboard.php';</script>";

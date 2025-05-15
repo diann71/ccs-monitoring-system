@@ -16,23 +16,26 @@ if (isset($_POST['approve'])) {
     if (mysqli_stmt_execute($stmt)) {
         $_SESSION['approval_success'] = true;
 
-        // Get the PC ID from the reservation
-        $query = "SELECT pc_id FROM reservations WHERE reservation_id = ?";
+        // Get the PC ID and user ID from the reservation
+        $query = "SELECT pc_id, idno FROM reservations WHERE reservation_id = ?";
         $stmt2 = mysqli_prepare($mysql, $query);
         mysqli_stmt_bind_param($stmt2, 'i', $reservation_id);
         mysqli_stmt_execute($stmt2);
         $result = mysqli_stmt_get_result($stmt2);
         $row = mysqli_fetch_assoc($result);
         $pc_id = $row['pc_id'];
+        $user_id = $row['idno'];
         mysqli_stmt_close($stmt2);
-
 
         $update_pc = "UPDATE pcs SET status = 'Used' WHERE pc_id = ?";
         $stmt3 = mysqli_prepare($mysql, $update_pc);
         mysqli_stmt_bind_param($stmt3, 'i', $pc_id);
         mysqli_stmt_execute($stmt3);
         mysqli_stmt_close($stmt3);
-        
+
+        // Create notification for the user
+        require_once '../includes/notification_functions.php';
+        createNotification('reservation_approved', 'Your reservation has been approved!', $user_id, null);
     }
     
     mysqli_stmt_close($stmt);
@@ -48,6 +51,20 @@ if (isset($_POST['reject'])) {
     
     if (mysqli_stmt_execute($stmt)) {
         $_SESSION['reject_success'] = true;
+
+        // Get the user ID from the reservation
+        $query = "SELECT idno FROM reservations WHERE reservation_id = ?";
+        $stmt2 = mysqli_prepare($mysql, $query);
+        mysqli_stmt_bind_param($stmt2, 'i', $reservation_id);
+        mysqli_stmt_execute($stmt2);
+        $result = mysqli_stmt_get_result($stmt2);
+        $row = mysqli_fetch_assoc($result);
+        $user_id = $row['idno'];
+        mysqli_stmt_close($stmt2);
+
+        // Create notification for the user
+        require_once '../includes/notification_functions.php';
+        createNotification('reservation_rejected', 'Your reservation has been rejected.', $user_id, null);
     }
     
     mysqli_stmt_close($stmt);
@@ -85,7 +102,7 @@ ob_end_flush();
 </head>
 <body class="bg-gray-50">
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-2xl font-bold text-gray-800 mb-6">Current Reservations</h1>
+        <h1 class="text-xl font-bold text-gray-800 mb-6">Current Reservations</h1>
         
         <div class="bg-white rounded-lg shadow overflow-hidden">
             <table class="min-w-full divide-y divide-gray-200">
@@ -98,6 +115,7 @@ ob_end_flush();
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lab</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PC</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time In</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                         <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
@@ -127,6 +145,9 @@ ob_end_flush();
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <?= date('M d, Y - h:i A', strtotime($row['time_in'])) ?>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                <?= htmlspecialchars($row['session']) ?>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="px-3 py-1 inline-flex items-center text-sm font-medium rounded-full
@@ -167,16 +188,23 @@ ob_end_flush();
         </div>
 
         <!-- Reservation History Section -->
-        <h1 class="text-2xl font-bold text-gray-800 mb-6 mt-12">Reservation History</h1>
+        <h1 class="text-xl font-bold text-gray-800 mb-6 mt-12">Reservation History</h1>
         
-        <form method="GET" class="mb-4">
-            <label for="history_status" class="mr-2 font-semibold">Filter by Status:</label>
-            <select name="history_status" id="history_status" onchange="this.form.submit()" class="border rounded px-2 py-1">
-                <option value="">All</option>
-                <option value="approved" <?= (isset($_GET['history_status']) && $_GET['history_status'] == 'approved') ? 'selected' : '' ?>>Approved</option>
-                <option value="rejected" <?= (isset($_GET['history_status']) && $_GET['history_status'] == 'rejected') ? 'selected' : '' ?>>Rejected</option>
-            </select>
-        </form>
+        <!-- Filter Section -->
+        <div class="mb-6">
+            <form method="GET" class="flex items-center gap-4">
+                <div>
+                    <label for="history_status" class="block text-sm font-medium text-gray-700 mb-1">Filter by Status:</label>
+                    <select name="history_status" id="history_status" onchange="this.form.submit()" class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">All Reservations</option>
+                        <option value="pending" <?= (isset($_GET['history_status']) && $_GET['history_status'] == 'pending') ? 'selected' : '' ?>>Pending</option>
+                        <option value="approved" <?= (isset($_GET['history_status']) && $_GET['history_status'] == 'approved') ? 'selected' : '' ?>>Approved</option>
+                        <option value="rejected" <?= (isset($_GET['history_status']) && $_GET['history_status'] == 'rejected') ? 'selected' : '' ?>>Rejected</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
         <div class="bg-white rounded-lg shadow overflow-hidden">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
@@ -188,6 +216,7 @@ ob_end_flush();
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lab</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PC</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time In</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                     </tr>
                 </thead>
@@ -195,11 +224,13 @@ ob_end_flush();
                     <?php 
                     $history_status = $_GET['history_status'] ?? '';
                     $history_query = "SELECT r.*, p.pc_name FROM reservations r 
-                        LEFT JOIN pcs p ON r.pc_id = p.pc_id 
-                        WHERE r.status != 'pending'";
-                    if ($history_status == 'approved' || $history_status == 'rejected') {
-                        $history_query .= " AND r.status = '" . mysqli_real_escape_string($mysql, $history_status) . "'";
+                        LEFT JOIN pcs p ON r.pc_id = p.pc_id";
+
+                    // Add status filter if selected
+                    if (!empty($history_status)) {
+                        $history_query .= " WHERE r.status = '" . mysqli_real_escape_string($mysql, $history_status) . "'";
                     }
+
                     $history_query .= " ORDER BY r.time_in DESC";
                     $history_result = mysqli_query($mysql, $history_query);
                     while ($row = mysqli_fetch_assoc($history_result)) { ?>
@@ -227,10 +258,16 @@ ob_end_flush();
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <?= date('M d, Y - h:i A', strtotime($row['time_in'])) ?>
                             </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                <?= htmlspecialchars($row['session']) ?>
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="px-3 py-1 inline-flex items-center text-sm font-medium rounded-full
                                     <?php 
                                     switch(strtolower($row['status'])) {
+                                        case 'pending':
+                                            echo 'bg-yellow-100 text-yellow-800 border border-yellow-200';
+                                            break;
                                         case 'approved':
                                             echo 'bg-green-600 text-white border border-green-700';
                                             break;

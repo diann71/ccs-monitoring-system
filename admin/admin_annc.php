@@ -18,6 +18,18 @@ if(isset($_POST["submit"])){
         $row = mysqli_query($mysql, $result);
 
         if($row){
+            // Create notifications for all students
+            require_once __DIR__ . '/../includes/notification_functions.php';
+            $message = "New announcement: " . $title;
+            
+            // Get all students
+            $students_query = "SELECT idno FROM students";
+            $students_result = mysqli_query($mysql, $students_query);
+            
+            while ($student = mysqli_fetch_assoc($students_result)) {
+                createNotification('announcement', $message, $student['idno'], null);
+            }
+            
             $_SESSION["success"] = "Announcement added successfully!";
         } else{
             $_SESSION["error"] = "Failed to add announcement: " . mysqli_error($mysql);
@@ -67,6 +79,18 @@ if (isset($_POST['update'])) {
         $row = mysqli_query($mysql, $update_query);
        
         if ($row) {
+            // Create notifications for all students about the update
+            require_once __DIR__ . '/../includes/notification_functions.php';
+            $message = "Announcement updated: " . $title;
+            
+            // Get all students
+            $students_query = "SELECT idno FROM students";
+            $students_result = mysqli_query($mysql, $students_query);
+            
+            while ($student = mysqli_fetch_assoc($students_result)) {
+                createNotification('announcement', $message, $student['idno'], null);
+            }
+            
             $_SESSION['success'] = "Edited Successfully";
         } else {
             $_SESSION['error'] = "Failed to update announcement: " . mysqli_error($mysql);
