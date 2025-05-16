@@ -22,6 +22,18 @@ function displayNotificationBell($user_id = null, $admin_id = null) {
                     echo '<p class="text-center">No new notifications</p>';
                 } else {
                     foreach ($notifications as $notification) {
+                        // FILTER: Only show notifications meant for the current user/admin
+                        if ($admin_id) {
+                            // Only show notifications for this admin AND ensure it's not a user-specific notification
+                            if ($notification['admin_id'] != $admin_id || $notification['user_id'] !== null) {
+                                continue;
+                            }
+                        } elseif ($user_id) {
+                            // Only show notifications for this user
+                            if ($notification['user_id'] != $user_id || $notification['admin_id'] !== null) {
+                                continue;
+                            }
+                        }
                         // Determine the link based on notification type
                         $link = '#';
                         switch ($notification['type']) {
@@ -29,10 +41,10 @@ function displayNotificationBell($user_id = null, $admin_id = null) {
                                 $link = 'admin_reservation.php';
                                 break;
                             case 'reservation_approved':
-                                $link = 'admin_reservation.php';
+                                $link = 'reservation.php';
                                 break;
                             case 'announcement':
-                                $link = 'dashboard.php';
+                                $link = 'anncement.php';
                                 break;
                             case 'feedback':
                                 $link = 'admin_feedback.php';

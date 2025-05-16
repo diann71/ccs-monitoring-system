@@ -93,6 +93,10 @@ ob_end_flush();
                             <?php endforeach; ?>
                         </select>
                     </div>
+                    <!-- Lab Schedule Button -->
+                    <a href="save_lab_schedule.php" class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition mt-6" style="height:40px;line-height:24px;">
+                        🗓️ Lab Schedule
+                    </a>
                 </form>
             </div>
         </div>

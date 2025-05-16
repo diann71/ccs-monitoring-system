@@ -210,3 +210,5 @@ include "../database/connector.php";
         document.getElementById('menuCloseIcon').classList.toggle('hidden');
     }); 
 </script>
+
+<?php echo "<!-- ADMIN SESSION: " . (isset($_SESSION['admin_id']) ? $_SESSION['admin_id'] : 'NOT SET') . " -->"; ?>

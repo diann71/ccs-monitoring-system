@@ -13,12 +13,12 @@ function getUnreadNotifications($user_id = null, $admin_id = null) {
     $query = "SELECT * FROM notifications WHERE is_read = 0";
     
     if ($user_id) {
-        $query .= " AND user_id = ?";
+        $query .= " AND user_id = ? AND admin_id IS NULL";
         $query .= " ORDER BY created_at DESC";
         $stmt = $mysql->prepare($query);
         $stmt->bind_param("i", $user_id);
     } elseif ($admin_id) {
-        $query .= " AND admin_id = ?";
+        $query .= " AND admin_id = ? AND user_id IS NULL";
         $query .= " ORDER BY created_at DESC";
         $stmt = $mysql->prepare($query);
         $stmt->bind_param("i", $admin_id);

@@ -15,6 +15,9 @@ if($row){
     $year = $row['year'];
     $profile = $row['profile'];
     $session = $row['session'];
+    
+    // Store session in $_SESSION array
+    $_SESSION['session'] = $session;
 }
 
 ?>  

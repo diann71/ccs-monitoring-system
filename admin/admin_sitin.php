@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['rewards'])) {
     mysqli_stmt_bind_param($stmt, "s", $idno);
     
     if (mysqli_stmt_execute($stmt)) {
-        echo "<script>alert('Time Out Successful!'); window.location.href='admin_sitin.php';</script>";
+        echo "<script>alert('Successfullt given reward!'); window.location.href='admin_sitin.php';</script>";
     } else {
         echo "<script>alert('Error: " . mysqli_error($mysql) . "');</script>";
     }
